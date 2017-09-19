@@ -40,12 +40,43 @@
     const icon = document.querySelector('.icon');
     const temperature = document.querySelector('.temperature');
     const wind = document.querySelector('.wind');
+    let lat = "-89";
+    let long = "17.19";
+
+    // function getLocation() {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(showPosition);
+    //     }
+    // }
+    // function showPosition(position){
+    //     lat = position.coords.latitude;
+    //     long = position.coords.longitude;
+    //     console.log(lat, long);
+    //   }
 
     const apiKey = "cf09b681971abfafb863bbbf9b0c9579";
+    let api = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&appid=cf09b681971abfafb863bbbf9b0c9579";
+
 
     function getWeather(){
-      console.log(apiKey);
+        let http = new XMLHttpRequest();
+        let url = api;
+        let method = "GET";
+
+        http.open(method, url);
+        http.onreadystatechange = function(){
+          if(http.readyState === XMLHttpRequest.DONE && http.status === 200){
+              console.log(http.response.weather);
+          }else if(http.readyState === XMLHttpRequest && http.status !== 200) {
+
+          }
+        };
+        http.send();
+
     }
+
+
+
 
     document.addEventListener("DOMContentLoaded", getWeather);
   </script>
