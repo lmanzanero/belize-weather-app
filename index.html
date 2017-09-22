@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Weather App</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <style media="screen">
 
     body {
@@ -36,49 +37,35 @@
     </div>
   </div>
   <script type="text/javascript">
-    const loc = document.querySelector('.location');
-    const icon = document.querySelector('.icon');
-    const temperature = document.querySelector('.temperature');
-    const wind = document.querySelector('.wind');
-    let lat = "-89";
-    let long = "17.19";
 
-    // function getLocation() {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(showPosition);
-    //     }
-    // }
-    // function showPosition(position){
-    //     lat = position.coords.latitude;
-    //     long = position.coords.longitude;
-    //     console.log(lat, long);
-    //   }
+  $(document).ready(function(){
+      let lon;
+      let lat;
+      let weatherApi = `https:fcc-weather-api.glitch.me/api/current?`;
 
-    const apiKey = "cf09b681971abfafb863bbbf9b0c9579";
-    let api = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&appid=cf09b681971abfafb863bbbf9b0c9579";
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          lat = "lat=" + position.coords.latitude;
+          lon = "lon=" + position.coords.longitude;
+          console.log(lat, lon);
+          getWeather(lat, lon);
+        });
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
 
+       function getWeather(lat, lon){
+         let url = weatherApi + lat + "&" + lon;
+         console.log(url);
+         $.ajax({
+            url: url, success: function (result) {
+                console.log(result);
+            }
+          });
+       }
 
-    function getWeather(){
-        let http = new XMLHttpRequest();
-        let url = api;
-        let method = "GET";
+});
 
-        http.open(method, url);
-        http.onreadystatechange = function(){
-          if(http.readyState === XMLHttpRequest.DONE && http.status === 200){
-              console.log(http.response.weather);
-          }else if(http.readyState === XMLHttpRequest && http.status !== 200) {
-
-          }
-        };
-        http.send();
-
-    }
-
-
-
-
-    document.addEventListener("DOMContentLoaded", getWeather);
   </script>
 </body>
 </html>
