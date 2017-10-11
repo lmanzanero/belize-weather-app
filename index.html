@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Weather App</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <style media="screen">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <style media="screen">
 
     body {
-      background: #fff;
+      background: white;
       margin: 0 auto;
       padding-top: 90px;
       height: 100%;
@@ -28,13 +28,29 @@
       margin: 0 auto;
       padding: 30px;
       text-align: center;
-      width: 50%;
-      height: 60%;
+      width: 70%;
+      height: 50%;
       box-shadow: 10px 10px 10px #d3d3d3;
     }
 
     .weather-box h4 {
       color: green;
+    }
+
+    .weather-items {
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items:flex-start;
+    }
+
+    .weather-items div {
+      margin: 5px;
+      padding: 10px;
+      height: 30px;
+      width: 100px;
+      float: left;
+      background: blue;
     }
   </style>
 </head>
@@ -46,7 +62,7 @@
           <div class="country">Country</div>
           <div class="location">Location</div>
           <div class="icon">Icon</div>
-          <div class="temp_discription">description</div>
+          <div class="temp_description">description</div>
           <div class="temperature">Temperature</div>
           <div class="wind">Wind</div>
       </div>
@@ -54,16 +70,13 @@
   </div>
   <script type="text/javascript">
 
-
-
-  $(document).ready(function(){
       let lon;
       let lat;
       let weatherApi = `https:fcc-weather-api.glitch.me/api/current?`;
       let country = document.querySelector('.country');
-      let location = document.querySelector('.location');
+      let location1 = document.querySelector('.location');
       let icon = document.querySelector('.icon');
-      let description = document.querySelector('.temp_discription');
+      let description = document.querySelector('.temp_description');
       let temp = document.querySelector('.temperature');
       let wind = document.querySelector('.wind');
       // const colors = ["blue", "green", "Yellow", "red"];
@@ -72,32 +85,34 @@
           lat = "lat=" + position.coords.latitude;
           lon = "lon=" + position.coords.longitude;
           console.log(lat, lon);
-          getWeather(lat, lon);
+          getWeather(`${weatherApi}${lat}&${lon}`);
         });
       } else {
         console.log("Geolocation is not supported by this browser.");
       }
 
-       function getWeather(lat, lon){
-         let url = weatherApi + lat + "&" + lon;
-         console.log(url);
-         $.ajax({
-            url: url, success: function (result) {
-              country.innerHTML = result.sys.country;
-              location.innerHTML = result.name;
-              let iconTemplate =  `<img atl="image icons" src="${result.weather[0].icon}"/>`;
-              icon.innerHTML = iconTemplate;
-              description.innerHTML = result.weather[0].description;
-              console.log(result.weather[0].description);
-              console.log(result);
-            }
+      function getWeather(api){
+        fetch(api, {
+            method: 'GET'
+          })
+          .then(response => response.json())
+          .then(function (data) {
+            console.log('Request succeeded with JSON response', data);
+            location1.innerHTML = data.name;
+            icon.innerHTML = weather[0].icon;
+            description.innerHTML = weather[0].description;
+            temp.innerHTML = main.temp;
+            wind.innerHTML = `${wind.speed} mph`;
+          })
+          .catch(function (error) {
+            console.log('Request failed', error);
           });
-       }
+      }
+
 
       //  function getColors(){
        //
       //  }
-});
 
   </script>
 </body>
