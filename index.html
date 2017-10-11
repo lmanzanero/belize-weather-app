@@ -95,14 +95,15 @@
         fetch(api, {
             method: 'GET'
           })
-          .then(response => response.json())
+          .then((response) => response.json())
           .then(function (data) {
             console.log('Request succeeded with JSON response', data);
+            country.innerHTML = data.sys.country
             location1.innerHTML = data.name;
-            icon.innerHTML = weather[0].icon;
-            description.innerHTML = weather[0].description;
-            temp.innerHTML = main.temp;
-            wind.innerHTML = `${wind.speed} mph`;
+            icon.innerHTML = `<span><img src="${data.weather[0].icon}" alt="" /></span>`;
+            description.innerHTML = data.weather[0].description;
+            temp.innerHTML = `${data.main.temp} degrees`;
+            wind.innerHTML = `${data.wind.speed} mph`;
           })
           .catch(function (error) {
             console.log('Request failed', error);
