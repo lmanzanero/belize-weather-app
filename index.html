@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Weather App</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <style media="screen">
 
     body {
@@ -14,6 +13,7 @@
       padding-top: 90px;
       height: 100%;
       width: 100%;
+      font-family: "Courier New", Courier, monospace;
     }
 
     .container {
@@ -24,47 +24,52 @@
     }
 
     .weather-box{
-      background-color: rgba(255,0,0,0.5);
+      background-color: rgba(255,0,0,0.2);
       margin: 0 auto;
       padding: 30px;
       text-align: center;
       width: 70%;
-      height: 50%;
+      height: 70%;
       box-shadow: 10px 10px 10px #d3d3d3;
     }
 
-    .weather-box h4 {
-      color: green;
+    .weather-box h1 {
+      color: black;
+      margin: 10px;
+      padding-bottom: 40px;
     }
 
     .weather-items {
       margin: 0 auto;
       width: 100%;
-      display: flex;
-      align-items:flex-start;
     }
 
-    .weather-items div {
+    .weather-items button {
+      position: relative;
       margin: 5px;
-      padding: 10px;
-      height: 30px;
-      width: 100px;
-      float: left;
+      top: 50%;
+      height: 80px;
+      width: 40%;
       background: blue;
+      font-size: 20px;
+    }
+
+    .weather-items button:hover{
+      background-color: rgba(255,0,0,0.2);
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="weather-box">
-      <h4>You Local Weather</h4>
+      <h1>You Local Weather</h1>
       <div class="weather-items">
-          <div class="country">Country</div>
-          <div class="location">Location</div>
-          <div class="icon">Icon</div>
-          <div class="temp_description">description</div>
-          <div class="temperature">Temperature</div>
-          <div class="wind">Wind</div>
+          <button type="button" class="country">Country</button>
+          <button type="button" class="location">Location</button>
+          <button type="button" class="icon">Icon</button>
+          <button type="button" class="temp_description">description</button>
+          <button type="button" class="temperature">Temperature</button>
+          <button type="button" class="wind">Wind</button>
       </div>
     </div>
   </div>
