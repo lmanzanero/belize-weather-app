@@ -100,7 +100,7 @@
             console.log('Request succeeded with JSON response', data);
             country.innerHTML = data.sys.country
             location1.innerHTML = data.name;
-            icon.innerHTML = `<span><img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
+            icon.innerHTML = `<span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
             description.innerHTML = data.weather[0].description;
             temp.innerHTML = `${data.main.temp} degrees`;
             wind.innerHTML = `${data.wind.speed} mph`;
