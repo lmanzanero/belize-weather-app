@@ -72,7 +72,7 @@
 
       let lon;
       let lat;
-      let weatherApi = `https:fcc-weather-api.glitch.me/api/current?`;
+      let weatherApi = `https://api.openweathermap.org/data/2.5/weather?`;
       let country = document.querySelector('.country');
       let location1 = document.querySelector('.location');
       let icon = document.querySelector('.icon');
@@ -85,7 +85,7 @@
           lat = "lat=" + position.coords.latitude;
           lon = "lon=" + position.coords.longitude;
           console.log(lat, lon);
-          getWeather(`${weatherApi}${lat}&${lon}`);
+          getWeather(`${weatherApi}${lat}&${lon}${"&appid=cf09b681971abfafb863bbbf9b0c9579"}`);
         });
       } else {
         console.log("Geolocation is not supported by this browser.");
@@ -100,7 +100,7 @@
             console.log('Request succeeded with JSON response', data);
             country.innerHTML = data.sys.country
             location1.innerHTML = data.name;
-            icon.innerHTML = `<span><img src="${data.weather[0].icon}" alt="" /></span>`;
+            icon.innerHTML = `<span><img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
             description.innerHTML = data.weather[0].description;
             temp.innerHTML = `${data.main.temp} degrees`;
             wind.innerHTML = `${data.wind.speed} mph`;
