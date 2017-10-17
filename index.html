@@ -5,30 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Weather App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
    <style media="screen">
 
     body {
       background: white;
-      margin: 0 auto;
-      padding-top: 90px;
-      height: 100%;
-      width: 100%;
+      margin: 30px;
       font-family: "Courier New", Courier, monospace;
     }
 
-    .container {
-      margin: 0 auto;
-      width: 100%;
-      height: 100%;
-      position: fixed;
-    }
 
     .weather-box{
       background-color: rgba(255,0,0,0.2);
       margin: 0 auto;
-      padding: 30px;
+      padding: 5px;
       text-align: center;
-      width: 70%;
+      width: 90%;
       height: 70%;
       box-shadow: 10px 10px 10px #d3d3d3;
     }
@@ -47,33 +40,44 @@
     .weather-items button {
       position: relative;
       margin: 5px;
-      top: 50%;
       height: 80px;
       width: 40%;
+      min-width: 200px;
       background: blue;
+      color: #fff;
       font-size: 20px;
     }
 
     .weather-items button:hover{
       background-color: rgba(255,0,0,0.2);
+      color: black;
+      width: 45%;
+      min-width: 220px;
     }
+
+    .progress{
+      margin: 60px;
+    }
+     
   </style>
 </head>
 <body>
   <div class="container">
     <div class="weather-box">
-      <h1>You Local Weather</h1>
+      <h1>Your Local Weather</h1>
       <div class="weather-items">
-          <button type="button" class="country">Country</button>
-          <button type="button" class="location">Location</button>
-          <button type="button" class="icon">Icon</button>
-          <button type="button" class="temp_description">description</button>
-          <button type="button" class="temperature">Temperature</button>
-          <button type="button" class="wind">Wind</button>
+          <button type="button" class="location btn"></button>
+          <button type="button" class="icon btn"></button>
+          <button type="button" class="temperature btn"></button>
+          <button type="button" class="wind btn"></button>
+      </div>
+      <div class="progress">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
       </div>
     </div>
   </div>
   <script type="text/javascript">
+
 
       let lon;
       let lat;
@@ -89,7 +93,6 @@
         navigator.geolocation.getCurrentPosition(function (position) {
           lat = "lat=" + position.coords.latitude;
           lon = "lon=" + position.coords.longitude;
-          console.log(lat, lon);
           getWeather(`${weatherApi}${lat}&${lon}${"&appid=cf09b681971abfafb863bbbf9b0c9579"}`);
         });
       } else {
@@ -103,11 +106,24 @@
           .then((response) => response.json())
           .then(function (data) {
             console.log('Request succeeded with JSON response', data);
-            country.innerHTML = data.sys.country
-            location1.innerHTML = data.name;
-            icon.innerHTML = `<span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
-            description.innerHTML = data.weather[0].description;
-            temp.innerHTML = `${data.main.temp} degrees`;
+            location1.innerHTML = `${data.name}, ${data.sys.country}`;
+            icon.innerHTML = `${data.weather[0].description} <span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
+            let far = (data.main.temp - 273.15) * 9/5 + 32;
+            let cel = (data.main.temp - 273.15);
+            temp.addEventListener('click', Toggle);
+            temp.addEventListener('mouseover', Toggle);
+            temp.addEventListener('onload', Toggle);
+            let toggle = true;
+            function Toggle() {
+                if(toggle){
+                  temp.innerHTML = Math.floor(far);
+                  toggle = false;
+                } else{
+                  temp.innerHTML = Math.floor(cel);
+                  toggle = true;
+                }
+            }
+
             wind.innerHTML = `${data.wind.speed} mph`;
           })
           .catch(function (error) {
@@ -115,6 +131,20 @@
           });
       }
 
+      // let toggle;
+      // let newTemp
+      // function tempToggle(temp) {
+      //   if(toggle){
+      //     // (K - 273.15) * 9/5 + 32
+      //      newTemp = (temp.target.innerText - 273.15) * 9/5 + 32;
+      //     temp = newTemp;
+      //     console.log(newTemp);
+      //     toggle = false;
+      //   } else {
+      //     toggle = true;
+      //     console.log(newTemp);
+      //   }
+      // }
 
       //  function getColors(){
        //
