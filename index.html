@@ -11,7 +11,7 @@
 
     body {
       background: white;
-      margin: 30px;
+      margin: 10px;
       font-family: "Courier New", Courier, monospace;
     }
 
@@ -21,8 +21,7 @@
       margin: 0 auto;
       padding: 5px;
       text-align: center;
-      width: 90%;
-      height: 70%;
+      width: 95%;
       box-shadow: 10px 10px 10px #d3d3d3;
     }
 
@@ -56,15 +55,15 @@
     }
 
     .progress{
-      margin: 60px;
+      margin: 50px;
     }
-     
+
   </style>
 </head>
 <body>
   <div class="container">
     <div class="weather-box">
-      <h1>Your Local Weather</h1>
+      <h1><strong>Your Local Weather</strong></h1>
       <div class="weather-items">
           <button type="button" class="location btn"></button>
           <button type="button" class="icon btn"></button>
@@ -72,7 +71,7 @@
           <button type="button" class="wind btn"></button>
       </div>
       <div class="progress">
-        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+
       </div>
     </div>
   </div>
@@ -82,12 +81,11 @@
       let lon;
       let lat;
       let weatherApi = `https://api.openweathermap.org/data/2.5/weather?`;
-      let country = document.querySelector('.country');
       let location1 = document.querySelector('.location');
       let icon = document.querySelector('.icon');
-      let description = document.querySelector('.temp_description');
       let temp = document.querySelector('.temperature');
       let wind = document.querySelector('.wind');
+      let progress = document.querySelector('.progress')
       // const colors = ["blue", "green", "Yellow", "red"];
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -110,43 +108,34 @@
             icon.innerHTML = `${data.weather[0].description} <span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
             let far = (data.main.temp - 273.15) * 9/5 + 32;
             let cel = (data.main.temp - 273.15);
-            temp.addEventListener('click', Toggle);
-            temp.addEventListener('mouseover', Toggle);
-            temp.addEventListener('onload', Toggle);
-            let toggle = true;
+            progress.innerHTML = `<div class="progress-bar bg-danger" role="progressbar" style="width:${Math.floor(far)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${Math.floor(far)}℉</div>`;
+            temp.innerHTML =  `${Math.floor(far)} ℉`;
+            //Simple Toggle for temperatures
+            let toggle = false;
             function Toggle() {
-                if(toggle){
-                  temp.innerHTML = Math.floor(far);
-                  toggle = false;
-                } else{
-                  temp.innerHTML = Math.floor(cel);
+                if(!toggle){
+                  temp.innerHTML =  `${Math.floor(far)} ℉`;
                   toggle = true;
+                } else{
+                  temp.innerHTML = `${Math.floor(cel)} ℃`;
+                  toggle = false;
                 }
             }
+            //Fixes the bug so I don't have to double click to switch on the first try, so hover only works once
+            temp.addEventListener('mouseover', Toggle, {
+              once: true
+            });
+            temp.addEventListener('click', Toggle);
 
-            wind.innerHTML = `${data.wind.speed} mph`;
+            wind.innerHTML = `${data.wind.speed} Knots`;
           })
           .catch(function (error) {
             console.log('Request failed', error);
           });
       }
 
-      // let toggle;
-      // let newTemp
-      // function tempToggle(temp) {
-      //   if(toggle){
-      //     // (K - 273.15) * 9/5 + 32
-      //      newTemp = (temp.target.innerText - 273.15) * 9/5 + 32;
-      //     temp = newTemp;
-      //     console.log(newTemp);
-      //     toggle = false;
-      //   } else {
-      //     toggle = true;
-      //     console.log(newTemp);
-      //   }
-      // }
 
-      //  function getColors(){
+      //  function getGeoPics(){
        //
       //  }
 
