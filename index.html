@@ -15,6 +15,9 @@
       font-family: "Courier New", Courier, monospace;
     }
 
+    #map {
+           height: 100%;
+         }
 
     .weather-box{
       background-color: rgba(255,0,0,0.2);
@@ -24,6 +27,10 @@
       text-align: center;
       width: 95%;
       box-shadow: 10px 10px 10px #d3d3d3;
+      -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+      background-size: cover;
     }
 
     .weather-box h1 {
@@ -62,6 +69,7 @@
   </style>
 </head>
 <body>
+  <div id="map"></div>
   <div class="container">
     <div class="weather-box">
       <h1><strong>Your Local Weather</strong></h1>
@@ -93,9 +101,28 @@
           lat = "lat=" + position.coords.latitude;
           lon = "lon=" + position.coords.longitude;
           getWeather(`${weatherApi}${lat}&${lon}${"&appid=cf09b681971abfafb863bbbf9b0c9579"}`);
+          let photoLoc =  `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q`;
+          getGeoPhoto(photoLoc);
         });
       } else {
         console.log("Geolocation is not supported by this browser.");
+      }
+      //Gets Geo photo
+      function getGeoPhoto(url){
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        // console.log(proxyurl + url);
+        fetch(proxyurl + url, {
+          method: 'GET'
+        })
+        .then((response) => response.json())
+        .then(function(data){
+          const photoReference = data.results[0].photos[0].photo_reference;
+          let locationPicture = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=700&photoreference=${photoReference}&key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q`;
+            document.querySelector('.weather-box').style.backgroundImage = `url(${locationPicture})`;
+        })
+        .catch(function (error) {
+          console.log('Request failed', error);
+        });
       }
 
       function getWeather(api){
@@ -104,7 +131,7 @@
           })
           .then((response) => response.json())
           .then(function (data) {
-            console.log('Request succeeded with JSON response', data);
+            // console.log('Request succeeded with JSON response', data);
             location1.innerHTML = `${data.name}, ${data.sys.country}`;
             icon.innerHTML = `${data.weather[0].description} <span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
             let far = (data.main.temp - 273.15) * 9/5 + 32;
@@ -122,6 +149,7 @@
                   toggle = false;
                 }
             }
+
             //Fixes the bug so I don't have to double click to switch on the first try, so hover only works once
             temp.addEventListener('mouseover', Toggle, {
               once: true
@@ -134,12 +162,7 @@
             console.log('Request failed', error);
           });
       }
-
-
-      //  function getGeoPics(){
-       //
-      //  }
-
   </script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q&libraries=places"></script>
 </body>
 </html>
