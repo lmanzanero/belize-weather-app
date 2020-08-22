@@ -10,23 +10,28 @@
    <style media="screen">
 
     body {
-      background: white;
+      display: flex;
+      background: #272727;
       align-content: center;
+      justify-content: center; 
+      margin: 0 auto;
+      padding: 0;
+      height: 100vh;
       font-family: "Courier New", Courier, monospace;
     }
 
-    #map {
-           height: 100%;
-         }
-
     .weather-box{
-      background-color: rgba(255,0,0,0.2);
       position: relative;
-      margin-top: 10%;
-      padding: 5px;
-      text-align: center;
-      width: 95%;
-      box-shadow: 10px 10px 10px #d3d3d3;
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      top: 25%;
+      padding: 1em;
+      background-color: #fd9; 
+      border-radius: 5px;
+      text-align: center; 
+      justify-content: center;
+      box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
       -webkit-background-size: cover;
      -moz-background-size: cover;
      -o-background-size: cover;
@@ -34,42 +39,71 @@
     }
 
     .weather-box h1 {
-      color: black;
-      margin: 10px;
-      padding-bottom: 40px;
+      color: #fd9; 
+      display: block;
+      justify-content: center;
+      text-align: center; 
+      margin: auto;
+      padding: 1em;
+      width: 70%;
+      border-radius: 0.4em;
+      background-color: #272727;
     }
 
     .weather-items {
+      display: flex;
+      flex-direction: row;
       margin: 0 auto;
       width: 100%;
     }
 
     .weather-items button {
-      position: relative;
+      position: relative; 
       margin: 5px;
       height: 80px;
-      width: 40%;
+      width: 100%;
+      font-weight: 600; 
       min-width: 200px;
-      background: blue;
-      color: #fff;
+      background: #272727;
       font-size: 20px;
+      color: #fd9;
     }
 
-    .weather-items button:hover{
-      background-color: rgba(255,0,0,0.2);
-      color: black;
-      width: 45%;
-      min-width: 220px;
+    .weather-items button:hover{ 
+      font-weight: 700; 
+      box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
     }
 
-    .progress{
-      margin: 10%;
+    .progress{ 
+      display: block;
+      width: 80%; 
+      margin: 1em auto;
+    }
+
+    .progress .progress-bar {
+      color: #272727;
+      font-weight: bolder; 
+      font-size: 1.2em;
+      background: -webkit-linear-gradient(to right, #0b486b, #f56217); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #0b486b, #f56217)
+    }
+
+    footer { 
+      position: relative; 
+      color: #fd9;
+      background-color: #272727;
+      height: 30px; 
+      width: 50%;
+      margin: 3em auto; 
+    }
+
+    footer p { 
+      font-size: 1.5em;
     }
 
   </style>
 </head>
-<body>
-  <div id="map"></div>
+<body> 
   <div class="container">
     <div class="weather-box">
       <h1><strong>Your Local Weather</strong></h1>
@@ -82,6 +116,9 @@
       <div class="progress">
 
       </div>
+      <footer>
+        <p>View Source Code <a href="https://github.com/lmanzanero/weather-app" target="_blank"> Here</a></p>
+      </footer>
     </div>
   </div>
   <script type="text/javascript">
@@ -136,7 +173,7 @@
             icon.innerHTML = `${data.weather[0].description} <span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
             let far = (data.main.temp - 273.15) * 9/5 + 32;
             let cel = (data.main.temp - 273.15);
-            progress.innerHTML = `<div class="progress-bar bg-danger" role="progressbar" style="width:${Math.floor(far)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${Math.floor(far)}℉</div>`;
+            progress.innerHTML = `<div class="progress-bar" role="progressbar" style="width:${Math.floor(far)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${Math.floor(far)}℉</div>`;
             temp.innerHTML =  `${Math.floor(far)} ℉`;
             //Simple Toggle for temperatures
             let toggle = false;
