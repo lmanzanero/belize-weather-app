@@ -19,6 +19,8 @@ const fetchWeather = async (city) => {
     return
   }
 
+  document.querySelector('.data').textContent = JSON.stringify(data);
+
   const displayData = {
     city: data.name,
     temp: kelvinToFahrenheit(data.main.temp),

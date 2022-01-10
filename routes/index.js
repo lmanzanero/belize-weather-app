@@ -11,22 +11,41 @@ const API_KEY_VALUE = process.env.API_KEY_VALUE
 
 // Init cache
 let cache = apicache.middleware
+// cache('2 minutes')
 
-router.get('/', cache('2 minutes'), async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const params = new URLSearchParams({
       [API_KEY_NAME]: API_KEY_VALUE,
       ...url.parse(req.url, true).query,
     })
 
-    const apiRes = await needle('get', `${API_BASE_URL}?${params}`)
+    const apiRes = await needle('get', `${API_BASE_URL}weather?${params}`)
     const data = apiRes.body
 
     // Log the request to the public API
     if (process.env.NODE_ENV !== 'production') {
-      console.log(`REQUEST: ${API_BASE_URL}?${params}`)
+      console.log(`REQUEST: ${API_BASE_URL}?${params}`, data); 
     }
 
+    res.status(200).json(data)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// Forecast for all of these
+// Current weather
+// Minute forecast for 1 hour
+// Hourly forecast for 48 hours
+// Daily forecast for 7 days
+// National weather alerts
+// Historical weather data for the previous 5 days
+
+router.get('/forecast',  cache('2 minutes'), async (req, res, next) => {
+  try { 
+    const apiRes = await needle('get', `${API_BASE_URL}onecall?lat=17.1899&lon=88.4976&appid=${API_KEY_VALUE}`)
+    const data = apiRes.body
     res.status(200).json(data)
   } catch (error) {
     next(error)
