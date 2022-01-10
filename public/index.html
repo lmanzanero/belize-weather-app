@@ -145,7 +145,7 @@
           lat = position.coords.latitude;
           long = position.coords.longitude;
           getWeather(`api/location?long=${long}&lat=${lat}`);
-          let photoLoc = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q`;
+          let photoLoc = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=GOOGLE_API_KEY`;
           // getGeoPhoto(photoLoc);
         });
       } else {
@@ -159,7 +159,7 @@
       //     .then((response) => response.json())
       //     .then(function (data) {
       //       const photoReference = data.results[0].photos[0].photo_reference;
-      //       let locationPicture = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=700&photoreference=${photoReference}&key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q`;
+      //       let locationPicture = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=700&photoreference=${photoReference}&key=GOOGLE_API_KEY`;
       //       document.querySelector(
       //         ".weather-box"
       //       ).style.backgroundImage = `url(${locationPicture})`;
@@ -210,7 +210,7 @@
     </script>
     <script
       type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q&libraries=places"
+      src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&libraries=places"
     ></script>
   </body>
 </html>
