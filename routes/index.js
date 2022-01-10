@@ -36,8 +36,8 @@ router.get('/', async (req, res, next) => {
 
 //current location
 router.get('/location', async(req, res, next) => {
-  try { 
-    if(!req.body.lat || !req.body.long) {
+  try {  
+    if(!req.query.lat || !req.query.long) {
       res.status(400).json({
         status: 400,
         message: "Please include longitude and latitude"
@@ -45,9 +45,10 @@ router.get('/location', async(req, res, next) => {
       return
     }
 
-    const params = `lat=${req.body.lat}&lon=${req.body.long}&appid=${API_KEY_VALUE}`
+    const params = `lat=${req.query.lat}&lon=${req.query.long}&appid=${API_KEY_VALUE}`
     const apiRes = await needle('get', `${API_BASE_URL}weather?${params}`)
     const data = apiRes.body; 
+    console.log(data);
     res.status(200).json(data)
   } catch (error) {
     next(error);
