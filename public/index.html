@@ -15,23 +15,20 @@
     <style media="screen">
       body {
         display: flex;
-        background: #272727;
+        background: #dbe1e8;
         align-content: center;
         justify-content: center;
-        margin: 0 auto;
+        margin: 0;
         padding: 0;
-        height: 100vh;
+        height: 100%;
         font-family: "Courier New", Courier, monospace;
       }
 
       .weather-box {
-        position: relative;
-        display: block;
-        margin: 0 auto;
+        margin: auto;
         width: 100%;
-        top: 25%;
         padding: 1em;
-        background-color: #fd9;
+        background-color: #f8f8f8;
         border-radius: 5px;
         text-align: center;
         justify-content: center;
@@ -43,7 +40,7 @@
       }
 
       .weather-box h1 {
-        color: #fd9;
+        color: #6c7983;
         display: block;
         justify-content: center;
         text-align: center;
@@ -51,29 +48,54 @@
         padding: 1em;
         width: 70%;
         border-radius: 0.4em;
-        background-color: #272727;
+        background-color: #dbe1e8;
       }
 
-      .weather-items {
+      .weather-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 1em 0px;
+      }
+
+      .map { 
+        height: 100%;
+        max-height: 500px;
+        width: 100%;
+      }
+
+      .map img {
+        height: 100%;
+      }
+
+      .weather-details { 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+      .weather-details .weather-detail {
         display: flex;
         flex-direction: row;
         margin: 0 auto;
         width: 100%;
       }
 
-      .weather-items button {
-        position: relative;
-        margin: 5px;
+      .weather-details .weather-detail button {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap-reverse;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
         height: 80px;
-        width: 100%;
         font-weight: 600;
-        min-width: 200px;
-        background: #272727;
-        font-size: 20px;
-        color: #fd9;
+        min-width: 100px;
+        background: #dbe1e8;
+        font-size: 10px;
+        color: #6c7983;
       }
 
-      .weather-items button:hover {
+      .weather-details .weather-detail button:hover {
         font-weight: 700;
         box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
       }
@@ -96,31 +118,142 @@
         background: linear-gradient(to right, #0b486b, #f56217);
       }
 
+      .sevenday-forcast {
+        display: grid; 
+        height: 200px;
+      }
+
+      .forecast-table {
+	 margin: 1em 1em;
+	 min-width: 300px;
+   background-color: #dbe1e8; 
+}
+ .forecast-table tr {
+	 border-top: 1px solid #ddd;
+	 border-bottom: 1px solid #ddd;
+}
+ .forecast-table th {
+	 display: none;
+   padding: 0.5em;
+}
+ .forecast-table td {
+	 display: block;
+}
+ .forecast-table td:first-child {
+	 padding-top: 0.5em;
+}
+ .forecast-table td:last-child {
+	 padding-bottom: 0.5em;
+}
+ .forecast-table td:before {
+	 content: attr(data-th) ": ";
+	 font-weight: bold;
+	 width: 6.5em;
+	 display: inline-block;
+   
+}
+ @media (min-width: 480px) {
+	 .forecast-table td:before {
+		 display: none;
+	}
+}
+ .forecast-table th, .forecast-table td {
+	 text-align: left;
+}
+ @media (min-width: 480px) {
+	 .forecast-table th, .forecast-table td {
+		 display: table-cell;
+		 padding: 0.25em 0.5em;
+	}
+	 .forecast-table th:first-child, .forecast-table td:first-child {
+		 padding-left: 0;
+	}
+	 .forecast-table th:last-child, .forecast-table td:last-child {
+		 padding-right: 0;
+	}
+}
+
       footer {
         position: relative;
-        color: #fd9;
-        background-color: #272727;
-        height: 30px;
+        color: #6c7983;
+        background-color: #dbe1e8;
         width: 50%;
-        margin: 3em auto;
+        margin: auto;
+        border-radius: 0.4em;
       }
 
       footer p {
         font-size: 1.5em;
+        line-height: 0.5em;
+        margin: 3em auto;
+        padding: 0.5em;
       }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="weather-box">
-        <h1><strong>Your Local Weather</strong></h1>
-        <div class="weather-items">
-          <button type="button" class="location btn"></button>
-          <button type="button" class="icon btn"></button>
-          <button type="button" class="temperature btn"></button>
-          <button type="button" class="wind btn"></button>
+        <h1><strong>Belize Weather</strong></h1>
+        <div class="weather-container">
+          <div class="map">
+            <img
+              src="https://simplemaps.com/static/svg/bz/bz.svg"
+              alt="Belize SVG Map"
+            />
+          </div>
+          <div class="weather-details">
+            <label for="locations">Choose a location</label>
+            <select name="locations" id="locations">
+              <option value="Corozal">Corozal</option>
+              <option value="Orange Walk">Orange Walk</option>
+              <option value="Belize City">Belize City</option>
+              <option value="Cayo">Cayo</option>
+              <option value="Stann Creek">Stann Creek</option>
+              <option value="Toldeo">Toldeo</option>
+            </select>
+            <div class="weather-detail">
+              <button type="button" class="location btn">Text</button>
+              <button type="button" class="icon btn"></button>
+              <button type="button" class="temperature btn"></button>
+              <button type="button" class="wind btn"></button>
+            </div>
+            <div class="progress"></div>
+            <div class="sevenday-forcast">
+              <h4>7 Day Forcast</h4> 
+              <table class="forecast-table">
+                <tr>
+                  <th>Cayo</th>
+                  <th>Sun</th>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                </tr>
+                <tr>
+                  <td data-th="Movie Title">Day</td>
+                  <td data-th="Genre">12-13</td>
+                  <td data-th="Year">1977</td>
+                  <td data-th="Gross">$</td>
+                </tr>
+                <tr>
+                  <td data-th="Movie Title">Night</td>
+                  <td data-th="Genre">12-16</td>
+                  <td data-th="Year">1986</td>
+                  <td data-th="Gross">$1</td>
+                </tr>
+                <tr>
+                  <td data-th="Movie Title">Apparant</td>
+                  <td data-th="Genre">3-4</td>
+                  <td data-th="Year">1973</td>
+                  <td data-th="Gross">$1</td>
+                </tr>
+              </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="progress"></div>
         <footer>
           <p>
             View Source Code
