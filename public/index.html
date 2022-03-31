@@ -48,8 +48,7 @@
       padding: 1em;
       width: 70%;
       border-radius: 0.4em;
-      background-color: #dbe1e8;
-      box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      background-color: #dbe1e8; 
     }
 
     .weather-container {
@@ -190,6 +189,32 @@
       }
     }
 
+    .graphs {
+      display: flex;
+      flex-direction: row;
+      gap: 1em;
+      justify-content: space-evenly; 
+      margin: 2.5em auto;
+    }
+
+    .graphs .graph-container {
+      height: 280px;
+      width: 300px;
+      overflow: hidden; 
+      box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    }
+
+    .graphs .graph-container .graph-title {
+      color: #6c7983;
+      background-color: #dbe1e8; 
+    }
+
+    .graphs .graph-container img {
+      width: 100%;
+      height: 100%;
+      object-fit:cover; 
+    }
+
     footer { 
       color: #6c7983;
       background-color: #dbe1e8; 
@@ -264,6 +289,29 @@
               </tr>
             </table>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="weather-box">
+      <h2>Weather Graphs</h2>
+      <div class="graphs">
+        <div class="graph-container">
+          <div class="graph-title">
+            Radar
+          </div>
+          <img src="http://nms.gov.bz/images/radar/250/latest_250kmloop.gif?t=1648733049" alt="Belize Live Weather Radar"/>
+        </div>
+        <div class="graph-container">
+          <div class="graph-title">
+            Radar
+          </div>
+          <img src="https://weather.msfc.nasa.gov/goes/abi/thumb/GOES16_abi_conus_20220331_132117_band02.jpg" alt="Belize Live Weather Satallite"/>
+        </div>
+        <div class="graph-container">
+          <div class="graph-title">
+            Weather Stations
+          </div>
+          <img src="https://www.researchgate.net/profile/Jonathan-Lashley/publication/295078178/figure/fig2/AS:330834843324422@1455888581393/Location-of-Weather-Stations-in-Belize.png" alt="Belize Live Weather Stations"/>
         </div>
       </div>
     </div>
