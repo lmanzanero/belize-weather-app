@@ -46,7 +46,7 @@
       display: block;
       justify-content: center;
       text-align: center;
-      margin: auto;
+      margin: 0.5em auto;
       padding: 1em;
       width: 70%;
       border-radius: 0.4em;
@@ -56,7 +56,7 @@
     .weather-container {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      padding: 1em 0px;
+      padding: 2.5em 0px;
     }
 
     .map {
@@ -110,6 +110,24 @@
       font-size: larger;
     }
     
+    select {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      background: #dbe1e8;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      padding: 12px;
+      margin: auto;
+      border-radius: 0.3em;
+      width: 100%;
+      font-size: 18px;
+      box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    }
+
+    select:focus {
+      background-color: #dbe1e8;
+    }
     h2, h4 {
        color: #6c7983;
     }
@@ -344,7 +362,7 @@
       </p>
     </footer> 
   </div>
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
     let lon;
     let lat;
     let location1 = document.querySelector(".location");
@@ -424,7 +442,7 @@
           console.log("Request failed", error.response);
         });
     }
-  </script> -->
+  </script>
   <script src="player.js"></script>
   <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&libraries=places">
   </script> -->
