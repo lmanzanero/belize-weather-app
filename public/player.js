@@ -12,7 +12,7 @@ const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
 
 // Song titles
-const songs = ['hey', 'summer', 'ukulele'];
+const songs = ['Weather Report', 'Weather Report', 'Weather Report'];
 
 // Keep track of song
 let songIndex = 2;
@@ -23,8 +23,8 @@ loadSong(songs[songIndex]);
 // Update song details
 function loadSong(song) {
   title.innerText = song;
-  audio.src = `music/${song}.mp3`;
-  cover.src = `images/${song}.jpg`;
+  audio.src = `http://db.hydromet.gov.bz:8181/wimp_new/forecast/general/audio/2022-03-31_0600_AM_NMS_BZ.mp3`;
+  cover.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Flag_of_Belize.svg/1280px-Flag_of_Belize.svg.png`;
 }
 
 // Play song
