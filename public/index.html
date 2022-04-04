@@ -300,13 +300,13 @@
             <table class="forecast-table">
               <tr>
                 <th>Country</th>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
+                <th class="day">Mon</th>
+                <th class="day">Tue</th>
+                <th class="day">Wed</th>
+                <th class="day">Thu</th>
+                <th class="day">Fri</th>
+                <th class="day">Sat</th>
+                <th class="day">Sun</th>
               </tr>
               <tr>
                 <td data-th="Movie Title">Day</td>
@@ -368,13 +368,15 @@
     let city = document.querySelector(".city");
     let icon = document.querySelector(".icon");
     let temp = document.querySelector(".temperature");
-    let wind = document.querySelector(".wind"); 
+    let wind = document.querySelector(".wind");  
+    let th = document.querySelectorAll("table tr .day");
     // const colors = ["blue", "green", "Yellow", "red"];
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         lat = position.coords.latitude;
         long = position.coords.longitude;
         getWeather(`api/location?long=${long}&lat=${lat}`);
+        getForcast(`api/forecast`);
         let photoLoc =
           `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=GOOGLE_API_KEY`;
         // getGeoPhoto(photoLoc);
@@ -400,11 +402,28 @@
     //     });
     // }
 
-    async function getWeather(api) {
+    async function getForcast(forecast) {
+      try {
+        const response = await fetch(forecast);
+        const data = await response.json(); 
+        const days = data.daily.map(day => { 
+          let dayLong = new Date(day.dt * 1000).toLocaleString('en-us', {weekday:'long'}); 
+          let dayShorted = dayLong.substr(0, 3);
+          return dayShorted;
+        })
+        console.log(days);
+        th.forEach((header, index) => {
+            console.log(header.textContent = days[index]);
+          })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    async function getWeather(api) { 
       await fetch(api)
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
+        .then((data) => {  
           city.textContent = `${data.name}, ${data.sys.country}`;
           icon.innerHTML =
             `${data.weather[0].description} <span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
@@ -413,7 +432,6 @@
           temp.textContent = `${Math.floor(far)} ℉`;
           //Simple Toggle for temperatures
           let toggle = false;
-
           function Toggle() {
             if (!toggle) {
               temp.textContent = `${Math.floor(far)} ℉`;
