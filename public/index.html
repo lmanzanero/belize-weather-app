@@ -308,19 +308,23 @@
                 <th class="day">Sat</th>
                 <th class="day">Sun</th>
               </tr>
-              <tr>
-                <td data-th="dayHeader">Day</td>
-                <td data-th="dayTemps">12-13</td>
-                <td data-th="nightTemps">1977</td>
-                <td data-th="feelsLike">$</td>
+              <tr class="tableInfo">
+                <td class="dayHeader">Day</td>
+                <td class="dayTemps">12-13</td>
+                <td class="dayTemps">1977</td>
+                <td class="dayTemps">$</td>
+                <td class="dayTemps">$</td>
+                <td class="dayTemps">$</td>
+                <td class="dayTemps">$</td>
+                <td class="dayTemps">$</td>
               </tr>
-              <tr>
+              <tr class="tableInfo">
                 <td data-th="Movie Title">Night</td>
                 <td data-th="dayTemps">12-16</td>
                 <td data-th="nightTemps">1986</td>
                 <td data-th="feelsLike">$1</td>
               </tr>
-              <tr>
+              <tr class="tableInfo">
                 <td data-th="Movie Title">Apparant</td>
                 <td data-th="dayTemps">3-4</td>
                 <td data-th="nightTemps">1973</td>
@@ -370,6 +374,7 @@
     let temp = document.querySelector(".temperature");
     let wind = document.querySelector(".wind");  
     let th = document.querySelectorAll("table tr .day");
+    let dayTemps = document.querySelectorAll("table .tableInfo .dayTemps");
     // const colors = ["blue", "green", "Yellow", "red"];
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -414,11 +419,13 @@
             dayShorted: dayShorted, 
             maxTemp: day.temp.max, 
             minTemp: day.temp.min};
-        })
-        console.log(days);
+        }) 
         th.forEach((header, index) => {
             header.textContent = days[index].dayShorted;
           })
+        dayTemps.forEach((row, index) => { 
+           row.textContent = `${(days[index].minTemp - 273.15).toFixed(1)} - ${(days[index].maxTemp - 273.15).toFixed(1)}`;
+        })
       } catch (error) {
         console.log(error);
       }
