@@ -13,7 +13,7 @@ const API_KEY_VALUE = process.env.API_KEY_VALUE
 let cache = apicache.middleware
 // cache('2 minutes')
 
-router.get('/', async (req, res, next) => {
+router.get('/', cache('2 minutes'), async (req, res, next) => {
   try {
     const params = new URLSearchParams({
       [API_KEY_NAME]: API_KEY_VALUE,
@@ -35,7 +35,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //current location
-router.get('/location', async(req, res, next) => {
+router.get('/location', cache('2 minutes'), async(req, res, next) => {
   try {  
     if(!req.query.lat || !req.query.long) {
       res.status(400).json({

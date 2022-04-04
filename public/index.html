@@ -289,10 +289,10 @@
             <option value="Toldeo">Toldeo</option>
           </select>
           <div class="weather-detail">
-            <button type="button">Text</button>
-            <button type="button"></button>
-            <button type="button"></button>
-            <button type="button"></button>
+            <button type="button" class="city"></button>
+            <button type="button" class="icon"></button>
+            <button type="button" class="temperature"></button>
+            <button type="button" class="wind"></button>
           </div>
           <!-- <div class="progress"></div> -->
           <div class="sevenday-forcast">
@@ -365,7 +365,7 @@
   <script type="text/javascript">
     let lon;
     let lat;
-    let location1 = document.querySelector(".location");
+    let city = document.querySelector(".city");
     let icon = document.querySelector(".icon");
     let temp = document.querySelector(".temperature");
     let wind = document.querySelector(".wind"); 
@@ -404,28 +404,22 @@
       await fetch(api)
         .then((response) => response.json())
         .then((data) => {
-          location1.innerHTML = `${data.name}, ${data.sys.country}`;
+          console.log(data);
+          city.textContent = `${data.name}, ${data.sys.country}`;
           icon.innerHTML =
             `${data.weather[0].description} <span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
           let far = ((data.main.temp - 273.15) * 9) / 5 + 32;
-          let cel = data.main.temp - 273.15;
-          // progress1.innerHTML = `
-          //       <progress value="${Math.floor(
-          //     far
-          //   )}" max="100"> ${Math.floor(
-          //     far
-          //   )}℉ </progress>
-          // `; 
-          temp.innerHTML = `${Math.floor(far)} ℉`;
+          let cel = data.main.temp - 273.15; 
+          temp.textContent = `${Math.floor(far)} ℉`;
           //Simple Toggle for temperatures
           let toggle = false;
 
           function Toggle() {
             if (!toggle) {
-              temp.innerHTML = `${Math.floor(far)} ℉`;
+              temp.textContent = `${Math.floor(far)} ℉`;
               toggle = true;
             } else {
-              temp.innerHTML = `${Math.floor(cel)} ℃`;
+              temp.textContent = `${Math.floor(cel)} ℃`;
               toggle = false;
             }
           }
