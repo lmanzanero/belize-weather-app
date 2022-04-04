@@ -426,8 +426,7 @@
         const data = await response.json(); 
         const days = data.daily.map(day => { 
           let dayLong = new Date(day.dt * 1000).toLocaleString('en-us', {weekday:'long'}); 
-          let dayShorted = dayLong.substr(0, 3);
-          console.log(day);
+          let dayShorted = dayLong.substr(0, 3); 
           return { 
             dayShorted: dayShorted, 
             maxTemp: day.temp.max, 

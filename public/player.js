@@ -10,12 +10,14 @@ const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
+let date = new Date() ; 
 
 // Song titles
 const songs = ['Weather Report', 'Weather Report', 'Weather Report'];
 
 // Keep track of song
 let songIndex = 2;
+let dateIndex = 0;
 
 // Initially load song details into DOM
 loadSong(songs[songIndex]);
@@ -23,7 +25,8 @@ loadSong(songs[songIndex]);
 // Update song details
 function loadSong(song) {
   title.innerText = song;
-  audio.src = `http://db.hydromet.gov.bz:8181/wimp_new/forecast/general/audio/2022-03-31_0600_AM_NMS_BZ.mp3`;
+	console.log(date);
+  audio.src = `http://db.hydromet.gov.bz:8181/wimp_new/forecast/general/audio/${date}_0600_AM_NMS_BZ.mp3`;
   cover.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Flag_of_Belize.svg/1280px-Flag_of_Belize.svg.png`;
 }
 
@@ -47,8 +50,12 @@ function pauseSong() {
 
 // Previous song
 function prevSong() {
-  songIndex--;
-
+  songIndex--;  
+	//go to previous date
+	dateIndex--;
+	let decrementDay = new Date();
+	decrementDay.setDate(decrementDay.getDate() - dateIndex); 
+	date = new Date(decrementDay.getTime() - 24*60*60*1000).toISOString().slice(0, 10); 
   if (songIndex < 0) {
     songIndex = songs.length - 1;
   }
@@ -61,7 +68,11 @@ function prevSong() {
 // Next song
 function nextSong() {
   songIndex++;
-
+	//go to next day
+	dateIndex++
+	let tomorrow = new Date();
+	tomorrow.setDate(tomorrow.getDate() - dateIndex); 
+	date = new Date(tomorrow.getTime() + 24*60*60*1000).toISOString().slice(0, 10); 
   if (songIndex > songs.length - 1) {
     songIndex = 0;
   }
