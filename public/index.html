@@ -309,22 +309,22 @@
                 <th class="day">Sun</th>
               </tr>
               <tr>
-                <td data-th="Movie Title">Day</td>
-                <td data-th="Genre">12-13</td>
-                <td data-th="Year">1977</td>
-                <td data-th="Gross">$</td>
+                <td data-th="dayHeader">Day</td>
+                <td data-th="dayTemps">12-13</td>
+                <td data-th="nightTemps">1977</td>
+                <td data-th="feelsLike">$</td>
               </tr>
               <tr>
                 <td data-th="Movie Title">Night</td>
-                <td data-th="Genre">12-16</td>
-                <td data-th="Year">1986</td>
-                <td data-th="Gross">$1</td>
+                <td data-th="dayTemps">12-16</td>
+                <td data-th="nightTemps">1986</td>
+                <td data-th="feelsLike">$1</td>
               </tr>
               <tr>
                 <td data-th="Movie Title">Apparant</td>
-                <td data-th="Genre">3-4</td>
-                <td data-th="Year">1973</td>
-                <td data-th="Gross">$1</td>
+                <td data-th="dayTemps">3-4</td>
+                <td data-th="nightTemps">1973</td>
+                <td data-th="feelsLike">$1</td>
               </tr>
             </table>
           </div>
@@ -409,11 +409,15 @@
         const days = data.daily.map(day => { 
           let dayLong = new Date(day.dt * 1000).toLocaleString('en-us', {weekday:'long'}); 
           let dayShorted = dayLong.substr(0, 3);
-          return dayShorted;
+
+          return { 
+            dayShorted: dayShorted, 
+            maxTemp: day.temp.max, 
+            minTemp: day.temp.min};
         })
         console.log(days);
         th.forEach((header, index) => {
-            console.log(header.textContent = days[index]);
+            header.textContent = days[index].dayShorted;
           })
       } catch (error) {
         console.log(error);
