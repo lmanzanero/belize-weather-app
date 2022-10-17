@@ -3,8 +3,7 @@
   position: relative;
   background-color: #dbe1e8;
   border-radius: 15px; 
-  display: flex; 
-  width: min-content;
+  display: flex;   
   padding: 20px 30px; 
   margin: auto;
   z-index: 10;
@@ -117,4 +116,33 @@
   height: 100%;
   width: 0%;
   transition: width 0.1s linear;
+}
+
+
+@media only screen and (max-width: 860px) {
+ 
+
+  .img-container {
+    position: relative;
+    width: 80px;
+  }
+
+  .img-container img {
+    height: 80px;
+  }
+
+  .action-btn {
+    background-color: #dbe1e8;
+    border: 0;
+    color: #6c7983;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 20px;
+  }
+  
+  .action-btn.action-btn-big {
+    color: #6c7983;
+    font-size: 20px;
+  }
 }

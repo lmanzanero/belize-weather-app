@@ -73,12 +73,16 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      gap: 1em;
     }
 
     .weather-details .weather-detail {
       display: flex;
       flex-direction: row;
       margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 1em;
       width: 100%;
     }
 
@@ -120,7 +124,7 @@
       padding: 12px;
       margin: auto;
       border-radius: 0.3em;
-      width: 100%;
+      width: 100%; 
       font-size: 18px;
       box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
     }
@@ -180,10 +184,7 @@
       }
     }
 
-    .forecast-table th,
-    .forecast-table td {
-      text-align: left;
-    }
+ 
 
     @media (min-width: 480px) {
 
@@ -208,6 +209,7 @@
     .graphs {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       gap: 1em;
       justify-content: space-evenly; 
       margin: 2.5em auto;
@@ -246,6 +248,26 @@
       margin: 1em auto;
       padding: 0.5em;
     }
+    @media only screen and (max-width: 860px) {
+      .weather-box {
+        padding: 0;
+        margin: auto;
+        width: 100%;
+      }
+      .weather-container {
+        grid-template-columns: 1fr;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        padding: 0; 
+        gap: 2em;
+      }
+
+      table {
+        font-size: xx-small;
+      }
+    }
+
   </style>
 </head>
 
@@ -353,13 +375,13 @@
           <div class="graph-title">
             Radar
           </div>
-          <img src="http://nms.gov.bz/images/radar/250/latest_250kmloop.gif?t=1648733049" alt="Belize Live Weather Radar"/>
+          <img src="http://nms.gov.bz/images/radar/250/latest_250kmloop.gif" alt="Belize Live Weather Radar"/>
         </div>
         <div class="graph-container">
           <div class="graph-title">
             Satallite
           </div>
-          <img src="https://weather.msfc.nasa.gov/goes/abi/thumb/GOES16_abi_conus_20220331_132117_band02.jpg" alt="Belize Live Weather Satallite"/>
+          <img src="https://nms.gov.bz/images/radar/250/latest_PAC_250kmpic.gif" alt="Belize Live Weather Satallite"/>
         </div>
         <div class="graph-container">
           <div class="graph-title">
