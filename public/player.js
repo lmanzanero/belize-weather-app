@@ -24,14 +24,13 @@ loadSong(songs[songIndex]);
 
 // Update song details
 function loadSong(song) {
-  title.innerText = song;
-	console.log(date);
-  audio.src = `http://db.hydromet.gov.bz:8181/wimp_new/forecast/general/audio/${date}_0600_AM_NMS_BZ.mp3`;
+  title.innerText = song; 
+  audio.src = `https://wimp.nms.gov.bz/WIMPv2.0/forecast/general/audio/${date}_1200_PM_NMS_BZ.mp3`;
   cover.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Flag_of_Belize.svg/1280px-Flag_of_Belize.svg.png`;
 }
 
 // Play song
-function playSong() {
+function playAudio() {
   musicContainer.classList.add('play');
   playBtn.querySelector('i.fas').classList.remove('fa-play');
   playBtn.querySelector('i.fas').classList.add('fa-pause');
@@ -50,36 +49,23 @@ function pauseSong() {
 
 // Previous song
 function prevSong() {
-  songIndex--;  
-	//go to previous date
-	dateIndex--;
-	let decrementDay = new Date();
-	decrementDay.setDate(decrementDay.getDate() - dateIndex); 
-	date = new Date(decrementDay.getTime() - 24*60*60*1000).toISOString().slice(0, 10); 
-  if (songIndex < 0) {
-    songIndex = songs.length - 1;
-  }
-
-  loadSong(songs[songIndex]);
-
-  playSong();
+	let updatedDate = date.setDate(date.getDate() - 1); 
+	console.log(updatedDate);
+	let dateFormat = new Date(updatedDate);
+	let formattedDate = dateFormat.toISOString().slice(0,10);
+	console.log(formattedDate);
+  playAudio();
 }
 
 // Next song
 function nextSong() {
-  songIndex++;
-	//go to next day
-	dateIndex++
-	let tomorrow = new Date();
-	tomorrow.setDate(tomorrow.getDate() - dateIndex); 
-	date = new Date(tomorrow.getTime() + 24*60*60*1000).toISOString().slice(0, 10); 
-  if (songIndex > songs.length - 1) {
-    songIndex = 0;
-  }
+  let updatedDate = date.setDate(date.getDate() + 1); 
+	console.log(updatedDate);
+	let dateFormat = new Date(updatedDate);
+	let formattedDate = dateFormat.toISOString().slice(0,10);
+	console.log(formattedDate);
 
-  loadSong(songs[songIndex]);
-
-  playSong();
+  playAudio();
 }
 
 // Update progress bar
@@ -168,7 +154,7 @@ playBtn.addEventListener('click', () => {
   if (isPlaying) {
     pauseSong();
   } else {
-    playSong();
+    playAudio();
   }
 });
 
