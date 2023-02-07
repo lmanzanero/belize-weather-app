@@ -37,15 +37,15 @@ router.get('/', cache('2 minutes'), async (req, res, next) => {
 //current location
 router.get('/location', cache('2 minutes'), async(req, res, next) => {
   try {  
-    if(!req.query.lat || !req.query.long) {
-      res.status(400).json({
-        status: 400,
-        message: "Please include longitude and latitude"
-      })
-      return
-    }
+    // if(!req.query.lat || !req.query.long) {
+    //   res.status(400).json({
+    //     status: 400,
+    //     message: "Please include longitude and latitude"
+    //   })
+    //   return
+    // }
 
-    const params = `lat=${req.query.lat}&lon=${req.query.long}&appid=${API_KEY_VALUE}`
+    const params = `lat=17.1899&lon=88.4976&appid=${API_KEY_VALUE}`
     const apiRes = await needle('get', `${API_BASE_URL}weather?${params}`)
     const data = apiRes.body; 
     console.log(data);
@@ -73,4 +73,15 @@ router.get('/forecast',  cache('2 minutes'), async (req, res, next) => {
   }
 })
 
+
+router.get('/forecastareas', cache('2 minutes'), async (req, res, next) => {
+  try {
+    const date = new Date().getTime(); 
+    const apiRes = await needle('get', `https://wimp.nms.gov.bz/api/forecast_areas/read.php?_=${date}`);
+    const data = apiRes.body;
+    return res.status(200).json(data);
+  } catch (error) {
+    
+  }
+})
 module.exports = router
