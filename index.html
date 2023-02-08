@@ -322,25 +322,19 @@
     let forecastAreas = [];
     const locationSelect = document.getElementById("locations");
     let currentLocation = 'corozal';
-    const paths = document.querySelectorAll('#BelizeMap path');
-    paths.forEach(path => {
-      path.addEventListener('mouseover', function (e) {
-        const districtWeather = forecastAreas.filter(area => area.zone_description?.replace(/\s/g, '').toLocaleLowerCase().includes(`${path.id}`));
-        document.querySelector('.tooltip').innerHTML = `
-            <span>Max Temp: ${districtWeather[0]?.temp_max ?? "unavailable"}</span>
-            <span>Max Temp: ${districtWeather[0]?.temp_min ?? "unavailable"}</span>
-            <span>Wind: ${districtWeather[0]?.wind_speed ?? "unavailable"}</span>
-            <span>${districtWeather[0]?.weather_condition ?? "unavailable"}</span>
-        `;
-      })
-    })
 
     const mapMarkers = document.querySelectorAll("#BelizeMap .marker");
     mapMarkers.forEach(marker => {
       marker.addEventListener('click', function() {
         console.log(marker.dataset.title)
         const districtWeather = forecastAreas.filter(area => area.zone_description === marker.dataset.title);
-        console.log(districtWeather);
+        document.querySelector('.tooltip').innerHTML = `
+            <h3>${districtWeather[0].zone_description}</h3>
+            <span>Max Temp: ${districtWeather[0]?.temp_max ?? "unavailable"}</span>
+            <span>Max Temp: ${districtWeather[0]?.temp_min ?? "unavailable"}</span>
+            <span>Wind: ${districtWeather[0]?.wind_speed ?? "unavailable"}</span>
+            <span>${districtWeather[0]?.weather_condition ?? "unavailable"}</span>
+        `;
       })
     })
 
