@@ -25,7 +25,7 @@ loadSong(songs[songIndex]);
 // Update song details
 function loadSong(song) {
   title.innerText = song; 
-  audio.src = `https://wimp.nms.gov.bz/WIMPv2.0/forecast/general/audio/${date}_1200_PM_NMS_BZ.mp3`;
+  audio.src = `https://wimp.nms.gov.bz/WIMPv2.0/forecast/general/audio/${date.toISOString().slice(0,10)}_1200_PM_NMS_BZ.mp3`;
   cover.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Flag_of_Belize.svg/1280px-Flag_of_Belize.svg.png`;
 }
 
@@ -34,7 +34,6 @@ function playAudio() {
   musicContainer.classList.add('play');
   playBtn.querySelector('i.fas').classList.remove('fa-play');
   playBtn.querySelector('i.fas').classList.add('fa-pause');
-
   audio.play();
 }
 
@@ -54,6 +53,7 @@ function prevSong() {
 	let dateFormat = new Date(updatedDate);
 	let formattedDate = dateFormat.toISOString().slice(0,10);
 	console.log(formattedDate);
+	audio.src = `https://wimp.nms.gov.bz/WIMPv2.0/forecast/general/audio/${formattedDate}_1200_PM_NMS_BZ.mp3`;
   playAudio();
 }
 
@@ -64,7 +64,7 @@ function nextSong() {
 	let dateFormat = new Date(updatedDate);
 	let formattedDate = dateFormat.toISOString().slice(0,10);
 	console.log(formattedDate);
-
+  audio.src = `https://wimp.nms.gov.bz/WIMPv2.0/forecast/general/audio/${formattedDate}_1200_PM_NMS_BZ.mp3`;
   playAudio();
 }
 
