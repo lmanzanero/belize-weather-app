@@ -54,7 +54,7 @@
     transform: rotate(360deg);
   }
 }
-
+ d
 .navigation {
   display: flex;
   align-items: center;
@@ -70,6 +70,10 @@
   cursor: pointer;
   padding: 10px;
   margin: 0 20px;
+}
+
+.action-btn i:hover {
+  color: #3e6c8f;
 }
 
 .action-btn.action-btn-big {
