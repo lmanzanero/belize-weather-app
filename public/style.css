@@ -25,6 +25,22 @@ svg #corozal:hover,
   cursor: pointer;
 }
 
+svg .marker {
+  fill: white;  
+}
+
+svg .marker path {
+  fill: blue;
+}
+
+svg .marker:hover {
+  fill: whitesmoke;
+}
+
+svg .marker path:hover {
+  fill: purple;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -89,18 +105,23 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   visibility: none;
-  z-index: 1;
+  z-index: 0;
   right: 0;
   width: 200px;
-  background-color: rgba(250, 235, 215, 0.753);
+  background-color: rgba(236, 245, 235, 0.863);
   height: 100px;
-  color: #6c7983;
+  color: #555d63;
   text-align: center;
+  font-size: small;
+  font-weight: bolder;
+  border-radius: 2em;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }
 
 .tooltip:hover {
   visibility: visible;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .general-forecast {
