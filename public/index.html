@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
   <title>Belize Weather Forecast - Daily, Weekly, Montly</title>
-  
+
 </head>
 
 <body>
@@ -22,8 +22,8 @@
           ...
         </div>
         <?xml version="1.0" encoding="utf-8"?>
-        <svg id="BelizeMap" viewBox="0 0 1000 1559" width="auto" height="auto" fill="#7c7c7c" stroke="#ffffff" stroke-linecap="round"
-          stroke-linejoin="round" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+        <svg id="BelizeMap" viewBox="0 0 1000 1559" width="auto" height="auto" fill="#7c7c7c" stroke="#ffffff"
+          stroke-linecap="round" stroke-linejoin="round" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient gradientUnits="userSpaceOnUse" x1="506.55" y1="1" x2="506.55" y2="319.3" id="gradient-0">
               <stop offset="0" style="stop-color: rgba(225, 126, 126, 1)" />
@@ -77,7 +77,7 @@
             </div>
           </div>
 
-          <audio src="" id="audio"></audio>
+          <audio src="https://wimp.nms.gov.bz/WIMPv2.0/forecast/general/audio/2023-02-07_1200_PM_NMS_BZ.mp3" id="audio"></audio>
 
           <div class="img-container">
             <img
@@ -236,35 +236,27 @@
     </p>
   </footer>
   </div>
+  <script type="text/javascript" src="generalWeather.js"></script>
   <script type="text/javascript" src="getAreasWeather.js"></script>
-  <script type="module"> 
+  <script type="text/javascript" src="forecastWeather.js"></script>
+  <script type="module">
     let lon;
     let lat;
-    let city = document.querySelector(".city");
-    let icon = document.querySelector(".icon");
-    let temp = document.querySelector(".temperature");
-    let wind = document.querySelector(".wind");
-    let sunrise = document.querySelector(".sunrise");
-    let sunset = document.querySelector(".sunset");
-    let th = document.querySelectorAll("table tr .day");
-    let dayTemps = document.querySelectorAll("table .tableInfo .dayTemps");
-    let nightTemps = document.querySelectorAll("table .tableInfo .nightTemps");
-    let feelsLike = document.querySelectorAll("table .tableInfo .feelsLike");
     let forecastAreas = [];
     const locationSelect = document.querySelector("#locations");
-    let currentLocation = 'corozal'; 
-    const paths = document.querySelectorAll('#BelizeMap path'); 
+    let currentLocation = 'corozal';
+    const paths = document.querySelectorAll('#BelizeMap path');
     paths.forEach(path => {
-      path.addEventListener('mouseover', function (e) {  
-      const districtWeather = forecastAreas.filter(area => area.zone_description?.replace(/\s/g, '').toLocaleLowerCase().includes(`${path.id}`));
-      document.querySelector('.tooltip').innerHTML = `
-            <span>Max Temp: ${districtWeather[0]?.temp_max}</span>
-            <span>Max Temp: ${districtWeather[0]?.temp_min}</span>
-            <span>Wind: ${districtWeather[0]?.wind_speed}</span>
-            <span>${districtWeather[0]?.weather_condition}</span>
-        `; 
+      path.addEventListener('mouseover', function (e) {
+        const districtWeather = forecastAreas.filter(area => area.zone_description?.replace(/\s/g, '').toLocaleLowerCase().includes(`${path.id}`));
+        document.querySelector('.tooltip').innerHTML = `
+            <span>Max Temp: ${districtWeather[0]?.temp_max ?? "unavailable"}</span>
+            <span>Max Temp: ${districtWeather[0]?.temp_min ?? "unavailable"}</span>
+            <span>Wind: ${districtWeather[0]?.wind_speed ?? "unavailable"}</span>
+            <span>${districtWeather[0]?.weather_condition ?? "unavailable"}</span>
+        `;
+      })
     })
-    }) 
     locationSelect.addEventListener('change', function (e) {
       console.log(e.target.value)
       currentLocation = e.target.value;
@@ -272,101 +264,10 @@
 
     })
 
-        await getWeather(`api/location?long=test&lat=test`);
-        await getForcast(`api/forecast`); 
-        const areaWeatherData = await getAreasWeather('api/forecastareas');
-        forecastAreas = areaWeatherData;
-        // let photoLoc =
-        //   `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=GOOGLE_API_KEY`;
-    // getGeoPhoto(photoLoc);
-    //Gets Geo photo
-    // function getGeoPhoto(url) {
-    //   fetch(url, {
-    //     method: "GET",
-    //   })
-    //     .then((response) => response.json())
-    //     .then(function (data) {
-    //       const photoReference = data.results[0].photos[0].photo_reference;
-    //       let locationPicture = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=700&photoreference=${photoReference}&key=GOOGLE_API_KEY`;
-    //       document.querySelector(
-    //         ".weather-box"
-    //       ).style.backgroundImage = `url(${locationPicture})`;
-    //     })
-    //     .catch(function (error) {
-    //       console.log("Request failed", error);
-    //     });
-    // }
-
-    async function getForcast(forecast) {
-      try {
-        const response = await fetch(forecast);
-        const data = await response.json();
-        const days = data.daily.map(day => {
-          let dayLong = new Date(day.dt * 1000).toLocaleString('en-us', { weekday: 'long' });
-          let dayShorted = dayLong.substr(0, 3);
-          return {
-            dayShorted: dayShorted,
-            maxTemp: day.temp.max,
-            minTemp: day.temp.min,
-            nightTemp: day.temp.night,
-            feelsLike: day.feels_like.day
-          };
-        })
-        th.forEach((header, index) => {
-          header.textContent = days[index].dayShorted;
-        });
-        dayTemps.forEach((row, index) => {
-          row.textContent = `${(days[index].minTemp - 273.15).toFixed(1)} - ${(days[index].maxTemp - 273.15).toFixed(1)}`;
-        });
-
-        nightTemps.forEach((row, index) => {
-          row.textContent = `${(days[index].nightTemp - 273.15).toFixed(1)}`;
-        });
-
-        feelsLike.forEach((row, index) => {
-          row.textContent = `${(days[index].feelsLike - 273.15).toFixed(1)}`;
-        })
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    async function getWeather(api) {
-      await fetch(api)
-        .then((response) => response.json())
-        .then((data) => {
-          city.textContent = currentLocation;
-          sunrise.textContent = `${new Date(data.sys.sunrise).getDate()}:${new Date(data.sys.sunrise).getUTCMinutes().toLocaleString()}`;
-          sunset.textContent = `${new Date(data.sys.sunset).getUTCHours().toLocaleString()}:${new Date(data.sys.sunset).getUTCMinutes().toLocaleString()}`;
-          icon.innerHTML =
-            `${data.weather[0].description} <span><img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="" /></span>`;
-          let far = ((data.main.temp - 273.15) * 9) / 5 + 32;
-          let cel = data.main.temp - 273.15;
-          temp.textContent = `${Math.floor(far)} ℉`;
-          //Simple Toggle for temperatures
-          let toggle = false;
-          function Toggle() {
-            if (!toggle) {
-              temp.textContent = `${Math.floor(far)} ℉`;
-              toggle = true;
-            } else {
-              temp.textContent = `${Math.floor(cel)} ℃`;
-              toggle = false;
-            }
-          }
-
-          //Fixes the bug so I don't have to double click to switch on the first try, so hover only works once
-          temp.addEventListener("mouseover", Toggle, {
-            once: true,
-          });
-          temp.addEventListener("click", Toggle);
-
-          wind.innerHTML = `${data.wind.speed} Knots`;
-        })
-        .catch(function (error) {
-          console.log("Request failed", error.response);
-        });
-    }
+    await getWeather(`api/location`);
+    await getForcast(`api/forecast`);
+    const areaWeatherData = await getAreasWeather('api/forecastareas');
+    forecastAreas = areaWeatherData;
   </script>
   <script src="player.js"></script>
 </body>
