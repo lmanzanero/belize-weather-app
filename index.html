@@ -240,6 +240,7 @@
   <script type="text/javascript" src="getAreasWeather.js"></script>
   <script type="text/javascript" src="forecastWeather.js"></script>
   <script type="module">
+    console.log("ENV ", process.env.API_URL)
     let lon;
     let lat;
     let forecastAreas = [];
@@ -264,9 +265,9 @@
 
     })
 
-    await getWeather(`${process.env.API_URL}api/location`);
-    await getForcast(`${process.env.API_URL}api/forecast`);
-    const areaWeatherData = await getAreasWeather(`${process.env.API_URL}api/forecastareas`);
+    await getWeather(`https://weather-app-production-205a.up.railway.app/api/location`);
+    await getForcast(`https://weather-app-production-205a.up.railway.app/api/forecast`);
+    const areaWeatherData = await getAreasWeather(`https://weather-app-production-205a.up.railway.app/api/forecastareas`);
     forecastAreas = areaWeatherData;
   </script>
   <script src="player.js"></script>
