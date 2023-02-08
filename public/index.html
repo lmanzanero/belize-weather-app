@@ -237,7 +237,7 @@
   </footer>
   </div>
   <script type="text/javascript" src="getAreasWeather.js"></script>
-  <script type="text/javascript"> 
+  <script type="module"> 
     let lon;
     let lat;
     let city = document.querySelector(".city");
@@ -255,14 +255,13 @@
     let currentLocation = 'corozal'; 
     const paths = document.querySelectorAll('#BelizeMap path'); 
     paths.forEach(path => {
-      path.addEventListener('mouseover', function (e) { 
-        console.log(forecastAreas) 
+      path.addEventListener('mouseover', function (e) {  
       const districtWeather = forecastAreas.filter(area => area.zone_description?.replace(/\s/g, '').toLocaleLowerCase().includes(`${path.id}`));
       document.querySelector('.tooltip').innerHTML = `
-            <span>Max Temp: ${districtWeather[0].temp_max}</span>
-            <span>Max Temp: ${districtWeather[0].temp_min}</span>
-            <span>Wind: ${districtWeather[0].wind_speed}</span>
-            <span>${districtWeather[0].weather_condition}</span>
+            <span>Max Temp: ${districtWeather[0]?.temp_max}</span>
+            <span>Max Temp: ${districtWeather[0]?.temp_min}</span>
+            <span>Wind: ${districtWeather[0]?.wind_speed}</span>
+            <span>${districtWeather[0]?.weather_condition}</span>
         `; 
     })
     }) 
@@ -273,23 +272,13 @@
 
     })
 
-
-    // const colors = ["blue", "green", "Yellow", "red"];
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async function (position) {
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        getWeather(`api/location?long=${long}&lat=${lat}`);
-        getForcast(`api/forecast`); 
+        await getWeather(`api/location?long=test&lat=test`);
+        await getForcast(`api/forecast`); 
         const areaWeatherData = await getAreasWeather('api/forecastareas');
         forecastAreas = areaWeatherData;
-        let photoLoc =
-          `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=GOOGLE_API_KEY`;
-        // getGeoPhoto(photoLoc);
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
+        // let photoLoc =
+        //   `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=GOOGLE_API_KEY`;
+    // getGeoPhoto(photoLoc);
     //Gets Geo photo
     // function getGeoPhoto(url) {
     //   fetch(url, {
