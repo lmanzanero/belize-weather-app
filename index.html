@@ -325,8 +325,7 @@
 
     const mapMarkers = document.querySelectorAll("#BelizeMap .marker");
     mapMarkers.forEach(marker => {
-      marker.addEventListener('click', function() {
-        console.log(marker.dataset.title)
+      marker.addEventListener('click', function(e) { 
         const districtWeather = forecastAreas.filter(area => area.zone_description === marker.dataset.title);
         document.querySelector('.tooltip').innerHTML = `
             <h3>${districtWeather[0].zone_description}</h3>
@@ -335,6 +334,17 @@
             <span>Wind: ${districtWeather[0]?.wind_speed ?? "unavailable"}</span>
             <span>${districtWeather[0]?.weather_condition ?? "unavailable"}</span>
         `;
+
+      //get mouse position
+      let mousePosition = {
+        x: e.clientX,
+        y: e.clientY
+      }
+       const map = document.querySelector('.map'); 
+      //change tooltip position near mouse
+      const tooltip = document.querySelector('.tooltip');
+      tooltip.style.left = `${(mousePosition.x - map.offsetWidth/2)}px`; 
+      tooltip.style.top = `${(mousePosition.y - map.offsetHeight/2)}px`; 
       })
     })
 
