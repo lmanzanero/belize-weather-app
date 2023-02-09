@@ -53,28 +53,22 @@ router.get('/location', cache('2 minutes'), async(req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
-// Forecast for all of these
-// Current weather
-// Minute forecast for 1 hour
-// Hourly forecast for 48 hours
-// Daily forecast for 7 days
-// National weather alerts
-// Historical weather data for the previous 5 days
-
-router.get('/forecast',  cache('2 minutes'), async (req, res, next) => {
-  const date = new Date().getTime();
-  try { 
-    const forecastDaily = await needle('get',`https://wimp.nms.gov.bz/api/forecast_daily/read.php?_${date}` );
-    const forecastGeneral = await needle('get', `https://wimp.nms.gov.bz/api/forecast_general/read.php?_${date}`);
-    const forecastMarine = await needle('get', `https://wimp.nms.gov.bz/api/forecast_marine/read.php?t=${date}`);
-    const allForecast = await Promise.all([forecastDaily, forecastGeneral, forecastMarine]);
-    return await res.status(200).json({daily: forecastDaily.body, general: forecastGeneral.body, marine: forecastMarine.body}); 
+router.get('/forecast', async (req, res, next) => { 
+    const date = new Date().getTime();
+    try { 
+      const sevenDayForecast = await needle('get', `${API_BASE_URL}onecall?lat=17.1899&lon=88.4976&appid=${API_KEY_VALUE}`)
+      const forecastDaily = await needle('get',`https://wimp.nms.gov.bz/api/forecast_daily/read.php?_${date}` );
+      const forecastGeneral = await needle('get', `https://wimp.nms.gov.bz/api/forecast_general/read.php?_${date}`);
+      const forecastMarine = await needle('get', `https://wimp.nms.gov.bz/api/forecast_marine/read.php?t=${date}`);
+      const allForecast = await Promise.all([await forecastDaily, await forecastGeneral, await forecastMarine, await sevenDayForecast]);
+      const [ daily, general, marine, weekly ] = allForecast.map(async (data) => await data.body);
+      return await res.status(200).json({daily: await daily, general: await general, marine: await marine, weekly: await weekly});  
   } catch (error) {
     next(error)
   }
-})
+});
 
 
 router.get('/forecastareas', cache('2 minutes'), async (req, res, next) => {
