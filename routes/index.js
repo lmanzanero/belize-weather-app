@@ -84,4 +84,23 @@ router.get('/forecastareas', cache('2 minutes'), async (req, res, next) => {
     
   }
 })
+
+// let photoLoc =  `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q`;
+
+router.get('/geopicture', cache('2 minutes'), async (req, res, next) => {
+  const { lat, long } = req.query;
+  try {
+    const photoApi = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=100&type=&keyword=&key=${process.env.GOOGLE_API_KEY}`;
+    const photoResponse = await needle('get', photoApi);
+    const result = photoResponse.body.results; 
+    const cleanedResults = result.filter(photo => photo.photos != null)
+    const photos = cleanedResults.map(photo => photo.photos[0].photo_reference);
+    const photoUrls = photos.map(photoReference => `https://maps.googleapis.com/maps/api/place/photo?maxwidth=700&photoreference=${photoReference}&key=${process.env.GOOGLE_API_KEY}` )
+    return await res.status(200).json({photoUrls})
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json({error: error })
+  }
+})
+
 module.exports = router
