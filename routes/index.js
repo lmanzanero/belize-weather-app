@@ -55,7 +55,7 @@ router.get('/location', cache('2 minutes'), async(req, res, next) => {
   }
 });
 
-router.get('/forecast', async (req, res, next) => { 
+router.get('/forecast',  cache('2 minutes'), async (req, res, next) => { 
     const date = new Date().getTime();
     try { 
       const sevenDayForecast = await needle('get', `${API_BASE_URL}onecall?lat=17.1899&lon=88.4976&appid=${API_KEY_VALUE}`)
