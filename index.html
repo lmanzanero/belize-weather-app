@@ -188,19 +188,22 @@
               <div class="moon-sunrise">
                 <div class="row">
                   <div class="col">
-                    Sunrise: <span class="sunrise">time</span>
+                    <h4>Sunrise</h4> <span class="sunrise">...</span>
                   </div>
                   <div class="col">
-                    Sunset: <span class="sunset">time</span>
+                    <h4>Sunset</h4> <span class="sunset">...</span>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col">
-                    Moonrise: <span>time</span>
+                    <h4>Moonrise</h4> <span class="moonrise">...</span>
                   </div>
                   <div class="col">
-                    Moonset: <span>time</span>
+                    <h4>Moonset: </h4> <span class="moonset">...</span>
                   </div>
+                </div>
+                <div class="tide-details">
+                   <h4>Tide Details</h4>
                 </div>
               </div>
             </div>
@@ -320,6 +323,7 @@
     let lon;
     let lat;
     let forecastAreas = [];
+    let daily
     const locationSelect = document.getElementById("locations");
     let currentLocation = 'corozal';
 
@@ -356,7 +360,7 @@
     })
 
     await getWeather(`https://weather-app-production-205a.up.railway.app/api/location`);
-    await getForcast(`https://weather-app-production-205a.up.railway.app/api/forecast`);
+    await getForcast(`http://localhost:3000/api/forecast`);
     const areaWeatherData = await getAreasWeather(`https://weather-app-production-205a.up.railway.app/api/forecastareas`);
     forecastAreas = areaWeatherData; 
      forecastAreas.forEach(area => {

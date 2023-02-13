@@ -128,7 +128,8 @@ body {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 1em;
-  height: 300px;
+  height: auto;
+  padding: 1em;
   border-radius: 0.4em;
 }
 
@@ -213,13 +214,23 @@ select:focus {
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 13px;
-  margin: auto;
-  padding: 1em;
-  gap: 2em;
+  margin: 1em auto;
+  gap: 1em;
 }
 
-.col {
-  padding: 1em;
+.col { 
+  padding: 0.5em
+}
+
+.tide-details {
+  margin: 1em auto;
+}
+.tide-details p {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 13px;
+  line-height: 1.4em;
 }
 
 h2,
