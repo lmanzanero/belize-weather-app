@@ -356,7 +356,7 @@
     })
 
     await getWeather(`https://weather-app-production-205a.up.railway.app/api/location`);
-    await getForcast(`https://weather-app-production-205a.up.railway.app/api/forecast`);
+    await getForcast(`api/forecast`);
     const areaWeatherData = await getAreasWeather(`https://weather-app-production-205a.up.railway.app/api/forecastareas`);
     forecastAreas = areaWeatherData; 
      forecastAreas.forEach(area => {
