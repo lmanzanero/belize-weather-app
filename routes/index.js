@@ -58,7 +58,7 @@ router.get('/location', cache('2 minutes'), async(req, res, next) => {
 router.get('/forecast',  cache('2 minutes'), async (req, res, next) => { 
     const date = new Date().getTime();
     try { 
-      const sevenDayForecast = await needle('get', `${API_BASE_URL}onecall?lat=17.1899&lon=88.4976&appid=${API_KEY_VALUE}`)
+      const sevenDayForecast = await needle('get', `${API_BASE_URL}onecall?lat=17.1899&lon=-88.4976&appid=${API_KEY_VALUE}`)
       const forecastDaily = await needle('get',`https://wimp.nms.gov.bz/api/forecast_daily/read.php?_${date}` );
       const forecastGeneral = await needle('get', `https://wimp.nms.gov.bz/api/forecast_general/read.php?_${date}`);
       const forecastMarine = await needle('get', `https://wimp.nms.gov.bz/api/forecast_marine/read.php?t=${date}`);

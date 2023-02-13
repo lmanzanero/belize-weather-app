@@ -7,8 +7,9 @@ let feelsLike = document.querySelectorAll("table .tableInfo .feelsLike");
 async function getForcast(forecast) {
   try {
     const response = await fetch(forecast);
-    const data = await response.json();
-    const days = data.daily.map(day => {
+    const data = await response.json(); 
+    const { weekly } = data;
+    const days = weekly.daily.map(day => {
       let dayLong = new Date(day.dt * 1000).toLocaleString('en-us', { weekday: 'long' });
       let dayShorted = dayLong.substr(0, 3);
       return {
