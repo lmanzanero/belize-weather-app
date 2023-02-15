@@ -245,50 +245,8 @@
           </div>
         </div>
         <!-- <div class="progress"></div> -->
-        <div class="sevenday-forcast">
-          <h4>7 Day Forcast</h4>
-          <table class="forecast-table">
-            <tr>
-              <th>Country</th>
-              <th class="day">Mon</th>
-              <th class="day">Tue</th>
-              <th class="day">Wed</th>
-              <th class="day">Thu</th>
-              <th class="day">Fri</th>
-              <th class="day">Sat</th>
-              <th class="day">Sun</th>
-            </tr>
-            <tr class="tableInfo">
-              <td class="dayHeader">Day</td>
-              <td class="dayTemps">...</td>
-              <td class="dayTemps">...</td>
-              <td class="dayTemps">...</td>
-              <td class="dayTemps">...</td>
-              <td class="dayTemps">...</td>
-              <td class="dayTemps">...</td>
-              <td class="dayTemps">...</td>
-            </tr>
-            <tr class="tableInfo">
-              <td class="dayHeader">Night</td>
-              <td class="nightTemps">...</td>
-              <td class="nightTemps">...</td>
-              <td class="nightTemps">...</td>
-              <td class="nightTemps">...</td>
-              <td class="nightTemps">...</td>
-              <td class="nightTemps">...</td>
-              <td class="nightTemps">...</td>
-            </tr>
-            <tr class="tableInfo">
-              <td class="dayHeader">Apparent</td>
-              <td class="feelsLike">...</td>
-              <td class="feelsLike">...</td>
-              <td class="feelsLike">...</td>
-              <td class="feelsLike">...</td>
-              <td class="feelsLike">...</td>
-              <td class="feelsLike">...</td>
-              <td class="feelsLike">...</td>
-            </tr>
-          </table>
+        <div class="sevenday-forcast"> 
+            <canvas id="myChart"></canvas> 
         </div>
       </div>
     </div>
@@ -325,9 +283,6 @@
         Here</a>
     </p>
   </footer>
-  </div>
-  <div class="chart-container">
-    <canvas id="myChart"></canvas>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
