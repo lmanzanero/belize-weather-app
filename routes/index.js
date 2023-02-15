@@ -80,9 +80,7 @@ router.get('/forecastareas', cache('2 minutes'), async (req, res, next) => {
   } catch (error) {
     
   }
-})
-
-// let photoLoc =  `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=100&type=&keyword=&key=AIzaSyDuwOeDAoF86o2my6MBAjvV9N1-A_7gH3Q`;
+});
 
 router.get('/geopicture', cache('2 minutes'), async (req, res, next) => {
   const { lat, long } = req.query;
