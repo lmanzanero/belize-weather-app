@@ -60,6 +60,13 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 
+.chart-tip {
+  display: flex; 
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: left;
+}
+
 .weather-box {
   display: block;
   margin: auto;
