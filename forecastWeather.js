@@ -108,14 +108,18 @@ const dailyWeatherChart = new Chart(ctx, {
     datasets: [{
       label: 'Avg Temp',
       data: [],
-      borderWidth: 1,
+      borderWidth: 6,
       fill: true,
-      tension: 0.4
+      tension: 0.4,
+      borderColor: '#20827a',
+      backgroundColor: 'transparent',
+      hoverOffset: 4
     } 
   ]
   },
   options: {  
     responsive: true,
+    maintainAspectRatio: false,
     interaction: {
       mode: 'index',
       intersect: false,
