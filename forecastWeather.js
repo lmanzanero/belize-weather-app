@@ -66,10 +66,12 @@ const externalTooltipHandler = (context) => {
     bodyLines.forEach((body, i) => { 
      if(i === dataPoints[0].dataIndex) { 
       tableBody.innerHTML = `
-        <p>Day:  ${body.day}</p>
-        <p>Min-Max:   ${body.minMax}</p>
-        <p>Night:  ${body.night}</p>
-        <p>Apparent: ${body.feelsLike}</p>
+        <div class="chart-tip">
+          <p>Day:  ${body.day} ☀️</p>
+          <p>Min-Max: 🥶 ${body.minMax} 🥵</p>
+          <p>Night:  ${body.night}  🌃</p>
+          <p>Apparent: ${body.feelsLike} 🌡 </p>
+        </div>
       `;
      }
     });
@@ -192,7 +194,7 @@ async function getForcast(forecast) {
       ${tide.tide_date_type}: <span>${tide.tide_display}</span>
       </p>`);
     });
-    
+
   } catch (error) {
     console.log(error);
   }
