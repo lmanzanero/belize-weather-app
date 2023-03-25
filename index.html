@@ -352,9 +352,9 @@
 
     })
 
-    await getWeather(`https://weather-app-production-205a.up.railway.app/api/location`);
-    await getForcast(`https://weather-app-production-205a.up.railway.app/api/forecast`);
-    const areaWeatherData = await getAreasWeather(`https://weather-app-production-205a.up.railway.app/api/forecastareas`);
+    await getWeather(`https://dark-jade-crab-kit.cyclic.app/api/location`);
+    await getForcast(`https://dark-jade-crab-kit.cyclic.app/api/forecast`);
+    const areaWeatherData = await getAreasWeather(`https://dark-jade-crab-kit.cyclic.app/api/forecastareas`);
     forecastAreas = areaWeatherData;
     forecastAreas.forEach(area => {
       locationSelect.add(new Option(area.zone_description, area.zone_description))
