@@ -13,12 +13,12 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lmanzanero.github.io/belize-weather-app/">
+  <meta property="og:url" content="/belize-weather-app/">
   <meta property="og:title" content="Belize Weather - Daily, Hourly, 7 Day Forecast">
   <meta property="og:description"
     content="Belize weather forecast with current conditions for Corozal, Orange Walk, Belize City, Belmopan, San Ignacio , Stann Creek, Dangriga, Placencia, and Toledo.">
   <meta property="og:image"
-    content="https://lmanzanero.github.io/belize-weather-app/belize-weather.png">
+    content="http://localhost:3000/belize-weather.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
@@ -27,10 +27,10 @@
   <meta property="twitter:description"
     content="Belize weather forecast with current conditions for Corozal, Orange Walk, Belize City, Belmopan, San Ignacio , Stann Creek, Dangriga, Placencia, and Toledo.">
   <meta property="twitter:image"
-    content="https://lmanzanero.github.io/belize-weather-app/belize-weather.png">
+    content="http://localhost:3000/belize-weather.png">
   <meta name="google-site-verification" content="9nLn5E1o-c5gXV7yqI0IZNlj41JTIDJSW3THLK5KVdU" />
   <meta name="google-site-verification" content="9nLn5E1o-c5gXV7yqI0IZNlj41JTIDJSW3THLK5KVdU" />
-  <link rel="icon" type="image/x-icon" href="Belize-icon.png">
+  <link rel="icon" type="image/x-icon" href="http://localhost:3000/Belize-icon.png">
   <link rel="stylesheet" href="player.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
@@ -38,7 +38,7 @@
 
 <body>
   <div class="weather-box">
-    <h1><strong>Belize Weather</strong></h1>
+    <h1><strong>Belize Weather App</strong></h1>
     <div class="weather-container">
       <div class="map">
         <div class="tooltip">
@@ -281,7 +281,7 @@
         <div class="graph-title">
           Radar
         </div>
-        <img src="http://nms.gov.bz/images/radar/250/latest_250kmloop.gif" alt="Belize Live Weather Radar" />
+        <img src="https://nms.gov.bz/images/radar/250/latest_250kmloop.gif" alt="Belize Live Weather Radar" />
       </div>
       <div class="graph-container">
         <div class="graph-title">
@@ -353,9 +353,9 @@
 
     })
 
-    await getWeather(`https://dark-jade-crab-kit.cyclic.app/api/location`);
-    await getForcast(`https://dark-jade-crab-kit.cyclic.app/api/forecast`);
-    const areaWeatherData = await getAreasWeather(`https://dark-jade-crab-kit.cyclic.app/api/forecastareas`);
+    await getWeather(`http://localhost:3000/api/v1/location`);
+    await getForcast(`http://localhost:3000/api/v1/forecast`);
+    const areaWeatherData = await getAreasWeather(`http://localhost:3000/api/v1/forecastareas`);
     forecastAreas = areaWeatherData;
     forecastAreas.forEach(area => {
       locationSelect.add(new Option(area.zone_description, area.zone_description))

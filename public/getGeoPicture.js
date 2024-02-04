@@ -1,5 +1,5 @@
 function getGeoPicture(lat, long) {
-  const apiUrl = `api/geopicture?lat=${lat}&long${long}`
+  const apiUrl = `api/v1/geopicture?lat=${lat}&long${long}`
   fetch(apiUrl, {
     method: "GET",
   })

@@ -16,7 +16,7 @@
 #myChart, canvas {
   width: 100%;
   height: 100%;
-  margin: auto;
+  margin: 1em auto;
   background: linear-gradient(0deg, rgba(34,125,195,1) 10%, rgba(34,193,195,1) 29%, rgba(169,155,101,1) 69%, rgba(253,57,45,1) 100%);
 }
  
@@ -145,8 +145,7 @@ body {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 1em;
-  height: auto;
-  padding: 1em;
+  height: auto; 
   border-radius: 0.4em;
 }
 
@@ -338,7 +337,7 @@ h4 {
 
 .graphs .graph-container {
   height: 300px;
-  width: 380px;
+  width: 300px;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
   border-radius: 0.4em;
@@ -374,17 +373,55 @@ footer p {
 @media only screen and (max-width: 860px) {
   .weather-box {
     padding: 0;
-    margin: auto;
-    width: 100%;
+    margin: 0;
+    width: 100vw;
+    overflow: hidden;
+  }
+  .weather-box h1 {
+    font-size: large;
   }
 
   .weather-container {
+    position: relative;
     grid-template-columns: 1fr;
     height: 100%;
     width: 100%;
     margin: auto;
     padding: 0;
     gap: 2em;
+  }
+
+  .map {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    max-height: 500px;
+  }
+
+   #BelizeMap {
+    width: auto;
+    height: 100%;
+    margin: auto;
+    border: 2px solid green;
+  }
+  .weather-details {
+    border: 2px solid green; 
+  }
+
+  .general-forecast {
+    grid-template-columns: 1fr;
+    margin: 0;
+    padding: 0;
+  }
+
+  .general-forecast .today {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+  .map .tooltip {
+
   }
 
   table {
