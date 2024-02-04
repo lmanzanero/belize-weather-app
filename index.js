@@ -25,7 +25,7 @@ app.use(cors())
 app.use(express.static('public'))
 
 // Routes
-app.use('/api', require('./routes'))
+app.use('/api/v1', require('./routes'))
 
 // Error handler middleware
 app.use(errorHandler)
