@@ -1,5 +1,5 @@
-function WeatherChart (weatherDates, temps) {
-  return   ` 
+function WeatherChart(weatherDates, temps) {
+  return `
         const ctx = document.getElementById('myChart');
         const dailyWeatherChart = new Chart(ctx, {
           type: 'line',
@@ -14,10 +14,10 @@ function WeatherChart (weatherDates, temps) {
               borderColor: '#20827a',
               backgroundColor: 'transparent',
               hoverOffset: 4
-            } 
+            }
           ]
           },
-          options: {  
+          options: {
             responsive: true,
             maintainAspectRatio: false,
             interaction: {
@@ -36,7 +36,7 @@ function WeatherChart (weatherDates, temps) {
             },
             scales: {
               y: {
-                min: 20, 
+                min: 20,
                 suggestedMax: 35,
                 beginAtZero: true,
                 title: {
@@ -57,8 +57,8 @@ function WeatherChart (weatherDates, temps) {
               }
             }
           }
-        });  
-  `
+        });
+  `;
 }
 
-module.exports = WeatherChart;
+export default WeatherChart;

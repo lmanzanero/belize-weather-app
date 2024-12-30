@@ -1,5 +1,5 @@
-function WeatherGraphs () {
-  return   `
+function WeatherGraphs() {
+  return `
   <div class="weather-box">
   <h2>Weather Graphs</h2>
   <div class="graphs">
@@ -25,7 +25,7 @@ function WeatherGraphs () {
     </div>
   </div>
 </div>
-  `
+  `;
 }
 
-module.exports = WeatherGraphs;
+export default WeatherGraphs;
