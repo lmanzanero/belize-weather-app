@@ -165,8 +165,26 @@ async function getForcast(forecast) {
     const data = await response.json();
     console.log(data);
     const { general, weekly, marine } = data;
+    //general data
+    moonrise.textContent = `${marine.forecast_data[0].moon_details[0].moon_display}`;
+    moonset.textContent = `${marine.forecast_data[0].moon_details[1].moon_display}`;
+
+    sunrise.textContent = `${marine.forecast_data[0].sun_details[0].sun_display}`;
+    sunset.textContent = `${marine.forecast_data[0].sun_details[1].sun_display}`;
 
     audio.src = `https:${general.forecast_data[0].audio}`;
+
+    const tideData = marine.forecast_data[0].tide_details;
+
+    tideData.forEach((tide) => {
+      tideDetails.insertAdjacentHTML(
+        "beforeend",
+        `
+      <p>
+      ${tide.tide_date_type}  : <b>${tide.tide_type}</b> at ${tide.tide_display}
+      </p>`,
+      );
+    });
     weatherDates = await weekly.daily.map((dailyTemp) => {
       let date = new Date(dailyTemp.dt * 1000).toISOString().slice(0, 10);
       return date;
@@ -186,24 +204,6 @@ async function getForcast(forecast) {
     );
     dailyWeatherChart.data.labels = weatherDates;
     dailyWeatherChart.update();
-    //general data
-    moonrise.textContent = `${marine.forecast_data[0].moon_details[0].moon_display}`;
-    moonset.textContent = `${marine.forecast_data[0].moon_details[1].moon_display}`;
-
-    sunrise.textContent = `${marine.forecast_data[0].sun_details[0].sun_display}`;
-    sunset.textContent = `${marine.forecast_data[0].sun_details[1].sun_display}`;
-
-    const tideData = marine.forecast_data[0].tide_details;
-
-    tideData.forEach((tide) => {
-      tideDetails.insertAdjacentHTML(
-        "beforeend",
-        `
-      <p>
-      ${tide.tide_date_type}: <span>${tide.tide_display}</span>
-      </p>`,
-      );
-    });
   } catch (error) {
     console.log(error);
   }
