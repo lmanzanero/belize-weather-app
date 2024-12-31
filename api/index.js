@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import "dotenv/config";
-import errorHandler from "./middleware/error.js";
-import router from "./routes/index.js";
+import errorHandler from "../middleware/error.js";
+import router from "../routes/index.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,7 +23,7 @@ app.set("trust proxy", 1);
 app.use(cors());
 
 // Set static folder
-app.use(express.static("api/public"));
+app.use(express.static("public"));
 
 // Routes
 app.use("/api/v1", router);
