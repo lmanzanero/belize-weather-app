@@ -23,7 +23,7 @@ app.set("trust proxy", 1);
 app.use(cors());
 
 // Set static folder
-app.use(express.static("public"));
+app.use(express.static("api/public"));
 
 // Routes
 app.use("/api/v1", router);
