@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node api/index",
-    "dev": "nodemon api/index.js",
-    "build": "node build"
+    "dev": "nodemon api/index.js"
   },
   "author": "Luis Manzanero",
   "license": "MIT",
