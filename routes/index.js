@@ -11,7 +11,10 @@ const API_BASE_URL = process.env.API_BASE_URL;
 const API_KEY_NAME = process.env.API_KEY_NAME;
 const API_KEY_VALUE = process.env.API_KEY_VALUE;
 const API_STATION_URL = process.env.API_STATION_URL;
-
+const API_DAILY_URL = process.env.API_DAILY_URL;
+const API_GENERAL_URL = process.env.API_GENERAL_URL;
+const API_MARINE_URL = process.env.API_MARINE_URL;
+const API_FORECAST_AREAS_URL = process.env.API_FORECAST_AREAS_URL;
 // Init cache
 let cache = apicache.middleware;
 // cache('2 minutes')
@@ -57,20 +60,9 @@ router.get("/forecast", cache("2 minutes"), async (req, res, next) => {
       "get",
       `${API_BASE_URL}forecast?lat=17.1899&lon=-88.4976&appid=${API_KEY_VALUE}`,
     );
-
-    console.log(sevenDayForecast);
-    const forecastDaily = await needle(
-      "get",
-      `https://wimp.nms.gov.bz/api/forecast_daily/read.php?_${date}`,
-    );
-    const forecastGeneral = await needle(
-      "get",
-      `https://wimp.nms.gov.bz/api/forecast_general/read.php?_${date}`,
-    );
-    const forecastMarine = await needle(
-      "get",
-      `https://wimp.nms.gov.bz/api/forecast_marine/read.php?t=${date}`,
-    );
+    const forecastDaily = await needle("get", `${API_DAILY_URL}_${date}`);
+    const forecastGeneral = await needle("get", `${API_GENERAL_URL}_${date}`);
+    const forecastMarine = await needle("get", `${API_MARINE_URL}t=${date}`);
     const allForecast = await Promise.all([
       await forecastDaily,
       await forecastGeneral,
@@ -94,13 +86,12 @@ router.get("/forecast", cache("2 minutes"), async (req, res, next) => {
 router.get("/forecastareas", cache("2 minutes"), async (req, res, next) => {
   try {
     const date = new Date().getTime();
-    const apiRes = await needle(
-      "get",
-      `https://wimp.nms.gov.bz/api/forecast_areas/read.php?_=${date}`,
-    );
+    const apiRes = await needle("get", `${API_FORECAST_AREAS_URL}_=${date}`);
     const data = apiRes.body;
     return res.status(200).json(data);
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get("/geopicture", cache("2 minutes"), async (req, res, next) => {
@@ -119,8 +110,7 @@ router.get("/geopicture", cache("2 minutes"), async (req, res, next) => {
     );
     return res.status(200).json({ photoUrls });
   } catch (error) {
-    console.log(error);
-    return res.status(400).json({ error: error });
+    next(error);
   }
 });
 
@@ -128,7 +118,7 @@ router.get("/weather-stations", cache("2 minutes"), async (req, res, next) => {
   try {
     return res.status(200).json(stationsJSON);
   } catch (error) {
-    return res.status(400).json({ error: error });
+    next(error);
   }
 });
 router.get("/weather-stations/:station", async (req, res, next) => {

@@ -354,9 +354,9 @@
       city.textContent = currentLocation;
     })
 
-    await getWeather(`http://localhost:3000/api/v1/location`);
-    await getForcast(`http://localhost:3000/api/v1/forecast`);
-    const areaWeatherData = await getAreasWeather(`http://localhost:3000/api/v1/forecastareas`);
+    await getWeather(`/api/v1/location`);
+    await getForcast(`/api/v1/forecast`);
+    const areaWeatherData = await getAreasWeather(`/api/v1/forecastareas`);
     forecastAreas = areaWeatherData;
     forecastAreas.forEach(area => {
       locationSelect.add(new Option(area.zone_description, area.zone_description))
