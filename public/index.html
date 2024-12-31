@@ -242,7 +242,7 @@
             </div>
             <div class="forecast-details">
               <h3>Today</h3>
-              <div class="detail city">...</div>
+              <div class="detail city">Corozal Town</div>
               <div class="detail icon">...</div>
               <div class="detail temperature">...</div>
               <div class="detail wind">...</div>
@@ -350,7 +350,6 @@
       console.log(e.target.value)
       currentLocation = e.target.value;
       city.textContent = currentLocation;
-
     })
 
     await getWeather(`http://localhost:3000/api/v1/location`);

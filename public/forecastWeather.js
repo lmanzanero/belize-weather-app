@@ -136,8 +136,8 @@ const dailyWeatherChart = new Chart(ctx, {
     },
     scales: {
       y: {
-        min: 20,
-        suggestedMax: 35,
+        min: 15,
+        suggestedMax: 30,
         beginAtZero: true,
         title: {
           display: true,
@@ -158,6 +158,25 @@ const dailyWeatherChart = new Chart(ctx, {
     },
   },
 });
+
+function calculateDailyAverageTemperature(data) {
+  const dailyAverages = {};
+
+  data.forEach((item) => {
+    const date = new Date(item.dt * 1000).toISOString().slice(0, 10); // Get date in "YYYY-MM-DD" format
+    if (!dailyAverages[date]) {
+      dailyAverages[date] = { sum: 0, count: 0 };
+    }
+    dailyAverages[date].sum += item.main.temp;
+    dailyAverages[date].count++;
+  });
+
+  for (const date in dailyAverages) {
+    dailyAverages[date] = dailyAverages[date].sum / dailyAverages[date].count;
+  }
+
+  return dailyAverages;
+}
 
 async function getForcast(forecast) {
   try {
@@ -185,24 +204,33 @@ async function getForcast(forecast) {
       </p>`,
       );
     });
-    weatherDates = await weekly.daily.map((dailyTemp) => {
+    weatherDates = await weekly.list.map((dailyTemp) => {
       let date = new Date(dailyTemp.dt * 1000).toISOString().slice(0, 10);
       return date;
     });
-    dailyWeatherTemps = await weekly.daily.map((dailyTemp) => {
+    dailyWeatherTemps = await weekly.list.map((dailyTemp) => {
       const weatherTemps = {
-        day: (dailyTemp.temp.day - 273.15).toFixed(1),
-        minMax: `${(dailyTemp.temp.min - 273.15).toFixed(1)} - ${(dailyTemp.temp.max - 273.15).toFixed(1)}`,
-        night: (dailyTemp.temp.night - 273.15).toFixed(1),
-        feelsLike: (dailyTemp.feels_like.day - 273.15).toFixed(1),
+        day: (dailyTemp.main.temp - 273.15).toFixed(1),
+        minMax: `${(dailyTemp.main.temp_max - 273.15).toFixed(1)} - ${(dailyTemp.main.temp_max - 273.15).toFixed(1)}`,
+        night: (dailyTemp.main.temp_min - 273.15).toFixed(1),
+        feelsLike: (dailyTemp.main.feels_like - 273.15).toFixed(1),
       };
       return weatherTemps;
     });
 
-    dailyWeatherChart.data.datasets[0].data = dailyWeatherTemps.map(
-      (temp) => temp.day,
+    const dailyAverages = calculateDailyAverageTemperature(weekly.list);
+
+    const dailyAverageTemps = Object.values(dailyAverages).map((day) =>
+      Number((day - 273.15).toFixed(1)),
     );
-    dailyWeatherChart.data.labels = weatherDates;
+
+    const days = Object.keys(dailyAverages).map((day) => day);
+
+    console.log(days, dailyAverageTemps);
+
+    dailyWeatherChart.data.datasets[0].data = dailyAverageTemps;
+
+    dailyWeatherChart.data.labels = days;
     dailyWeatherChart.update();
   } catch (error) {
     console.log(error);
