@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "node build"
   },
   "author": "Luis Manzanero",
   "license": "MIT",
