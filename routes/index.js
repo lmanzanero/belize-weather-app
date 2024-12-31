@@ -57,6 +57,8 @@ router.get("/forecast", cache("2 minutes"), async (req, res, next) => {
       "get",
       `${API_BASE_URL}forecast?lat=17.1899&lon=-88.4976&appid=${API_KEY_VALUE}`,
     );
+
+    console.log(sevenDayForecast);
     const forecastDaily = await needle(
       "get",
       `https://wimp.nms.gov.bz/api/forecast_daily/read.php?_${date}`,

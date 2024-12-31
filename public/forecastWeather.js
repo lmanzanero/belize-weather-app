@@ -183,7 +183,7 @@ async function getForcast(forecast) {
     const response = await fetch(forecast);
     const data = await response.json();
     console.log(data);
-    const { general, weekly, marine } = data;
+    const { daily, general, weekly, marine } = data;
     //general data
     moonrise.textContent = `${marine.forecast_data[0].moon_details[0].moon_display}`;
     moonset.textContent = `${marine.forecast_data[0].moon_details[1].moon_display}`;
@@ -194,6 +194,51 @@ async function getForcast(forecast) {
     audio.src = `https:${general.forecast_data[0].audio}`;
 
     const tideData = marine.forecast_data[0].tide_details;
+
+    // Tomorrow
+    const tomorrowCoastalHigh = document.querySelector(
+      ".tomorrow .forecast-details .detail.coastal-high",
+    );
+    const tomorrowCoastalLow = document.querySelector(
+      ".tomorrow .forecast-details .detail.coastal-low",
+    );
+    const tomorrowInlandLow = document.querySelector(
+      ".tomorrow .forecast-details .detail.inland-low",
+    );
+    const tomorrowInlandHigh = document.querySelector(
+      ".tomorrow .forecast-details .detail.inland-high",
+    );
+    const tomorrowWindSpeed = document.querySelector(
+      ".tomorrow .forecast-details .detail.wind-speed",
+    );
+    const tonightCoastalHigh = document.querySelector(
+      ".tonight .forecast-details .detail.coastal-high",
+    );
+    const tonightCoastalLow = document.querySelector(
+      ".tonight .forecast-details .detail.coastal-low",
+    );
+    const tonightInlandLow = document.querySelector(
+      ".tonight .forecast-details .detail.inland-low",
+    );
+    const tonightInlandHigh = document.querySelector(
+      ".tonight .forecast-details .detail.inland-high",
+    );
+
+    const tonightWindSpeed = document.querySelector(
+      ".tonight .forecast-details .detail.wind-speed",
+    );
+
+    tonightCoastalHigh.innerHTML = `  <span> Coastal High </br> ${daily.forecast_data[0].coast_high}</span>`;
+    tonightCoastalLow.innerHTML = `  <span> Coastal High </br> ${daily.forecast_data[0].coast_high}</span>`;
+    tonightInlandHigh.innerHTML = `  <span> Inland High </br> ${daily.forecast_data[0].inland_high}</span>`;
+    tonightInlandLow.innerHTML = `  <span> Inland Low </br> ${daily.forecast_data[0].inland_low}</span>`;
+    tonightWindSpeed.innerHTML = ` <span>Wind Speed </br> ${daily.forecast_data[0].wind_speed}</span>`;
+
+    tomorrowCoastalHigh.innerHTML = `  <span> Coastal High </br> ${daily.forecast_data[1].coast_high}</span>`;
+    tomorrowCoastalLow.innerHTML = `  <span> Coastal Low </br> ${daily.forecast_data[1].coast_high}</span>`;
+    tomorrowInlandHigh.innerHTML = `  <span> Inland High </br> ${daily.forecast_data[1].inland_high}</span>`;
+    tomorrowInlandLow.innerHTML = `  <span> Inland Low </br> ${daily.forecast_data[1].inland_low}</span>`;
+    tomorrowWindSpeed.innerHTML = ` <span>Wind Speed </br> ${daily.forecast_data[1].wind_speed}</span>`;
 
     tideData.forEach((tide) => {
       tideDetails.insertAdjacentHTML(
