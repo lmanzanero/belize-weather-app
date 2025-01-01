@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+
+  <body>
+    <main>
+      <!-- Side Nav -->
+      <div class="side-nav">
+        <a href="#" class="side-nav-item">
+          <img
+            src="https://www.svgrepo.com/show/401546/flag-for-belize.svg"
+            alt="Belize Weather"
+        /></a>
+        <a href="#" class="side-nav-item">
+          <img
+            src="https://i.pinimg.com/originals/77/0b/80/770b805d5c99c7931366c2e84e88f251.png"
+            alt="Overview"
+          />
+        </a>
+        <a href="#" class="side-nav-item">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/235/235861.png"
+            alt="Weather Stations"
+          />
+        </a>
+      </div>
+      <!-- Main Overview + audio player + moon rise etc -->
+      <div class="main-overview">
+        <!-- General Overview -->
+        <div class="general-overview">
+          <div class="date">5th, January - 12:00pm</div>
+          <div class="location-name">
+            San Ignacio, Belize <br />
+            <span>Change of rain</span>
+          </div>
+          <div class="general-temperature">20 Degrees</div>
+          <div class="general-line-graph">low -> high -> lowest</div>
+          <div class="overview-data">
+            <div class="overview-item wind">Wind Speed <span>5 kmh</span></div>
+            <div class="overview-item air-quality">
+              Air Quality <span>25% </span>
+            </div>
+            <div class="overview-item humidity">Humidity <span>25%</span></div>
+          </div>
+        </div>
+        <!-- Audio Player -->
+        <div class="audio-player">
+          <h4>Listen to today's audio report.</h4>
+          <audio controls>
+            <!-- <source src="horse.ogg" type="audio/ogg" />
+            <source src="horse.mp3" type="audio/mpeg" /> -->
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <!-- MoonRiseData -->
+        <div class="weather-phases">
+          <div class="phase-item">
+            <p>Sunrise: 06:23 AM</p>
+            <p>Sunset: 06:23 AM</p>
+            <p>Moonrise: 08:00 AM</p>
+            <p>Moonset: 08:00 AM</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header & 4 day overview & map & CHart.js -->
+      <div class="weather-forecast-container">
+        <div class="main-nav">
+          <div class="search-input">
+            <input
+              type="search"
+              placeholder="Search District or nearby location"
+            />
+          </div>
+          <div class="theme-toggler">
+            <label class="switch">
+              <input type="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="forecast-overview">
+          <div class="four-day-forecast">
+            <h4 class="title">Next 4 Days</h4>
+            <div class="days-forecast">
+              <div class="day-forecast">
+                <span>Monday</span>
+                <span>Windy</span>
+                <span>23/18 degrees</span>
+              </div>
+              <div class="day-forecast">
+                <span>Tuesday</span>
+                <span>Windy</span>
+                <span>23/18 degrees</span>
+              </div>
+              <div class="day-forecast">
+                <span>Wednesday</span>
+                <span>Windy</span>
+                <span>23/18 degrees</span>
+              </div>
+              <div class="day-forecast">
+                <span>Thursday</span>
+                <span>Windy</span>
+                <span>23/18 degrees</span>
+              </div>
+            </div>
+          </div>
+          <div class="map-container">
+            <div id="map" style="width: 600px; height: 400px"></div>
+          </div>
+        </div>
+        <div class="sevenday-overview">
+          <canvas id="weather-chart"></canvas>
+        </div>
+      </div>
+    </main>
+  </body>
+  <!-- <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
+    integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    const ctx = document.getElementById("weather-chart");
+    const dailyWeatherChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["Mon", "Tues", "Wed", "Thurs", "Friday"],
+        datasets: [
+          {
+            label: "Avg Temp",
+            data: [20, 24, 19, 30, 28],
+            borderWidth: 6,
+            fill: true,
+            tension: 0.4,
+            borderColor: "#20827a",
+            backgroundColor: "transparent",
+            hoverOffset: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "Belize Weather: 7 Day Forecast",
+          },
+          tooltip: {
+            enabled: false,
+            position: "nearest",
+          },
+        },
+      },
+    });
+  </script>
+
+  <script>
+    const map = L.map("map").setView([51.505, -0.09], 13);
+
+    const tiles = L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }
+    ).addTo(map);
+
+    const marker = L.marker([51.5, -0.09])
+      .addTo(map)
+      .bindPopup("<b>Hello world!</b><br />I am a popup.")
+      .openPopup();
+
+    const circle = L.circle([51.508, -0.11], {
+      color: "red",
+      fillColor: "#f03",
+      fillOpacity: 0.5,
+      radius: 500,
+    })
+      .addTo(map)
+      .bindPopup("I am a circle.");
+
+    const polygon = L.polygon([
+      [51.509, -0.08],
+      [51.503, -0.06],
+      [51.51, -0.047],
+    ])
+      .addTo(map)
+      .bindPopup("I am a polygon.");
+
+    const popup = L.popup()
+      .setLatLng([51.513, -0.09])
+      .setContent("I am a standalone popup.")
+      .openOn(map);
+
+    function onMapClick(e) {
+      popup
+        .setLatLng(e.latlng)
+        .setContent(`You clicked the map at ${e.latlng.toString()}`)
+        .openOn(map);
+    }
+
+    map.on("click", onMapClick);
+  </script>
+  <style>
+    :root {
+      --dark-gray: #292d34;
+      --dark-gray-rgb: 41, 45, 52;
+      --green: #90b061;
+      --green-rgb: 144, 176, 97;
+      --brown: #be8a59;
+      --brown-rgb: 190, 138, 89;
+      --red: #c16266;
+      --red-rgb: 193, 98, 102;
+      --light-gray: #9da39d;
+      --light-gray-rgb: 157, 163, 157;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: var(--dark-gray);
+      color: var(--light-gray);
+    }
+
+    main {
+      margin: 2em;
+      height: 90vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1em;
+    }
+
+    .side-nav {
+      border: 1px solid var(--dark-gray);
+      background-color: var(--brown);
+      border-radius: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      gap: 1em;
+      width: 90px;
+      height: 100%;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+      .side-nav-item {
+        border-radius: 20%;
+        height: 40px;
+        width: 40px;
+
+        img {
+          height: 100%;
+          width: 100%;
+        }
+        :hover {
+          transform: translateX(2px) rotate(3deg) translateY(2px);
+        }
+        &:first-child {
+          margin-top: 1em;
+        }
+      }
+    }
+
+    .main-overview {
+      width: 480px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .general-overview {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--dark-gray);
+        background-color: var(--brown);
+        border: 1px solid var(--dark-gray);
+        border-radius: 1em;
+        height: 50vh;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        .date {
+          font-weight: bolder;
+          padding: 0.5em;
+        }
+
+        .location-name {
+          font-size: large;
+          text-align: center;
+
+          span {
+            font-style: italic;
+          }
+        }
+
+        .general-temperature {
+          font-size: 40px;
+        }
+
+        .overview-data {
+          display: flex;
+          flex-direction: row;
+          gap: 1em;
+          margin-bottom: 0.5em;
+          text-align: center;
+
+          .overview-item {
+            padding: 0.5em;
+            font-weight: bolder;
+
+            span {
+              font-style: italic;
+            }
+          }
+        }
+      }
+      .audio-player {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border: 1px solid var(--light-gray);
+        border-radius: 1em;
+        height: 15vh;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        h4 {
+          font-style: italic;
+          font-size: large;
+          color: var(--brown);
+        }
+
+        audio {
+          margin: auto auto 0.5em auto;
+          &::-webkit-media-controls-enclosure {
+            border-radius: 0.5em;
+            background-color: var(--brown);
+          }
+        }
+      }
+
+      .weather-phases {
+        border: 1px solid var(--dark-gray);
+        background-color: var(--brown);
+        color: var(--dark-gray);
+        border-radius: 1em;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-weight: bold;
+        height: 20vh;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        .phase-item {
+          text-align: center;
+          font-size: large;
+        }
+      }
+    }
+
+    .weather-forecast-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 60vw;
+      height: 100%;
+
+      .main-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+
+        .search-input {
+          width: 300px;
+          height: 40px;
+
+          input {
+            width: 100%;
+            height: 100%;
+            border-radius: 3em;
+          }
+        }
+
+        .theme-toggler {
+          .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+          }
+
+          .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+          }
+
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+          }
+
+          input:checked + .slider {
+            background-color: #2196f3;
+          }
+
+          input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+          }
+
+          input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+          }
+
+          /* Rounded sliders */
+          .slider.round {
+            border-radius: 34px;
+          }
+
+          .slider.round:before {
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .forecast-overview {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        border: 1px solid var(--light-gray);
+        border-radius: 1em;
+        gap: 1em;
+        height: 40vh;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        .four-day-forecast {
+          padding: 0 1em;
+          height: 100%;
+          color: var(--brown);
+
+          .title {
+            font-size: larger;
+            font-weight: bolder;
+          }
+
+          .days-forecast {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            border-radius: 1em;
+
+            .day-forecast {
+              height: 35px;
+              display: flex;
+              gap: 2em;
+              border-radius: 2em;
+              box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+              span {
+                margin: auto;
+                font-weight: bolder;
+                font-size: large;
+              }
+            }
+          }
+        }
+
+        .map-container {
+          height: 100%;
+          width: 50%;
+        }
+      }
+
+      .sevenday-overview {
+        width: 100%;
+        height: 40vh;
+        border: 1px solid var(--light-gray);
+        border-radius: 1em;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      }
+    }
+
+    .leaflet-container {
+      height: 400px;
+      width: 600px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</html>
