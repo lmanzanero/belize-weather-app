@@ -2,10 +2,10 @@
   "name": "api-proxy-server",
   "version": "1.0.0",
   "description": "Proxy server to hide public API keys with rate limiting, caching",
-  "main": "api/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node api/index",
+    "start": "node api/index.js",
     "dev": "nodemon api/index.js"
   },
   "author": "Luis Manzanero",

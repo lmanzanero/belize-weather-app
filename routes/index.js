@@ -1,6 +1,4 @@
-import url from "url";
 import express from "express";
-
 import needle from "needle";
 import apicache from "apicache";
 import stationsJSON from "../public/stations.json" assert { type: "json" };
