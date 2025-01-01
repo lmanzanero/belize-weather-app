@@ -1,8 +1,7 @@
 import express from "express";
-import path from "path";
 import needle from "needle";
 import apicache from "apicache";
-import stationsJSON from "../public/stations.json" assert { type: "json" };
+import fs from "fs";
 
 const router = express.Router();
 // Env vars
@@ -110,6 +109,9 @@ router.get("/geopicture", cache("2 minutes"), async (req, res, next) => {
 
 router.get("/weather-stations", cache("2 minutes"), async (req, res, next) => {
   try {
+    const stationsURL = "https://belize-weather-app.vercel.app/stations.json";
+    const response = await fetch(stationsURL);
+    const stationsJSON = await response.json();
     return res.status(200).json(stationsJSON);
   } catch (error) {
     next(error);
