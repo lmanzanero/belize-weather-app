@@ -17,7 +17,15 @@ const API_FORECAST_AREAS_URL = process.env.API_FORECAST_AREAS_URL;
 let cache = apicache.middleware;
 // cache('2 minutes')
 
-router.get("/", cache("2 minutes"), async (req, res, next) => {
+router.get("/", async (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/heath-check", async (req, res, next) => {
   try {
     res.status(200).json({ "heath-check": "Ok" });
   } catch (error) {
