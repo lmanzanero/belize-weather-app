@@ -4,7 +4,6 @@ import rateLimit from "express-rate-limit";
 import "dotenv/config";
 import errorHandler from "../middleware/error.js";
 import router from "../routes/index.js";
-import needle from "needle";
 import apicache from "apicache";
 let cache = apicache.middleware;
 
@@ -35,38 +34,8 @@ app.use(cors());
 // Set static folder
 app.use(express.static("public"));
 
-app.get("/forecast", cache("2 minutes"), async (req, res, next) => {
-  const date = new Date().getTime();
-  try {
-    const sevenDayForecast = await needle(
-      "get",
-      `${API_BASE_URL}forecast?lat=17.1899&lon=-88.4976&appid=${API_KEY_VALUE}`,
-    );
-    const forecastDaily = await needle("get", `${API_DAILY_URL}_${date}`);
-    const forecastGeneral = await needle("get", `${API_GENERAL_URL}_${date}`);
-    const forecastMarine = await needle("get", `${API_MARINE_URL}t=${date}`);
-    const allForecast = await Promise.all([
-      await forecastDaily,
-      await forecastGeneral,
-      await forecastMarine,
-      await sevenDayForecast,
-    ]);
-    const [daily, general, marine, weekly] = allForecast.map(
-      async (data) => await data.body,
-    );
-    return res.status(200).json({
-      daily: await daily,
-      general: await general,
-      marine: await marine,
-      weekly: await weekly,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
 // Routes
-app.use("/v1", router);
+app.use("/", router);
 
 // Error handler middleware
 app.use(errorHandler);
