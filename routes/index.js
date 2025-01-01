@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import needle from "needle";
 import apicache from "apicache";
 import stationsJSON from "../public/stations.json" assert { type: "json" };
@@ -19,7 +20,7 @@ let cache = apicache.middleware;
 
 router.get("/", async (req, res, next) => {
   try {
-    res.sendFile(path.join(__dirname, "public/index.html"));
+    res.status(200).json({ message: "Belize Weather API" });
   } catch (error) {
     next(error);
   }
