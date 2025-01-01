@@ -24,8 +24,11 @@ app.set("trust proxy", 1);
 // Enable cors
 app.use(cors());
 
+// Set static folder
+app.use(express.static("public"));
+
 // Routes
-app.use("/", router);
+app.use("/api/v1", router);
 
 // Error handler middleware
 app.use(errorHandler);
