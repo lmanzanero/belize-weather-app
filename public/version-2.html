@@ -27,7 +27,7 @@
             alt="Overview"
           />
         </a>
-        <a href="#" class="side-nav-item">
+        <a href="map.html" class="side-nav-item">
           <img
             src="https://cdn-icons-png.flaticon.com/512/235/235861.png"
             alt="Weather Stations"
@@ -179,43 +179,73 @@
   </script>
 
   <script>
-    const map = L.map("map").setView([51.505, -0.09], 13);
+    const map = L.map("map").setView([17.1899, -88.4976], 8);
+    const forecastDate = document.querySelector('.general-overview .date');
+  
 
     const tiles = L.tileLayer(
       "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
       {
-        maxZoom: 19,
+        maxZoom: 11,
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
     ).addTo(map);
 
-    const marker = L.marker([51.5, -0.09])
-      .addTo(map)
-      .bindPopup("<b>Hello world!</b><br />I am a popup.")
-      .openPopup();
 
-    const circle = L.circle([51.508, -0.11], {
-      color: "red",
-      fillColor: "#f03",
-      fillOpacity: 0.5,
-      radius: 500,
-    })
-      .addTo(map)
-      .bindPopup("I am a circle.");
+    async function getAllWeatherStation() {
+      const res = await fetch('/api/v1/weather-stations');
+      const data = await res.json();
 
-    const polygon = L.polygon([
-      [51.509, -0.08],
-      [51.503, -0.06],
-      [51.51, -0.047],
-    ])
-      .addTo(map)
-      .bindPopup("I am a polygon.");
+      const markers = data.forEach(station => {
+      const marker = L.marker([station.latitude, station.longitude])
+        .addTo(map)
+        .bindPopup(`<b>${station.name}</b><br /><a href="/map.html?=id=${station.id}">View Station </a>`)
+        .openPopup();
+      });
+    } 
 
-    const popup = L.popup()
-      .setLatLng([51.513, -0.09])
-      .setContent("I am a standalone popup.")
-      .openOn(map);
+    async function getTodaysForecast() {
+      const res = await fetch('/api/v1/forecast');
+      const data = await res.json();
+
+      const { general } = data;
+
+      const generalForecast = general.forecast_data[0];
+
+      forecastDate.textContent = generalForecast.forecast_display_time;
+
+    }
+
+    getAllWeatherStation();
+    getTodaysForecast();
+
+    // const marker = L.marker([51.5, -0.09])
+    //   .addTo(map)
+    //   .bindPopup("<b>Hello world!</b><br />I am a popup.")
+    //   .openPopup();
+
+    // const circle = L.circle([51.508, -0.11], {
+    //   color: "red",
+    //   fillColor: "#f03",
+    //   fillOpacity: 0.5,
+    //   radius: 500,
+    // })
+    //   .addTo(map)
+    //   .bindPopup("I am a circle.");
+
+    // const polygon = L.polygon([
+    //   [51.509, -0.08],
+    //   [51.503, -0.06],
+    //   [51.51, -0.047],
+    // ])
+    //   .addTo(map)
+    //   .bindPopup("I am a polygon.");
+
+    // const popup = L.popup()
+    //   .setLatLng([51.513, -0.09])
+    //   .setContent("I am a standalon popup.")
+    //   .openOn(map);
 
     function onMapClick(e) {
       popup

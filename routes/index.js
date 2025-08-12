@@ -1,7 +1,6 @@
 import express from "express";
 import needle from "needle";
-import apicache from "apicache";
-import fs from "fs";
+import apicache from "apicache"; 
 
 const router = express.Router();
 // Env vars
@@ -112,11 +111,30 @@ router.get("/weather-stations", cache("2 minutes"), async (req, res, next) => {
     const stationsURL = "https://belize-weather-app.vercel.app/stations.json";
     const response = await fetch(stationsURL);
     const stationsJSON = await response.json();
-    return res.status(200).json(stationsJSON);
+    const activeStations = stationsJSON.results.filter(station => station.is_active).map(station =>  {
+ 
+        return {
+          id: station.id,
+          name: station.name,
+          alias: station.alias_name,
+          longitude: station.longitude,
+          latitude: station.latitude,
+          elevation: station.elevation,
+          watershed: station.watershed,
+          region: station.region,
+          updated_at: station.updated_at,
+          created_at: station.created_at,
+          operation_status: station.operation_status,
+          is_active: station.is_active
+        }  
+    })
+
+    return res.status(200).json(activeStations);
   } catch (error) {
     next(error);
   }
 });
+
 router.get("/weather-stations/:station", async (req, res, next) => {
   try {
     const url = `${API_STATION_URL}/${req.params.station}/?_=${Date.now()}`;
