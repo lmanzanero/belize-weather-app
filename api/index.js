@@ -3,9 +3,7 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import "dotenv/config";
 import errorHandler from "./middleware/error.js";
-import router from "./routes/index.js";
-import apicache from "apicache";
-let cache = apicache.middleware;
+import router from "./routes/index.js"; 
 
 const PORT = process.env.PORT || 3000;
 
@@ -30,4 +28,6 @@ app.use("/api/v1", router);
 // Error handler middleware
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+export default app;
+// removing for vercel deployment
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
