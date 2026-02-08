@@ -4,6 +4,7 @@ import rateLimit from "express-rate-limit";
 import "dotenv/config";
 import errorHandler from "./middleware/error.js";
 import router from "./routes/index.js"; 
+import authRoutes from "./routes/auths.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -37,5 +38,6 @@ app.get("/", (req, res) => {
 })
 // Routes
 app.use("/api/v1", router);
+app.use("/api/v1/auth", authRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
