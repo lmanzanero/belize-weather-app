@@ -12,7 +12,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final authState = ref.watch(authProvider);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.home),
@@ -31,7 +31,7 @@ class HomePage extends ConsumerWidget {
             ),
         ],
       ),
-      body: Center(
+      body: SingleChildScrollView(child: Center(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
           child: Column(
@@ -39,7 +39,7 @@ class HomePage extends ConsumerWidget {
             children: [
               Icon(
                 Icons.rocket_launch,
-                size: 80,
+                size: 20,
                 color: Theme.of(context).colorScheme.primary,
               ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
               const SizedBox(height: 24),
@@ -176,7 +176,7 @@ class HomePage extends ConsumerWidget {
             ],
           ),
         ),
-      ),
+      ),),
     );
   }
 }

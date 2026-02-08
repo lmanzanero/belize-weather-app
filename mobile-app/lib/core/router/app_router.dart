@@ -17,6 +17,8 @@ import '../../features/home/presentation/pages/error_showcase_page.dart';
 import '../../features/home/presentation/pages/file_upload_showcase_page.dart';
 import '../../features/home/presentation/pages/language_showcase_page.dart';
 import '../../features/forms/presentation/pages/forms_example_page.dart';
+import '../../features/weather/presentation/pages/weather_home_page.dart';
+import '../../features/weather/presentation/pages/weather_map_page.dart';
 import '../../shared/widgets/responsive_scaffold.dart';
 
 final onboardingCompletedProvider = StateProvider<bool>((ref) {
@@ -44,7 +46,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   ref.watch(_onboardingInitProvider);
   
   return GoRouter(
-    initialLocation: onboardingCompleted ? '/home' : '/onboarding',
+    initialLocation: onboardingCompleted ? '/weather' : '/onboarding',
     redirect: (context, state) {
       final isAuthenticated = authState.isAuthenticated;
       final isAuthRoute = state.matchedLocation == '/login' || 
@@ -58,7 +60,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       
       // Redirect authenticated users away from auth pages
       if (isAuthenticated && isAuthRoute) {
-        return '/home';
+        return '/weather';
       }
       
       return null;
@@ -79,6 +81,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       ShellRoute(
         builder: (context, state, child) => ResponsiveScaffold(child: child),
         routes: [
+          GoRoute(
+            path: '/weather',
+            builder: (context, state) => const WeatherHomePage(),
+          ),
+          GoRoute(
+            path: '/weather-map',
+            builder: (context, state) => const WeatherMapPage(),
+          ),
           GoRoute(
             path: '/home',
             builder: (context, state) => const HomePage(),

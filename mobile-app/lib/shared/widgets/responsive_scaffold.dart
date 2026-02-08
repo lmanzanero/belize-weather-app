@@ -140,6 +140,11 @@ class _AnimatedNavigationRail extends StatelessWidget {
                 label: Text(AppLocalizations.of(context).home),
               ),
               NavigationRailDestination(
+                icon: const Icon(Icons.map_outlined),
+                selectedIcon: const Icon(Icons.map),
+                label: const Text('Map'),
+              ),
+              NavigationRailDestination(
                 icon: const Icon(Icons.dashboard_outlined),
                 selectedIcon: const Icon(Icons.dashboard),
                 label: Text(AppLocalizations.of(context).dashboard),
@@ -148,11 +153,6 @@ class _AnimatedNavigationRail extends StatelessWidget {
                 icon: const Icon(Icons.people_outline),
                 selectedIcon: const Icon(Icons.people),
                 label: Text(AppLocalizations.of(context).users),
-              ),
-              NavigationRailDestination(
-                icon: const Icon(Icons.notifications_outlined),
-                selectedIcon: const Icon(Icons.notifications),
-                label: Text(AppLocalizations.of(context).notifications),
               ),
               NavigationRailDestination(
                 icon: const Icon(Icons.settings_outlined),
@@ -167,10 +167,10 @@ class _AnimatedNavigationRail extends StatelessWidget {
   }
 
   int _getSelectedIndex(String route) {
-    if (route.startsWith('/home') || route.startsWith('/showcase') || route.startsWith('/forms')) return 0;
-    if (route.startsWith('/dashboard')) return 1;
-    if (route.startsWith('/users')) return 2;
-    if (route.startsWith('/notifications')) return 3;
+    if (route.startsWith('/weather') && !route.contains('map')) return 0;
+    if (route.startsWith('/weather-map')) return 1;
+    if (route.startsWith('/dashboard')) return 2;
+    if (route.startsWith('/users')) return 3;
     if (route.startsWith('/settings')) return 4;
     return 0;
   }
@@ -178,16 +178,16 @@ class _AnimatedNavigationRail extends StatelessWidget {
   void _onItemTapped(BuildContext context, int index) {
     switch (index) {
       case 0:
-        context.go('/home');
+        context.go('/weather');
         break;
       case 1:
-        context.go('/dashboard');
+        context.go('/weather-map');
         break;
       case 2:
-        context.go('/users');
+        context.go('/dashboard');
         break;
       case 3:
-        context.go('/notifications');
+        context.go('/users');
         break;
       case 4:
         context.go('/settings');
@@ -223,6 +223,11 @@ class _AnimatedNavigationBar extends StatelessWidget {
                 label: AppLocalizations.of(context).home,
               ),
               NavigationDestination(
+                icon: const Icon(Icons.map_outlined),
+                selectedIcon: const Icon(Icons.map),
+                label: 'Map',
+              ),
+              NavigationDestination(
                 icon: const Icon(Icons.dashboard_outlined),
                 selectedIcon: const Icon(Icons.dashboard),
                 label: AppLocalizations.of(context).dashboard,
@@ -245,25 +250,29 @@ class _AnimatedNavigationBar extends StatelessWidget {
   }
 
   int _getSelectedIndex(String route) {
-    if (route.startsWith('/home') || route.startsWith('/showcase') || route.startsWith('/forms')) return 0;
-    if (route.startsWith('/dashboard')) return 1;
-    if (route.startsWith('/users')) return 2;
-    if (route.startsWith('/settings')) return 3;
+    if (route.startsWith('/weather') && !route.contains('map')) return 0;
+    if (route.startsWith('/weather-map')) return 1;
+    if (route.startsWith('/dashboard')) return 2;
+    if (route.startsWith('/users')) return 3;
+    if (route.startsWith('/settings')) return 4;
     return 0;
   }
 
   void _onItemTapped(BuildContext context, int index) {
     switch (index) {
       case 0:
-        context.go('/home');
+        context.go('/weather');
         break;
       case 1:
-        context.go('/dashboard');
+        context.go('/weather-map');
         break;
       case 2:
-        context.go('/users');
+        context.go('/dashboard');
         break;
       case 3:
+        context.go('/users');
+        break;
+      case 4:
         context.go('/settings');
         break;
     }
