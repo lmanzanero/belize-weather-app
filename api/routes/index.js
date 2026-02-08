@@ -106,7 +106,7 @@ router.get("/geopicture", cache("2 minutes"), async (req, res, next) => {
   }
 });
 
-router.get("/weather-stations", cache("2 minutes"), async (req, res, next) => {
+router.get("/weather-stations", cache("10 minutes"), async (req, res, next) => {
   try {
     const stationsURL = "https://belize-weather-app.vercel.app/stations.json";
     const response = await fetch(stationsURL);
