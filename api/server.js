@@ -20,14 +20,14 @@ app.use(limiter);
 app.set("trust proxy", 1);
 
 // Enable cors
-app.use(cors());
-
-// Routes
-app.use("/api/v1", router);
-
+app.use(cors()); 
 // Error handler middleware
 app.use(errorHandler);
 
-export default app;
-// removing for vercel deployment
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.get("/", (req, res) => {
+  return res.json({message: 'Belize Weather API /api/v1'})
+})
+// Routes
+app.use("/api/v1", router);
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

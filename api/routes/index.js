@@ -18,7 +18,7 @@ let cache = apicache.middleware;
 
 router.get("/", async (req, res, next) => {
   try {
-    res.status(200).json({ message: "Belize Weather API" });
+    res.status(200).json({ message: "/api/v1" });
   } catch (error) {
     next(error);
   }
