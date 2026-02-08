@@ -19,6 +19,8 @@ import '../../features/home/presentation/pages/language_showcase_page.dart';
 import '../../features/forms/presentation/pages/forms_example_page.dart';
 import '../../features/weather/presentation/pages/weather_home_page.dart';
 import '../../features/weather/presentation/pages/weather_map_page.dart';
+import '../../features/weather/presentation/pages/community_page.dart';
+import '../../features/weather/presentation/pages/spotter_details_page.dart';
 import '../../shared/widgets/responsive_scaffold.dart';
 
 final onboardingCompletedProvider = StateProvider<bool>((ref) {
@@ -88,6 +90,19 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/weather-map',
             builder: (context, state) => const WeatherMapPage(),
+          ),
+          GoRoute(
+            path: '/community',
+            builder: (context, state) => const CommunityPage(),
+            routes: [
+              GoRoute(
+                path: 'spotter/:spotterId',
+                builder: (context, state) {
+                  final spotterId = state.pathParameters['spotterId']!;
+                  return SpotterDetailsPage(spotterId: spotterId);
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: '/home',

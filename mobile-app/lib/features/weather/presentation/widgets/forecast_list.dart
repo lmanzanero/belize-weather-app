@@ -9,6 +9,9 @@ class ForecastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return SizedBox(
       height: 100,
       child: ListView.builder(
@@ -21,13 +24,17 @@ class ForecastList extends StatelessWidget {
             margin: const EdgeInsets.only(right: 12),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E293B),
+              color: isDark ? const Color(0xFF1E293B) : Colors.grey.shade100,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.white.withOpacity(0.05)),
+              border: Border.all(color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05)),
             ),
             child: Row(
               children: [
-                const Icon(Icons.cloudy_snowing, color: Colors.lightBlueAccent, size: 32),
+                Icon(
+                  Icons.cloudy_snowing, 
+                  color: isDark ? Colors.lightBlueAccent : Colors.blue.shade400, 
+                  size: 32
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -36,12 +43,19 @@ class ForecastList extends StatelessWidget {
                     children: [
                       Text(
                         station.city,
-                        style: GoogleFonts.inter(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+                        style: GoogleFonts.inter(
+                          color: isDark ? Colors.white : Colors.black87, 
+                          fontSize: 14, 
+                          fontWeight: FontWeight.w500
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         '${station.temperatureF.round()}°F',
-                        style: GoogleFonts.inter(color: Colors.white.withOpacity(0.7), fontSize: 13),
+                        style: GoogleFonts.inter(
+                          color: isDark ? Colors.white70 : Colors.black54, 
+                          fontSize: 13
+                        ),
                       ),
                     ],
                   ),

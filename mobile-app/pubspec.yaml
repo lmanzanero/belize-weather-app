@@ -19,6 +19,9 @@ dependencies:
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
 
+  # Media
+  image_picker: ^1.1.2
+
   # State Management
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.5.1

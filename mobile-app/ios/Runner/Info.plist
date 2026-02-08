@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to share sky photos.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photos to share sky photos.</string>
 </dict>
 </plist>

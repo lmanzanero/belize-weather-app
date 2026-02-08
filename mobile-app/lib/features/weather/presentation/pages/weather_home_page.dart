@@ -14,9 +14,10 @@ class WeatherHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final weatherState = ref.watch(weatherStationsProvider);
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A),
+      backgroundColor: isDark ? const Color(0xFF0F172A) : Colors.white,
       body: weatherState.when(
         data: (stations) {
           final mainStation = stations.firstWhere((s) => s.city == 'Belize City', orElse: () => stations.first);
@@ -35,7 +36,7 @@ class WeatherHomePage extends ConsumerWidget {
                       Text(
                         'Municipality Forecast',
                         style: GoogleFonts.inter(
-                          color: Colors.white,
+                          color: isDark ? Colors.white : Colors.black87,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
@@ -54,31 +55,17 @@ class WeatherHomePage extends ConsumerWidget {
             ],
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text('Error: $err', style: const TextStyle(color: Colors.white))),
-      ),
-      bottomNavigationBar: _buildBottomNav(theme),
-    );
-  }
-
-  Widget _buildBottomNav(ThemeData theme) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E293B).withOpacity(0.95),
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1))),
-      ),
-      child: BottomNavigationBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: 'Map'),
-          BottomNavigationBarItem(icon: Icon(Icons.people_outline), label: 'Community'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_none), label: 'Alerts'),
-        ],
+        loading: () => Center(child: CircularProgressIndicator(color: theme.colorScheme.primary)),
+        error: (err, stack) => Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Text(
+              'Error: $err', 
+              style: TextStyle(color: isDark ? Colors.white70 : Colors.black54),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
       ),
     );
   }

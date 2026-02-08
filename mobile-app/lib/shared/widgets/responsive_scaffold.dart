@@ -54,7 +54,6 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold>
     final width = MediaQuery.of(context).size.width;
     final AnimationStatus status = _controller.status;
     
-    // Use mediumWidthBreakpoint (1000px) as the main breakpoint like material3-example
     if (width > mediumWidthBreakpoint) {
       if (width > largeWidthBreakpoint) {
         showMediumSizeLayout = false;
@@ -68,7 +67,6 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold>
         _controller.forward();
       }
     } else {
-      // Show NavigationBar for screens narrower than mediumWidthBreakpoint
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
       if (status != AnimationStatus.reverse &&
@@ -145,14 +143,14 @@ class _AnimatedNavigationRail extends StatelessWidget {
                 label: const Text('Map'),
               ),
               NavigationRailDestination(
-                icon: const Icon(Icons.dashboard_outlined),
-                selectedIcon: const Icon(Icons.dashboard),
-                label: Text(AppLocalizations.of(context).dashboard),
-              ),
-              NavigationRailDestination(
                 icon: const Icon(Icons.people_outline),
                 selectedIcon: const Icon(Icons.people),
-                label: Text(AppLocalizations.of(context).users),
+                label: const Text('Community'),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(Icons.notifications_outlined),
+                selectedIcon: const Icon(Icons.notifications),
+                label: const Text('Alerts'),
               ),
               NavigationRailDestination(
                 icon: const Icon(Icons.settings_outlined),
@@ -169,8 +167,8 @@ class _AnimatedNavigationRail extends StatelessWidget {
   int _getSelectedIndex(String route) {
     if (route.startsWith('/weather') && !route.contains('map')) return 0;
     if (route.startsWith('/weather-map')) return 1;
-    if (route.startsWith('/dashboard')) return 2;
-    if (route.startsWith('/users')) return 3;
+    if (route.startsWith('/community') || route.startsWith('/users')) return 2;
+    if (route.startsWith('/notifications')) return 3;
     if (route.startsWith('/settings')) return 4;
     return 0;
   }
@@ -184,10 +182,10 @@ class _AnimatedNavigationRail extends StatelessWidget {
         context.go('/weather-map');
         break;
       case 2:
-        context.go('/dashboard');
+        context.go('/community');
         break;
       case 3:
-        context.go('/users');
+        context.go('/notifications');
         break;
       case 4:
         context.go('/settings');
@@ -228,14 +226,14 @@ class _AnimatedNavigationBar extends StatelessWidget {
                 label: 'Map',
               ),
               NavigationDestination(
-                icon: const Icon(Icons.dashboard_outlined),
-                selectedIcon: const Icon(Icons.dashboard),
-                label: AppLocalizations.of(context).dashboard,
-              ),
-              NavigationDestination(
                 icon: const Icon(Icons.people_outline),
                 selectedIcon: const Icon(Icons.people),
-                label: AppLocalizations.of(context).users,
+                label: 'Community',
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.notifications_outlined),
+                selectedIcon: const Icon(Icons.notifications),
+                label: 'Alerts',
               ),
               NavigationDestination(
                 icon: const Icon(Icons.settings_outlined),
@@ -252,8 +250,8 @@ class _AnimatedNavigationBar extends StatelessWidget {
   int _getSelectedIndex(String route) {
     if (route.startsWith('/weather') && !route.contains('map')) return 0;
     if (route.startsWith('/weather-map')) return 1;
-    if (route.startsWith('/dashboard')) return 2;
-    if (route.startsWith('/users')) return 3;
+    if (route.startsWith('/community') || route.startsWith('/users')) return 2;
+    if (route.startsWith('/notifications')) return 3;
     if (route.startsWith('/settings')) return 4;
     return 0;
   }
@@ -267,10 +265,10 @@ class _AnimatedNavigationBar extends StatelessWidget {
         context.go('/weather-map');
         break;
       case 2:
-        context.go('/dashboard');
+        context.go('/community');
         break;
       case 3:
-        context.go('/users');
+        context.go('/notifications');
         break;
       case 4:
         context.go('/settings');
