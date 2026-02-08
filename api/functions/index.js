@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import "dotenv/config";
-import errorHandler from "./middleware/error.js";
-import router from "./routes/index.js";
+import errorHandler from "../middleware/error.js";
+import router from "../routes/index.js";
 import apicache from "apicache";
 let cache = apicache.middleware;
 
