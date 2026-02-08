@@ -1,13 +1,13 @@
 {
   "version": 2,
   "rewrites": [
-    { 
-      "source": "/api/(.*)", 
-      "destination": "/api/index.js" 
+    {
+      "source": "/api/v1/(.*)",
+      "destination": "/api/index.js"
     },
-    { 
-      "source": "/((?!api|static|favicon.ico).*)", 
-      "destination": "/index.html" 
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ]
 }
