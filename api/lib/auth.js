@@ -8,8 +8,10 @@ export const auth = betterAuth({
             async sendVerificationOTP({ email, otp, type }) { 
                 if (type === "sign-in") { 
                     // Send the OTP for sign in
+                    console.log(otp)
                 } else if (type === "email-verification") { 
                     // Send the OTP for email verification
+                    console.log(email)
                 } else { 
                     // Send the OTP for password reset
                 } 

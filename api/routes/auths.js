@@ -5,10 +5,12 @@ const router = express.Router();
 
 // 1. Request OTP (Sign-in or Verification)
 router.post("/send-otp", async (req, res, next) => {
+    console.log(req.body);
     try {
         const result = await auth.api.sendVerificationOTP({
             body: req.body, // Expects { email, type }
         });
+        console.log(result)
         res.json(result);
     } catch (e) { next(e); }
 });
