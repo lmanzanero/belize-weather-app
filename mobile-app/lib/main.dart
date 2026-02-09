@@ -15,7 +15,7 @@ void main() async {
   
   // Initialize Better Auth
   await FlutterBetterAuth.initialize(
-    url: 'http://localhost:3000/api/v1/auth',
+    url: 'http://10.0.2.2:3000/api/v1/auth',
   );
   
   // Remove the hash from URLs on web
