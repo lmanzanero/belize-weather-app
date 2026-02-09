@@ -21,7 +21,7 @@ class SafeImage extends StatelessWidget {
   final bool isAntiAlias;
   final Map<String, String>? httpHeaders;
   final Duration? fadeOutDuration;
-  final Duration? fadeInDuration;
+  late final Duration? fadeInDuration;
   final Curve fadeOutCurve;
   final Curve fadeInCurve;
 

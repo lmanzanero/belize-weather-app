@@ -8,7 +8,7 @@ import '../../features/auth/presentation/providers/auth_provider.dart';
 part 'theme_provider.freezed.dart';
 
 @freezed
-class ThemeState with _$ThemeState {
+abstract class ThemeState with _$ThemeState {
   const factory ThemeState({
     required ThemeMode themeMode,
     required ColorSeed colorSeed,

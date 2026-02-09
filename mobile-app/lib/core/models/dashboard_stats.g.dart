@@ -6,8 +6,8 @@ part of 'dashboard_stats.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DashboardStatsImpl _$$DashboardStatsImplFromJson(Map<String, dynamic> json) =>
-    _$DashboardStatsImpl(
+_DashboardStats _$DashboardStatsFromJson(Map<String, dynamic> json) =>
+    _DashboardStats(
       totalUsers: (json['totalUsers'] as num).toInt(),
       activeUsers: (json['activeUsers'] as num).toInt(),
       totalRevenue: (json['totalRevenue'] as num).toInt(),
@@ -23,34 +23,32 @@ _$DashboardStatsImpl _$$DashboardStatsImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$DashboardStatsImplToJson(
-  _$DashboardStatsImpl instance,
-) => <String, dynamic>{
-  'totalUsers': instance.totalUsers,
-  'activeUsers': instance.activeUsers,
-  'totalRevenue': instance.totalRevenue,
-  'growthRate': instance.growthRate,
-  'userGrowthData': instance.userGrowthData,
-  'revenueData': instance.revenueData,
-  'recentActivities': instance.recentActivities,
-};
+Map<String, dynamic> _$DashboardStatsToJson(_DashboardStats instance) =>
+    <String, dynamic>{
+      'totalUsers': instance.totalUsers,
+      'activeUsers': instance.activeUsers,
+      'totalRevenue': instance.totalRevenue,
+      'growthRate': instance.growthRate,
+      'userGrowthData': instance.userGrowthData,
+      'revenueData': instance.revenueData,
+      'recentActivities': instance.recentActivities,
+    };
 
-_$ChartDataImpl _$$ChartDataImplFromJson(Map<String, dynamic> json) =>
-    _$ChartDataImpl(
-      label: json['label'] as String,
-      value: (json['value'] as num).toDouble(),
-      color: json['color'] as String?,
-    );
+_ChartData _$ChartDataFromJson(Map<String, dynamic> json) => _ChartData(
+  label: json['label'] as String,
+  value: (json['value'] as num).toDouble(),
+  color: json['color'] as String?,
+);
 
-Map<String, dynamic> _$$ChartDataImplToJson(_$ChartDataImpl instance) =>
+Map<String, dynamic> _$ChartDataToJson(_ChartData instance) =>
     <String, dynamic>{
       'label': instance.label,
       'value': instance.value,
       'color': instance.color,
     };
 
-_$ActivityItemImpl _$$ActivityItemImplFromJson(Map<String, dynamic> json) =>
-    _$ActivityItemImpl(
+_ActivityItem _$ActivityItemFromJson(Map<String, dynamic> json) =>
+    _ActivityItem(
       id: json['id'] as String,
       description: json['description'] as String,
       userId: json['userId'] as String,
@@ -59,7 +57,7 @@ _$ActivityItemImpl _$$ActivityItemImplFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
     );
 
-Map<String, dynamic> _$$ActivityItemImplToJson(_$ActivityItemImpl instance) =>
+Map<String, dynamic> _$ActivityItemToJson(_ActivityItem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'description': instance.description,

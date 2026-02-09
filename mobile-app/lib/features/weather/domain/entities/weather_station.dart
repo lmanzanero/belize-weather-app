@@ -4,7 +4,7 @@ part 'weather_station.freezed.dart';
 part 'weather_station.g.dart';
 
 @freezed
-class WeatherStation with _$WeatherStation {
+abstract class WeatherStation with _$WeatherStation {
   const factory WeatherStation({
     required int id,
     @Default('Unknown Station') @JsonKey(name: 'name') String city,

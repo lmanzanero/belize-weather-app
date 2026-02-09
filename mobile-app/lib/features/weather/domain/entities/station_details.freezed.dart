@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,1114 +9,1169 @@ part of 'station_details.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
-StationDetails _$StationDetailsFromJson(Map<String, dynamic> json) {
-  return _StationDetails.fromJson(json);
-}
 
 /// @nodoc
 mixin _$StationDetails {
-  int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'alias_name')
-  String? get aliasName => throw _privateConstructorUsedError;
-  double? get longitude => throw _privateConstructorUsedError;
-  double? get latitude => throw _privateConstructorUsedError;
-  int get elevation => throw _privateConstructorUsedError;
-  String? get watershed => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_active')
-  bool? get isActive => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_at')
-  String? get updatedAt => throw _privateConstructorUsedError;
+
+ int get id; String get name;@JsonKey(name: 'alias_name') String? get aliasName; double? get longitude; double? get latitude; int get elevation; String? get watershed;@JsonKey(name: 'is_active') bool? get isActive;@JsonKey(name: 'updated_at') String? get updatedAt;
+/// Create a copy of StationDetails
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$StationDetailsCopyWith<StationDetails> get copyWith => _$StationDetailsCopyWithImpl<StationDetails>(this as StationDetails, _$identity);
 
   /// Serializes this StationDetails to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of StationDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $StationDetailsCopyWith<StationDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StationDetails&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.aliasName, aliasName) || other.aliasName == aliasName)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.elevation, elevation) || other.elevation == elevation)&&(identical(other.watershed, watershed) || other.watershed == watershed)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,aliasName,longitude,latitude,elevation,watershed,isActive,updatedAt);
+
+@override
+String toString() {
+  return 'StationDetails(id: $id, name: $name, aliasName: $aliasName, longitude: $longitude, latitude: $latitude, elevation: $elevation, watershed: $watershed, isActive: $isActive, updatedAt: $updatedAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $StationDetailsCopyWith<$Res> {
-  factory $StationDetailsCopyWith(
-    StationDetails value,
-    $Res Function(StationDetails) then,
-  ) = _$StationDetailsCopyWithImpl<$Res, StationDetails>;
-  @useResult
-  $Res call({
-    int id,
-    String name,
-    @JsonKey(name: 'alias_name') String? aliasName,
-    double? longitude,
-    double? latitude,
-    int elevation,
-    String? watershed,
-    @JsonKey(name: 'is_active') bool? isActive,
-    @JsonKey(name: 'updated_at') String? updatedAt,
-  });
-}
+abstract mixin class $StationDetailsCopyWith<$Res>  {
+  factory $StationDetailsCopyWith(StationDetails value, $Res Function(StationDetails) _then) = _$StationDetailsCopyWithImpl;
+@useResult
+$Res call({
+ int id, String name,@JsonKey(name: 'alias_name') String? aliasName, double? longitude, double? latitude, int elevation, String? watershed,@JsonKey(name: 'is_active') bool? isActive,@JsonKey(name: 'updated_at') String? updatedAt
+});
 
+
+
+
+}
 /// @nodoc
-class _$StationDetailsCopyWithImpl<$Res, $Val extends StationDetails>
+class _$StationDetailsCopyWithImpl<$Res>
     implements $StationDetailsCopyWith<$Res> {
-  _$StationDetailsCopyWithImpl(this._value, this._then);
+  _$StationDetailsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final StationDetails _self;
+  final $Res Function(StationDetails) _then;
 
-  /// Create a copy of StationDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? aliasName = freezed,
-    Object? longitude = freezed,
-    Object? latitude = freezed,
-    Object? elevation = null,
-    Object? watershed = freezed,
-    Object? isActive = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as int,
-            name: null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                      as String,
-            aliasName: freezed == aliasName
-                ? _value.aliasName
-                : aliasName // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            longitude: freezed == longitude
-                ? _value.longitude
-                : longitude // ignore: cast_nullable_to_non_nullable
-                      as double?,
-            latitude: freezed == latitude
-                ? _value.latitude
-                : latitude // ignore: cast_nullable_to_non_nullable
-                      as double?,
-            elevation: null == elevation
-                ? _value.elevation
-                : elevation // ignore: cast_nullable_to_non_nullable
-                      as int,
-            watershed: freezed == watershed
-                ? _value.watershed
-                : watershed // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            isActive: freezed == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
-                      as bool?,
-            updatedAt: freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                      as String?,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of StationDetails
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? aliasName = freezed,Object? longitude = freezed,Object? latitude = freezed,Object? elevation = null,Object? watershed = freezed,Object? isActive = freezed,Object? updatedAt = freezed,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,aliasName: freezed == aliasName ? _self.aliasName : aliasName // ignore: cast_nullable_to_non_nullable
+as String?,longitude: freezed == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double?,latitude: freezed == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double?,elevation: null == elevation ? _self.elevation : elevation // ignore: cast_nullable_to_non_nullable
+as int,watershed: freezed == watershed ? _self.watershed : watershed // ignore: cast_nullable_to_non_nullable
+as String?,isActive: freezed == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as bool?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$StationDetailsImplCopyWith<$Res>
-    implements $StationDetailsCopyWith<$Res> {
-  factory _$$StationDetailsImplCopyWith(
-    _$StationDetailsImpl value,
-    $Res Function(_$StationDetailsImpl) then,
-  ) = __$$StationDetailsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    int id,
-    String name,
-    @JsonKey(name: 'alias_name') String? aliasName,
-    double? longitude,
-    double? latitude,
-    int elevation,
-    String? watershed,
-    @JsonKey(name: 'is_active') bool? isActive,
-    @JsonKey(name: 'updated_at') String? updatedAt,
-  });
 }
 
-/// @nodoc
-class __$$StationDetailsImplCopyWithImpl<$Res>
-    extends _$StationDetailsCopyWithImpl<$Res, _$StationDetailsImpl>
-    implements _$$StationDetailsImplCopyWith<$Res> {
-  __$$StationDetailsImplCopyWithImpl(
-    _$StationDetailsImpl _value,
-    $Res Function(_$StationDetailsImpl) _then,
-  ) : super(_value, _then);
 
-  /// Create a copy of StationDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? aliasName = freezed,
-    Object? longitude = freezed,
-    Object? latitude = freezed,
-    Object? elevation = null,
-    Object? watershed = freezed,
-    Object? isActive = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(
-      _$StationDetailsImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as int,
-        name: null == name
-            ? _value.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String,
-        aliasName: freezed == aliasName
-            ? _value.aliasName
-            : aliasName // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        longitude: freezed == longitude
-            ? _value.longitude
-            : longitude // ignore: cast_nullable_to_non_nullable
-                  as double?,
-        latitude: freezed == latitude
-            ? _value.latitude
-            : latitude // ignore: cast_nullable_to_non_nullable
-                  as double?,
-        elevation: null == elevation
-            ? _value.elevation
-            : elevation // ignore: cast_nullable_to_non_nullable
-                  as int,
-        watershed: freezed == watershed
-            ? _value.watershed
-            : watershed // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        isActive: freezed == isActive
-            ? _value.isActive
-            : isActive // ignore: cast_nullable_to_non_nullable
-                  as bool?,
-        updatedAt: freezed == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as String?,
-      ),
-    );
-  }
+/// Adds pattern-matching-related methods to [StationDetails].
+extension StationDetailsPatterns on StationDetails {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _StationDetails value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _StationDetails() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _StationDetails value)  $default,){
+final _that = this;
+switch (_that) {
+case _StationDetails():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _StationDetails value)?  $default,){
+final _that = this;
+switch (_that) {
+case _StationDetails() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'alias_name')  String? aliasName,  double? longitude,  double? latitude,  int elevation,  String? watershed, @JsonKey(name: 'is_active')  bool? isActive, @JsonKey(name: 'updated_at')  String? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _StationDetails() when $default != null:
+return $default(_that.id,_that.name,_that.aliasName,_that.longitude,_that.latitude,_that.elevation,_that.watershed,_that.isActive,_that.updatedAt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'alias_name')  String? aliasName,  double? longitude,  double? latitude,  int elevation,  String? watershed, @JsonKey(name: 'is_active')  bool? isActive, @JsonKey(name: 'updated_at')  String? updatedAt)  $default,) {final _that = this;
+switch (_that) {
+case _StationDetails():
+return $default(_that.id,_that.name,_that.aliasName,_that.longitude,_that.latitude,_that.elevation,_that.watershed,_that.isActive,_that.updatedAt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'alias_name')  String? aliasName,  double? longitude,  double? latitude,  int elevation,  String? watershed, @JsonKey(name: 'is_active')  bool? isActive, @JsonKey(name: 'updated_at')  String? updatedAt)?  $default,) {final _that = this;
+switch (_that) {
+case _StationDetails() when $default != null:
+return $default(_that.id,_that.name,_that.aliasName,_that.longitude,_that.latitude,_that.elevation,_that.watershed,_that.isActive,_that.updatedAt);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$StationDetailsImpl implements _StationDetails {
-  const _$StationDetailsImpl({
-    required this.id,
-    this.name = 'Unknown',
-    @JsonKey(name: 'alias_name') this.aliasName,
-    this.longitude,
-    this.latitude,
-    this.elevation = 0,
-    this.watershed,
-    @JsonKey(name: 'is_active') this.isActive,
-    @JsonKey(name: 'updated_at') this.updatedAt,
-  });
 
-  factory _$StationDetailsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StationDetailsImplFromJson(json);
+class _StationDetails implements StationDetails {
+  const _StationDetails({required this.id, this.name = 'Unknown', @JsonKey(name: 'alias_name') this.aliasName, this.longitude, this.latitude, this.elevation = 0, this.watershed, @JsonKey(name: 'is_active') this.isActive, @JsonKey(name: 'updated_at') this.updatedAt});
+  factory _StationDetails.fromJson(Map<String, dynamic> json) => _$StationDetailsFromJson(json);
 
-  @override
-  final int id;
-  @override
-  @JsonKey()
-  final String name;
-  @override
-  @JsonKey(name: 'alias_name')
-  final String? aliasName;
-  @override
-  final double? longitude;
-  @override
-  final double? latitude;
-  @override
-  @JsonKey()
-  final int elevation;
-  @override
-  final String? watershed;
-  @override
-  @JsonKey(name: 'is_active')
-  final bool? isActive;
-  @override
-  @JsonKey(name: 'updated_at')
-  final String? updatedAt;
+@override final  int id;
+@override@JsonKey() final  String name;
+@override@JsonKey(name: 'alias_name') final  String? aliasName;
+@override final  double? longitude;
+@override final  double? latitude;
+@override@JsonKey() final  int elevation;
+@override final  String? watershed;
+@override@JsonKey(name: 'is_active') final  bool? isActive;
+@override@JsonKey(name: 'updated_at') final  String? updatedAt;
 
-  @override
-  String toString() {
-    return 'StationDetails(id: $id, name: $name, aliasName: $aliasName, longitude: $longitude, latitude: $latitude, elevation: $elevation, watershed: $watershed, isActive: $isActive, updatedAt: $updatedAt)';
-  }
+/// Create a copy of StationDetails
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$StationDetailsCopyWith<_StationDetails> get copyWith => __$StationDetailsCopyWithImpl<_StationDetails>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StationDetailsImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.aliasName, aliasName) ||
-                other.aliasName == aliasName) &&
-            (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
-            (identical(other.latitude, latitude) ||
-                other.latitude == latitude) &&
-            (identical(other.elevation, elevation) ||
-                other.elevation == elevation) &&
-            (identical(other.watershed, watershed) ||
-                other.watershed == watershed) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    aliasName,
-    longitude,
-    latitude,
-    elevation,
-    watershed,
-    isActive,
-    updatedAt,
-  );
-
-  /// Create a copy of StationDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$StationDetailsImplCopyWith<_$StationDetailsImpl> get copyWith =>
-      __$$StationDetailsImplCopyWithImpl<_$StationDetailsImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StationDetailsImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$StationDetailsToJson(this, );
 }
 
-abstract class _StationDetails implements StationDetails {
-  const factory _StationDetails({
-    required final int id,
-    final String name,
-    @JsonKey(name: 'alias_name') final String? aliasName,
-    final double? longitude,
-    final double? latitude,
-    final int elevation,
-    final String? watershed,
-    @JsonKey(name: 'is_active') final bool? isActive,
-    @JsonKey(name: 'updated_at') final String? updatedAt,
-  }) = _$StationDetailsImpl;
-
-  factory _StationDetails.fromJson(Map<String, dynamic> json) =
-      _$StationDetailsImpl.fromJson;
-
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  @JsonKey(name: 'alias_name')
-  String? get aliasName;
-  @override
-  double? get longitude;
-  @override
-  double? get latitude;
-  @override
-  int get elevation;
-  @override
-  String? get watershed;
-  @override
-  @JsonKey(name: 'is_active')
-  bool? get isActive;
-  @override
-  @JsonKey(name: 'updated_at')
-  String? get updatedAt;
-
-  /// Create a copy of StationDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StationDetailsImplCopyWith<_$StationDetailsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StationDetails&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.aliasName, aliasName) || other.aliasName == aliasName)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.elevation, elevation) || other.elevation == elevation)&&(identical(other.watershed, watershed) || other.watershed == watershed)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-WeatherVariable _$WeatherVariableFromJson(Map<String, dynamic> json) {
-  return _WeatherVariable.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,aliasName,longitude,latitude,elevation,watershed,isActive,updatedAt);
+
+@override
+String toString() {
+  return 'StationDetails(id: $id, name: $name, aliasName: $aliasName, longitude: $longitude, latitude: $latitude, elevation: $elevation, watershed: $watershed, isActive: $isActive, updatedAt: $updatedAt)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$StationDetailsCopyWith<$Res> implements $StationDetailsCopyWith<$Res> {
+  factory _$StationDetailsCopyWith(_StationDetails value, $Res Function(_StationDetails) _then) = __$StationDetailsCopyWithImpl;
+@override @useResult
+$Res call({
+ int id, String name,@JsonKey(name: 'alias_name') String? aliasName, double? longitude, double? latitude, int elevation, String? watershed,@JsonKey(name: 'is_active') bool? isActive,@JsonKey(name: 'updated_at') String? updatedAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$StationDetailsCopyWithImpl<$Res>
+    implements _$StationDetailsCopyWith<$Res> {
+  __$StationDetailsCopyWithImpl(this._self, this._then);
+
+  final _StationDetails _self;
+  final $Res Function(_StationDetails) _then;
+
+/// Create a copy of StationDetails
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? aliasName = freezed,Object? longitude = freezed,Object? latitude = freezed,Object? elevation = null,Object? watershed = freezed,Object? isActive = freezed,Object? updatedAt = freezed,}) {
+  return _then(_StationDetails(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,aliasName: freezed == aliasName ? _self.aliasName : aliasName // ignore: cast_nullable_to_non_nullable
+as String?,longitude: freezed == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double?,latitude: freezed == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double?,elevation: null == elevation ? _self.elevation : elevation // ignore: cast_nullable_to_non_nullable
+as int,watershed: freezed == watershed ? _self.watershed : watershed // ignore: cast_nullable_to_non_nullable
+as String?,isActive: freezed == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as bool?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$WeatherVariable {
-  String get name => throw _privateConstructorUsedError;
-  String get symbol => throw _privateConstructorUsedError;
-  @JsonKey(name: 'unit_name')
-  String get unitName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'unit_symbol')
-  String get unitSymbol => throw _privateConstructorUsedError;
+
+ String get name; String get symbol;@JsonKey(name: 'unit_name') String get unitName;@JsonKey(name: 'unit_symbol') String get unitSymbol;
+/// Create a copy of WeatherVariable
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WeatherVariableCopyWith<WeatherVariable> get copyWith => _$WeatherVariableCopyWithImpl<WeatherVariable>(this as WeatherVariable, _$identity);
 
   /// Serializes this WeatherVariable to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of WeatherVariable
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WeatherVariableCopyWith<WeatherVariable> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherVariable&&(identical(other.name, name) || other.name == name)&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.unitName, unitName) || other.unitName == unitName)&&(identical(other.unitSymbol, unitSymbol) || other.unitSymbol == unitSymbol));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,symbol,unitName,unitSymbol);
+
+@override
+String toString() {
+  return 'WeatherVariable(name: $name, symbol: $symbol, unitName: $unitName, unitSymbol: $unitSymbol)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $WeatherVariableCopyWith<$Res> {
-  factory $WeatherVariableCopyWith(
-    WeatherVariable value,
-    $Res Function(WeatherVariable) then,
-  ) = _$WeatherVariableCopyWithImpl<$Res, WeatherVariable>;
-  @useResult
-  $Res call({
-    String name,
-    String symbol,
-    @JsonKey(name: 'unit_name') String unitName,
-    @JsonKey(name: 'unit_symbol') String unitSymbol,
-  });
-}
+abstract mixin class $WeatherVariableCopyWith<$Res>  {
+  factory $WeatherVariableCopyWith(WeatherVariable value, $Res Function(WeatherVariable) _then) = _$WeatherVariableCopyWithImpl;
+@useResult
+$Res call({
+ String name, String symbol,@JsonKey(name: 'unit_name') String unitName,@JsonKey(name: 'unit_symbol') String unitSymbol
+});
 
+
+
+
+}
 /// @nodoc
-class _$WeatherVariableCopyWithImpl<$Res, $Val extends WeatherVariable>
+class _$WeatherVariableCopyWithImpl<$Res>
     implements $WeatherVariableCopyWith<$Res> {
-  _$WeatherVariableCopyWithImpl(this._value, this._then);
+  _$WeatherVariableCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final WeatherVariable _self;
+  final $Res Function(WeatherVariable) _then;
 
-  /// Create a copy of WeatherVariable
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = null,
-    Object? symbol = null,
-    Object? unitName = null,
-    Object? unitSymbol = null,
-  }) {
-    return _then(
-      _value.copyWith(
-            name: null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                      as String,
-            symbol: null == symbol
-                ? _value.symbol
-                : symbol // ignore: cast_nullable_to_non_nullable
-                      as String,
-            unitName: null == unitName
-                ? _value.unitName
-                : unitName // ignore: cast_nullable_to_non_nullable
-                      as String,
-            unitSymbol: null == unitSymbol
-                ? _value.unitSymbol
-                : unitSymbol // ignore: cast_nullable_to_non_nullable
-                      as String,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of WeatherVariable
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? symbol = null,Object? unitName = null,Object? unitSymbol = null,}) {
+  return _then(_self.copyWith(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
+as String,unitName: null == unitName ? _self.unitName : unitName // ignore: cast_nullable_to_non_nullable
+as String,unitSymbol: null == unitSymbol ? _self.unitSymbol : unitSymbol // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$WeatherVariableImplCopyWith<$Res>
-    implements $WeatherVariableCopyWith<$Res> {
-  factory _$$WeatherVariableImplCopyWith(
-    _$WeatherVariableImpl value,
-    $Res Function(_$WeatherVariableImpl) then,
-  ) = __$$WeatherVariableImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    String name,
-    String symbol,
-    @JsonKey(name: 'unit_name') String unitName,
-    @JsonKey(name: 'unit_symbol') String unitSymbol,
-  });
 }
 
-/// @nodoc
-class __$$WeatherVariableImplCopyWithImpl<$Res>
-    extends _$WeatherVariableCopyWithImpl<$Res, _$WeatherVariableImpl>
-    implements _$$WeatherVariableImplCopyWith<$Res> {
-  __$$WeatherVariableImplCopyWithImpl(
-    _$WeatherVariableImpl _value,
-    $Res Function(_$WeatherVariableImpl) _then,
-  ) : super(_value, _then);
 
-  /// Create a copy of WeatherVariable
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = null,
-    Object? symbol = null,
-    Object? unitName = null,
-    Object? unitSymbol = null,
-  }) {
-    return _then(
-      _$WeatherVariableImpl(
-        name: null == name
-            ? _value.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String,
-        symbol: null == symbol
-            ? _value.symbol
-            : symbol // ignore: cast_nullable_to_non_nullable
-                  as String,
-        unitName: null == unitName
-            ? _value.unitName
-            : unitName // ignore: cast_nullable_to_non_nullable
-                  as String,
-        unitSymbol: null == unitSymbol
-            ? _value.unitSymbol
-            : unitSymbol // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
-  }
+/// Adds pattern-matching-related methods to [WeatherVariable].
+extension WeatherVariablePatterns on WeatherVariable {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _WeatherVariable value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _WeatherVariable() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _WeatherVariable value)  $default,){
+final _that = this;
+switch (_that) {
+case _WeatherVariable():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _WeatherVariable value)?  $default,){
+final _that = this;
+switch (_that) {
+case _WeatherVariable() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String symbol, @JsonKey(name: 'unit_name')  String unitName, @JsonKey(name: 'unit_symbol')  String unitSymbol)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _WeatherVariable() when $default != null:
+return $default(_that.name,_that.symbol,_that.unitName,_that.unitSymbol);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String symbol, @JsonKey(name: 'unit_name')  String unitName, @JsonKey(name: 'unit_symbol')  String unitSymbol)  $default,) {final _that = this;
+switch (_that) {
+case _WeatherVariable():
+return $default(_that.name,_that.symbol,_that.unitName,_that.unitSymbol);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String symbol, @JsonKey(name: 'unit_name')  String unitName, @JsonKey(name: 'unit_symbol')  String unitSymbol)?  $default,) {final _that = this;
+switch (_that) {
+case _WeatherVariable() when $default != null:
+return $default(_that.name,_that.symbol,_that.unitName,_that.unitSymbol);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$WeatherVariableImpl implements _WeatherVariable {
-  const _$WeatherVariableImpl({
-    this.name = 'Unknown',
-    this.symbol = '',
-    @JsonKey(name: 'unit_name') this.unitName = '',
-    @JsonKey(name: 'unit_symbol') this.unitSymbol = '',
-  });
 
-  factory _$WeatherVariableImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WeatherVariableImplFromJson(json);
+class _WeatherVariable implements WeatherVariable {
+  const _WeatherVariable({this.name = 'Unknown', this.symbol = '', @JsonKey(name: 'unit_name') this.unitName = '', @JsonKey(name: 'unit_symbol') this.unitSymbol = ''});
+  factory _WeatherVariable.fromJson(Map<String, dynamic> json) => _$WeatherVariableFromJson(json);
 
-  @override
-  @JsonKey()
-  final String name;
-  @override
-  @JsonKey()
-  final String symbol;
-  @override
-  @JsonKey(name: 'unit_name')
-  final String unitName;
-  @override
-  @JsonKey(name: 'unit_symbol')
-  final String unitSymbol;
+@override@JsonKey() final  String name;
+@override@JsonKey() final  String symbol;
+@override@JsonKey(name: 'unit_name') final  String unitName;
+@override@JsonKey(name: 'unit_symbol') final  String unitSymbol;
 
-  @override
-  String toString() {
-    return 'WeatherVariable(name: $name, symbol: $symbol, unitName: $unitName, unitSymbol: $unitSymbol)';
-  }
+/// Create a copy of WeatherVariable
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$WeatherVariableCopyWith<_WeatherVariable> get copyWith => __$WeatherVariableCopyWithImpl<_WeatherVariable>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WeatherVariableImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.symbol, symbol) || other.symbol == symbol) &&
-            (identical(other.unitName, unitName) ||
-                other.unitName == unitName) &&
-            (identical(other.unitSymbol, unitSymbol) ||
-                other.unitSymbol == unitSymbol));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, symbol, unitName, unitSymbol);
-
-  /// Create a copy of WeatherVariable
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$WeatherVariableImplCopyWith<_$WeatherVariableImpl> get copyWith =>
-      __$$WeatherVariableImplCopyWithImpl<_$WeatherVariableImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WeatherVariableImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$WeatherVariableToJson(this, );
 }
 
-abstract class _WeatherVariable implements WeatherVariable {
-  const factory _WeatherVariable({
-    final String name,
-    final String symbol,
-    @JsonKey(name: 'unit_name') final String unitName,
-    @JsonKey(name: 'unit_symbol') final String unitSymbol,
-  }) = _$WeatherVariableImpl;
-
-  factory _WeatherVariable.fromJson(Map<String, dynamic> json) =
-      _$WeatherVariableImpl.fromJson;
-
-  @override
-  String get name;
-  @override
-  String get symbol;
-  @override
-  @JsonKey(name: 'unit_name')
-  String get unitName;
-  @override
-  @JsonKey(name: 'unit_symbol')
-  String get unitSymbol;
-
-  /// Create a copy of WeatherVariable
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WeatherVariableImplCopyWith<_$WeatherVariableImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WeatherVariable&&(identical(other.name, name) || other.name == name)&&(identical(other.symbol, symbol) || other.symbol == symbol)&&(identical(other.unitName, unitName) || other.unitName == unitName)&&(identical(other.unitSymbol, unitSymbol) || other.unitSymbol == unitSymbol));
 }
 
-WeatherValue _$WeatherValueFromJson(Map<String, dynamic> json) {
-  return _WeatherValue.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,symbol,unitName,unitSymbol);
+
+@override
+String toString() {
+  return 'WeatherVariable(name: $name, symbol: $symbol, unitName: $unitName, unitSymbol: $unitSymbol)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$WeatherVariableCopyWith<$Res> implements $WeatherVariableCopyWith<$Res> {
+  factory _$WeatherVariableCopyWith(_WeatherVariable value, $Res Function(_WeatherVariable) _then) = __$WeatherVariableCopyWithImpl;
+@override @useResult
+$Res call({
+ String name, String symbol,@JsonKey(name: 'unit_name') String unitName,@JsonKey(name: 'unit_symbol') String unitSymbol
+});
+
+
+
+
+}
+/// @nodoc
+class __$WeatherVariableCopyWithImpl<$Res>
+    implements _$WeatherVariableCopyWith<$Res> {
+  __$WeatherVariableCopyWithImpl(this._self, this._then);
+
+  final _WeatherVariable _self;
+  final $Res Function(_WeatherVariable) _then;
+
+/// Create a copy of WeatherVariable
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? symbol = null,Object? unitName = null,Object? unitSymbol = null,}) {
+  return _then(_WeatherVariable(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
+as String,unitName: null == unitName ? _self.unitName : unitName // ignore: cast_nullable_to_non_nullable
+as String,unitSymbol: null == unitSymbol ? _self.unitSymbol : unitSymbol // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$WeatherValue {
-  dynamic get value => throw _privateConstructorUsedError;
-  WeatherVariable get variable => throw _privateConstructorUsedError;
+
+ dynamic get value; WeatherVariable get variable;
+/// Create a copy of WeatherValue
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WeatherValueCopyWith<WeatherValue> get copyWith => _$WeatherValueCopyWithImpl<WeatherValue>(this as WeatherValue, _$identity);
 
   /// Serializes this WeatherValue to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of WeatherValue
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WeatherValueCopyWith<WeatherValue> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherValue&&const DeepCollectionEquality().equals(other.value, value)&&(identical(other.variable, variable) || other.variable == variable));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(value),variable);
+
+@override
+String toString() {
+  return 'WeatherValue(value: $value, variable: $variable)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $WeatherValueCopyWith<$Res> {
-  factory $WeatherValueCopyWith(
-    WeatherValue value,
-    $Res Function(WeatherValue) then,
-  ) = _$WeatherValueCopyWithImpl<$Res, WeatherValue>;
-  @useResult
-  $Res call({dynamic value, WeatherVariable variable});
+abstract mixin class $WeatherValueCopyWith<$Res>  {
+  factory $WeatherValueCopyWith(WeatherValue value, $Res Function(WeatherValue) _then) = _$WeatherValueCopyWithImpl;
+@useResult
+$Res call({
+ dynamic value, WeatherVariable variable
+});
 
-  $WeatherVariableCopyWith<$Res> get variable;
+
+$WeatherVariableCopyWith<$Res> get variable;
+
 }
-
 /// @nodoc
-class _$WeatherValueCopyWithImpl<$Res, $Val extends WeatherValue>
+class _$WeatherValueCopyWithImpl<$Res>
     implements $WeatherValueCopyWith<$Res> {
-  _$WeatherValueCopyWithImpl(this._value, this._then);
+  _$WeatherValueCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final WeatherValue _self;
+  final $Res Function(WeatherValue) _then;
 
-  /// Create a copy of WeatherValue
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? value = freezed, Object? variable = null}) {
-    return _then(
-      _value.copyWith(
-            value: freezed == value
-                ? _value.value
-                : value // ignore: cast_nullable_to_non_nullable
-                      as dynamic,
-            variable: null == variable
-                ? _value.variable
-                : variable // ignore: cast_nullable_to_non_nullable
-                      as WeatherVariable,
-          )
-          as $Val,
-    );
-  }
-
-  /// Create a copy of WeatherValue
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $WeatherVariableCopyWith<$Res> get variable {
-    return $WeatherVariableCopyWith<$Res>(_value.variable, (value) {
-      return _then(_value.copyWith(variable: value) as $Val);
-    });
-  }
+/// Create a copy of WeatherValue
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? value = freezed,Object? variable = null,}) {
+  return _then(_self.copyWith(
+value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as dynamic,variable: null == variable ? _self.variable : variable // ignore: cast_nullable_to_non_nullable
+as WeatherVariable,
+  ));
+}
+/// Create a copy of WeatherValue
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WeatherVariableCopyWith<$Res> get variable {
+  
+  return $WeatherVariableCopyWith<$Res>(_self.variable, (value) {
+    return _then(_self.copyWith(variable: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$WeatherValueImplCopyWith<$Res>
-    implements $WeatherValueCopyWith<$Res> {
-  factory _$$WeatherValueImplCopyWith(
-    _$WeatherValueImpl value,
-    $Res Function(_$WeatherValueImpl) then,
-  ) = __$$WeatherValueImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic value, WeatherVariable variable});
 
-  @override
-  $WeatherVariableCopyWith<$Res> get variable;
+/// Adds pattern-matching-related methods to [WeatherValue].
+extension WeatherValuePatterns on WeatherValue {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _WeatherValue value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _WeatherValue() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _WeatherValue value)  $default,){
+final _that = this;
+switch (_that) {
+case _WeatherValue():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _WeatherValue value)?  $default,){
+final _that = this;
+switch (_that) {
+case _WeatherValue() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic value,  WeatherVariable variable)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _WeatherValue() when $default != null:
+return $default(_that.value,_that.variable);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic value,  WeatherVariable variable)  $default,) {final _that = this;
+switch (_that) {
+case _WeatherValue():
+return $default(_that.value,_that.variable);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic value,  WeatherVariable variable)?  $default,) {final _that = this;
+switch (_that) {
+case _WeatherValue() when $default != null:
+return $default(_that.value,_that.variable);case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-class __$$WeatherValueImplCopyWithImpl<$Res>
-    extends _$WeatherValueCopyWithImpl<$Res, _$WeatherValueImpl>
-    implements _$$WeatherValueImplCopyWith<$Res> {
-  __$$WeatherValueImplCopyWithImpl(
-    _$WeatherValueImpl _value,
-    $Res Function(_$WeatherValueImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of WeatherValue
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? value = freezed, Object? variable = null}) {
-    return _then(
-      _$WeatherValueImpl(
-        value: freezed == value
-            ? _value.value
-            : value // ignore: cast_nullable_to_non_nullable
-                  as dynamic,
-        variable: null == variable
-            ? _value.variable
-            : variable // ignore: cast_nullable_to_non_nullable
-                  as WeatherVariable,
-      ),
-    );
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$WeatherValueImpl implements _WeatherValue {
-  const _$WeatherValueImpl({this.value = '--', required this.variable});
 
-  factory _$WeatherValueImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WeatherValueImplFromJson(json);
+class _WeatherValue implements WeatherValue {
+  const _WeatherValue({this.value = '--', required this.variable});
+  factory _WeatherValue.fromJson(Map<String, dynamic> json) => _$WeatherValueFromJson(json);
 
-  @override
-  @JsonKey()
-  final dynamic value;
-  @override
-  final WeatherVariable variable;
+@override@JsonKey() final  dynamic value;
+@override final  WeatherVariable variable;
 
-  @override
-  String toString() {
-    return 'WeatherValue(value: $value, variable: $variable)';
-  }
+/// Create a copy of WeatherValue
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$WeatherValueCopyWith<_WeatherValue> get copyWith => __$WeatherValueCopyWithImpl<_WeatherValue>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WeatherValueImpl &&
-            const DeepCollectionEquality().equals(other.value, value) &&
-            (identical(other.variable, variable) ||
-                other.variable == variable));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(value),
-    variable,
-  );
-
-  /// Create a copy of WeatherValue
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$WeatherValueImplCopyWith<_$WeatherValueImpl> get copyWith =>
-      __$$WeatherValueImplCopyWithImpl<_$WeatherValueImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WeatherValueImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$WeatherValueToJson(this, );
 }
 
-abstract class _WeatherValue implements WeatherValue {
-  const factory _WeatherValue({
-    final dynamic value,
-    required final WeatherVariable variable,
-  }) = _$WeatherValueImpl;
-
-  factory _WeatherValue.fromJson(Map<String, dynamic> json) =
-      _$WeatherValueImpl.fromJson;
-
-  @override
-  dynamic get value;
-  @override
-  WeatherVariable get variable;
-
-  /// Create a copy of WeatherValue
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WeatherValueImplCopyWith<_$WeatherValueImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WeatherValue&&const DeepCollectionEquality().equals(other.value, value)&&(identical(other.variable, variable) || other.variable == variable));
 }
 
-StationFullData _$StationFullDataFromJson(Map<String, dynamic> json) {
-  return _StationFullData.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(value),variable);
+
+@override
+String toString() {
+  return 'WeatherValue(value: $value, variable: $variable)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$WeatherValueCopyWith<$Res> implements $WeatherValueCopyWith<$Res> {
+  factory _$WeatherValueCopyWith(_WeatherValue value, $Res Function(_WeatherValue) _then) = __$WeatherValueCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic value, WeatherVariable variable
+});
+
+
+@override $WeatherVariableCopyWith<$Res> get variable;
+
+}
+/// @nodoc
+class __$WeatherValueCopyWithImpl<$Res>
+    implements _$WeatherValueCopyWith<$Res> {
+  __$WeatherValueCopyWithImpl(this._self, this._then);
+
+  final _WeatherValue _self;
+  final $Res Function(_WeatherValue) _then;
+
+/// Create a copy of WeatherValue
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? value = freezed,Object? variable = null,}) {
+  return _then(_WeatherValue(
+value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as dynamic,variable: null == variable ? _self.variable : variable // ignore: cast_nullable_to_non_nullable
+as WeatherVariable,
+  ));
+}
+
+/// Create a copy of WeatherValue
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WeatherVariableCopyWith<$Res> get variable {
+  
+  return $WeatherVariableCopyWith<$Res>(_self.variable, (value) {
+    return _then(_self.copyWith(variable: value));
+  });
+}
+}
+
 
 /// @nodoc
 mixin _$StationFullData {
-  StationDetails get station => throw _privateConstructorUsedError;
-  @JsonKey(name: 'station_name')
-  String get stationName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'station_id')
-  int get stationId => throw _privateConstructorUsedError;
-  List<WeatherValue>? get latest => throw _privateConstructorUsedError;
-  List<WeatherValue>? get past24h => throw _privateConstructorUsedError;
-  List<WeatherValue>? get currentday => throw _privateConstructorUsedError;
+
+ StationDetails get station;@JsonKey(name: 'station_name') String get stationName;@JsonKey(name: 'station_id') int get stationId; List<WeatherValue>? get latest; List<WeatherValue>? get past24h; List<WeatherValue>? get currentday;
+/// Create a copy of StationFullData
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$StationFullDataCopyWith<StationFullData> get copyWith => _$StationFullDataCopyWithImpl<StationFullData>(this as StationFullData, _$identity);
 
   /// Serializes this StationFullData to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of StationFullData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $StationFullDataCopyWith<StationFullData> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StationFullData&&(identical(other.station, station) || other.station == station)&&(identical(other.stationName, stationName) || other.stationName == stationName)&&(identical(other.stationId, stationId) || other.stationId == stationId)&&const DeepCollectionEquality().equals(other.latest, latest)&&const DeepCollectionEquality().equals(other.past24h, past24h)&&const DeepCollectionEquality().equals(other.currentday, currentday));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,station,stationName,stationId,const DeepCollectionEquality().hash(latest),const DeepCollectionEquality().hash(past24h),const DeepCollectionEquality().hash(currentday));
+
+@override
+String toString() {
+  return 'StationFullData(station: $station, stationName: $stationName, stationId: $stationId, latest: $latest, past24h: $past24h, currentday: $currentday)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $StationFullDataCopyWith<$Res> {
-  factory $StationFullDataCopyWith(
-    StationFullData value,
-    $Res Function(StationFullData) then,
-  ) = _$StationFullDataCopyWithImpl<$Res, StationFullData>;
-  @useResult
-  $Res call({
-    StationDetails station,
-    @JsonKey(name: 'station_name') String stationName,
-    @JsonKey(name: 'station_id') int stationId,
-    List<WeatherValue>? latest,
-    List<WeatherValue>? past24h,
-    List<WeatherValue>? currentday,
-  });
+abstract mixin class $StationFullDataCopyWith<$Res>  {
+  factory $StationFullDataCopyWith(StationFullData value, $Res Function(StationFullData) _then) = _$StationFullDataCopyWithImpl;
+@useResult
+$Res call({
+ StationDetails station,@JsonKey(name: 'station_name') String stationName,@JsonKey(name: 'station_id') int stationId, List<WeatherValue>? latest, List<WeatherValue>? past24h, List<WeatherValue>? currentday
+});
 
-  $StationDetailsCopyWith<$Res> get station;
+
+$StationDetailsCopyWith<$Res> get station;
+
 }
-
 /// @nodoc
-class _$StationFullDataCopyWithImpl<$Res, $Val extends StationFullData>
+class _$StationFullDataCopyWithImpl<$Res>
     implements $StationFullDataCopyWith<$Res> {
-  _$StationFullDataCopyWithImpl(this._value, this._then);
+  _$StationFullDataCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final StationFullData _self;
+  final $Res Function(StationFullData) _then;
 
-  /// Create a copy of StationFullData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? station = null,
-    Object? stationName = null,
-    Object? stationId = null,
-    Object? latest = freezed,
-    Object? past24h = freezed,
-    Object? currentday = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            station: null == station
-                ? _value.station
-                : station // ignore: cast_nullable_to_non_nullable
-                      as StationDetails,
-            stationName: null == stationName
-                ? _value.stationName
-                : stationName // ignore: cast_nullable_to_non_nullable
-                      as String,
-            stationId: null == stationId
-                ? _value.stationId
-                : stationId // ignore: cast_nullable_to_non_nullable
-                      as int,
-            latest: freezed == latest
-                ? _value.latest
-                : latest // ignore: cast_nullable_to_non_nullable
-                      as List<WeatherValue>?,
-            past24h: freezed == past24h
-                ? _value.past24h
-                : past24h // ignore: cast_nullable_to_non_nullable
-                      as List<WeatherValue>?,
-            currentday: freezed == currentday
-                ? _value.currentday
-                : currentday // ignore: cast_nullable_to_non_nullable
-                      as List<WeatherValue>?,
-          )
-          as $Val,
-    );
-  }
-
-  /// Create a copy of StationFullData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $StationDetailsCopyWith<$Res> get station {
-    return $StationDetailsCopyWith<$Res>(_value.station, (value) {
-      return _then(_value.copyWith(station: value) as $Val);
-    });
-  }
+/// Create a copy of StationFullData
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? station = null,Object? stationName = null,Object? stationId = null,Object? latest = freezed,Object? past24h = freezed,Object? currentday = freezed,}) {
+  return _then(_self.copyWith(
+station: null == station ? _self.station : station // ignore: cast_nullable_to_non_nullable
+as StationDetails,stationName: null == stationName ? _self.stationName : stationName // ignore: cast_nullable_to_non_nullable
+as String,stationId: null == stationId ? _self.stationId : stationId // ignore: cast_nullable_to_non_nullable
+as int,latest: freezed == latest ? _self.latest : latest // ignore: cast_nullable_to_non_nullable
+as List<WeatherValue>?,past24h: freezed == past24h ? _self.past24h : past24h // ignore: cast_nullable_to_non_nullable
+as List<WeatherValue>?,currentday: freezed == currentday ? _self.currentday : currentday // ignore: cast_nullable_to_non_nullable
+as List<WeatherValue>?,
+  ));
 }
-
-/// @nodoc
-abstract class _$$StationFullDataImplCopyWith<$Res>
-    implements $StationFullDataCopyWith<$Res> {
-  factory _$$StationFullDataImplCopyWith(
-    _$StationFullDataImpl value,
-    $Res Function(_$StationFullDataImpl) then,
-  ) = __$$StationFullDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    StationDetails station,
-    @JsonKey(name: 'station_name') String stationName,
-    @JsonKey(name: 'station_id') int stationId,
-    List<WeatherValue>? latest,
-    List<WeatherValue>? past24h,
-    List<WeatherValue>? currentday,
+/// Create a copy of StationFullData
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$StationDetailsCopyWith<$Res> get station {
+  
+  return $StationDetailsCopyWith<$Res>(_self.station, (value) {
+    return _then(_self.copyWith(station: value));
   });
-
-  @override
-  $StationDetailsCopyWith<$Res> get station;
+}
 }
 
-/// @nodoc
-class __$$StationFullDataImplCopyWithImpl<$Res>
-    extends _$StationFullDataCopyWithImpl<$Res, _$StationFullDataImpl>
-    implements _$$StationFullDataImplCopyWith<$Res> {
-  __$$StationFullDataImplCopyWithImpl(
-    _$StationFullDataImpl _value,
-    $Res Function(_$StationFullDataImpl) _then,
-  ) : super(_value, _then);
 
-  /// Create a copy of StationFullData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? station = null,
-    Object? stationName = null,
-    Object? stationId = null,
-    Object? latest = freezed,
-    Object? past24h = freezed,
-    Object? currentday = freezed,
-  }) {
-    return _then(
-      _$StationFullDataImpl(
-        station: null == station
-            ? _value.station
-            : station // ignore: cast_nullable_to_non_nullable
-                  as StationDetails,
-        stationName: null == stationName
-            ? _value.stationName
-            : stationName // ignore: cast_nullable_to_non_nullable
-                  as String,
-        stationId: null == stationId
-            ? _value.stationId
-            : stationId // ignore: cast_nullable_to_non_nullable
-                  as int,
-        latest: freezed == latest
-            ? _value._latest
-            : latest // ignore: cast_nullable_to_non_nullable
-                  as List<WeatherValue>?,
-        past24h: freezed == past24h
-            ? _value._past24h
-            : past24h // ignore: cast_nullable_to_non_nullable
-                  as List<WeatherValue>?,
-        currentday: freezed == currentday
-            ? _value._currentday
-            : currentday // ignore: cast_nullable_to_non_nullable
-                  as List<WeatherValue>?,
-      ),
-    );
-  }
+/// Adds pattern-matching-related methods to [StationFullData].
+extension StationFullDataPatterns on StationFullData {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _StationFullData value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _StationFullData() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _StationFullData value)  $default,){
+final _that = this;
+switch (_that) {
+case _StationFullData():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _StationFullData value)?  $default,){
+final _that = this;
+switch (_that) {
+case _StationFullData() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( StationDetails station, @JsonKey(name: 'station_name')  String stationName, @JsonKey(name: 'station_id')  int stationId,  List<WeatherValue>? latest,  List<WeatherValue>? past24h,  List<WeatherValue>? currentday)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _StationFullData() when $default != null:
+return $default(_that.station,_that.stationName,_that.stationId,_that.latest,_that.past24h,_that.currentday);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( StationDetails station, @JsonKey(name: 'station_name')  String stationName, @JsonKey(name: 'station_id')  int stationId,  List<WeatherValue>? latest,  List<WeatherValue>? past24h,  List<WeatherValue>? currentday)  $default,) {final _that = this;
+switch (_that) {
+case _StationFullData():
+return $default(_that.station,_that.stationName,_that.stationId,_that.latest,_that.past24h,_that.currentday);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( StationDetails station, @JsonKey(name: 'station_name')  String stationName, @JsonKey(name: 'station_id')  int stationId,  List<WeatherValue>? latest,  List<WeatherValue>? past24h,  List<WeatherValue>? currentday)?  $default,) {final _that = this;
+switch (_that) {
+case _StationFullData() when $default != null:
+return $default(_that.station,_that.stationName,_that.stationId,_that.latest,_that.past24h,_that.currentday);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$StationFullDataImpl implements _StationFullData {
-  const _$StationFullDataImpl({
-    required this.station,
-    @JsonKey(name: 'station_name') this.stationName = 'Unknown Station',
-    @JsonKey(name: 'station_id') this.stationId = 0,
-    final List<WeatherValue>? latest,
-    final List<WeatherValue>? past24h,
-    final List<WeatherValue>? currentday,
-  }) : _latest = latest,
-       _past24h = past24h,
-       _currentday = currentday;
 
-  factory _$StationFullDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StationFullDataImplFromJson(json);
+class _StationFullData implements StationFullData {
+  const _StationFullData({required this.station, @JsonKey(name: 'station_name') this.stationName = 'Unknown Station', @JsonKey(name: 'station_id') this.stationId = 0, final  List<WeatherValue>? latest, final  List<WeatherValue>? past24h, final  List<WeatherValue>? currentday}): _latest = latest,_past24h = past24h,_currentday = currentday;
+  factory _StationFullData.fromJson(Map<String, dynamic> json) => _$StationFullDataFromJson(json);
 
-  @override
-  final StationDetails station;
-  @override
-  @JsonKey(name: 'station_name')
-  final String stationName;
-  @override
-  @JsonKey(name: 'station_id')
-  final int stationId;
-  final List<WeatherValue>? _latest;
-  @override
-  List<WeatherValue>? get latest {
-    final value = _latest;
-    if (value == null) return null;
-    if (_latest is EqualUnmodifiableListView) return _latest;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<WeatherValue>? _past24h;
-  @override
-  List<WeatherValue>? get past24h {
-    final value = _past24h;
-    if (value == null) return null;
-    if (_past24h is EqualUnmodifiableListView) return _past24h;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<WeatherValue>? _currentday;
-  @override
-  List<WeatherValue>? get currentday {
-    final value = _currentday;
-    if (value == null) return null;
-    if (_currentday is EqualUnmodifiableListView) return _currentday;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'StationFullData(station: $station, stationName: $stationName, stationId: $stationId, latest: $latest, past24h: $past24h, currentday: $currentday)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StationFullDataImpl &&
-            (identical(other.station, station) || other.station == station) &&
-            (identical(other.stationName, stationName) ||
-                other.stationName == stationName) &&
-            (identical(other.stationId, stationId) ||
-                other.stationId == stationId) &&
-            const DeepCollectionEquality().equals(other._latest, _latest) &&
-            const DeepCollectionEquality().equals(other._past24h, _past24h) &&
-            const DeepCollectionEquality().equals(
-              other._currentday,
-              _currentday,
-            ));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    station,
-    stationName,
-    stationId,
-    const DeepCollectionEquality().hash(_latest),
-    const DeepCollectionEquality().hash(_past24h),
-    const DeepCollectionEquality().hash(_currentday),
-  );
-
-  /// Create a copy of StationFullData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$StationFullDataImplCopyWith<_$StationFullDataImpl> get copyWith =>
-      __$$StationFullDataImplCopyWithImpl<_$StationFullDataImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StationFullDataImplToJson(this);
-  }
+@override final  StationDetails station;
+@override@JsonKey(name: 'station_name') final  String stationName;
+@override@JsonKey(name: 'station_id') final  int stationId;
+ final  List<WeatherValue>? _latest;
+@override List<WeatherValue>? get latest {
+  final value = _latest;
+  if (value == null) return null;
+  if (_latest is EqualUnmodifiableListView) return _latest;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
 }
 
-abstract class _StationFullData implements StationFullData {
-  const factory _StationFullData({
-    required final StationDetails station,
-    @JsonKey(name: 'station_name') final String stationName,
-    @JsonKey(name: 'station_id') final int stationId,
-    final List<WeatherValue>? latest,
-    final List<WeatherValue>? past24h,
-    final List<WeatherValue>? currentday,
-  }) = _$StationFullDataImpl;
-
-  factory _StationFullData.fromJson(Map<String, dynamic> json) =
-      _$StationFullDataImpl.fromJson;
-
-  @override
-  StationDetails get station;
-  @override
-  @JsonKey(name: 'station_name')
-  String get stationName;
-  @override
-  @JsonKey(name: 'station_id')
-  int get stationId;
-  @override
-  List<WeatherValue>? get latest;
-  @override
-  List<WeatherValue>? get past24h;
-  @override
-  List<WeatherValue>? get currentday;
-
-  /// Create a copy of StationFullData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StationFullDataImplCopyWith<_$StationFullDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+ final  List<WeatherValue>? _past24h;
+@override List<WeatherValue>? get past24h {
+  final value = _past24h;
+  if (value == null) return null;
+  if (_past24h is EqualUnmodifiableListView) return _past24h;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
 }
+
+ final  List<WeatherValue>? _currentday;
+@override List<WeatherValue>? get currentday {
+  final value = _currentday;
+  if (value == null) return null;
+  if (_currentday is EqualUnmodifiableListView) return _currentday;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+
+/// Create a copy of StationFullData
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$StationFullDataCopyWith<_StationFullData> get copyWith => __$StationFullDataCopyWithImpl<_StationFullData>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$StationFullDataToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StationFullData&&(identical(other.station, station) || other.station == station)&&(identical(other.stationName, stationName) || other.stationName == stationName)&&(identical(other.stationId, stationId) || other.stationId == stationId)&&const DeepCollectionEquality().equals(other._latest, _latest)&&const DeepCollectionEquality().equals(other._past24h, _past24h)&&const DeepCollectionEquality().equals(other._currentday, _currentday));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,station,stationName,stationId,const DeepCollectionEquality().hash(_latest),const DeepCollectionEquality().hash(_past24h),const DeepCollectionEquality().hash(_currentday));
+
+@override
+String toString() {
+  return 'StationFullData(station: $station, stationName: $stationName, stationId: $stationId, latest: $latest, past24h: $past24h, currentday: $currentday)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$StationFullDataCopyWith<$Res> implements $StationFullDataCopyWith<$Res> {
+  factory _$StationFullDataCopyWith(_StationFullData value, $Res Function(_StationFullData) _then) = __$StationFullDataCopyWithImpl;
+@override @useResult
+$Res call({
+ StationDetails station,@JsonKey(name: 'station_name') String stationName,@JsonKey(name: 'station_id') int stationId, List<WeatherValue>? latest, List<WeatherValue>? past24h, List<WeatherValue>? currentday
+});
+
+
+@override $StationDetailsCopyWith<$Res> get station;
+
+}
+/// @nodoc
+class __$StationFullDataCopyWithImpl<$Res>
+    implements _$StationFullDataCopyWith<$Res> {
+  __$StationFullDataCopyWithImpl(this._self, this._then);
+
+  final _StationFullData _self;
+  final $Res Function(_StationFullData) _then;
+
+/// Create a copy of StationFullData
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? station = null,Object? stationName = null,Object? stationId = null,Object? latest = freezed,Object? past24h = freezed,Object? currentday = freezed,}) {
+  return _then(_StationFullData(
+station: null == station ? _self.station : station // ignore: cast_nullable_to_non_nullable
+as StationDetails,stationName: null == stationName ? _self.stationName : stationName // ignore: cast_nullable_to_non_nullable
+as String,stationId: null == stationId ? _self.stationId : stationId // ignore: cast_nullable_to_non_nullable
+as int,latest: freezed == latest ? _self._latest : latest // ignore: cast_nullable_to_non_nullable
+as List<WeatherValue>?,past24h: freezed == past24h ? _self._past24h : past24h // ignore: cast_nullable_to_non_nullable
+as List<WeatherValue>?,currentday: freezed == currentday ? _self._currentday : currentday // ignore: cast_nullable_to_non_nullable
+as List<WeatherValue>?,
+  ));
+}
+
+/// Create a copy of StationFullData
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$StationDetailsCopyWith<$Res> get station {
+  
+  return $StationDetailsCopyWith<$Res>(_self.station, (value) {
+    return _then(_self.copyWith(station: value));
+  });
+}
+}
+
+// dart format on

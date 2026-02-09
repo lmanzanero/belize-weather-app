@@ -4,7 +4,7 @@ part 'community_spotter.freezed.dart';
 part 'community_spotter.g.dart';
 
 @freezed
-class CommunitySpotter with _$CommunitySpotter {
+abstract class CommunitySpotter with _$CommunitySpotter {
   const factory CommunitySpotter({
     required String id,
     required String name,
@@ -19,7 +19,7 @@ class CommunitySpotter with _$CommunitySpotter {
 }
 
 @freezed
-class SkyPhoto with _$SkyPhoto {
+abstract class SkyPhoto with _$SkyPhoto {
   const factory SkyPhoto({
     required String id,
     required String imageUrl,

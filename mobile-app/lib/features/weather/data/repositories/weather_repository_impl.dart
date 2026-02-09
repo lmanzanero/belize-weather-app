@@ -6,12 +6,17 @@ import '../../domain/repositories/weather_repository.dart';
 class WeatherRepositoryImpl implements WeatherRepository {
   final Dio _dio;
 
+  // Use 10.0.2.2 to access your computer's localhost from an Android Emulator.
+  // Use localhost if testing on an iOS Simulator.
+  // Use your Vercel URL for production: https://belize-weather-app.vercel.app
+  static const String _baseUrl = 'http://10.0.2.2:3000';
+
   WeatherRepositoryImpl(this._dio);
 
   @override
   Future<List<WeatherStation>> getWeatherStations() async {
     try {
-      final response = await _dio.get('https://belize-weather-app.vercel.app/api/v1/weather-stations');
+      final response = await _dio.get('$_baseUrl/api/v1/weather-stations');
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         return data.map((json) => WeatherStation.fromJson(json)).toList();
@@ -26,7 +31,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<StationFullData> getStationDetails(int id) async {
     try {
-      final response = await _dio.get('https://belize-weather-app.vercel.app/api/v1/weather-stations/$id');
+      final response = await _dio.get('$_baseUrl/api/v1/weather-stations/$id');
       if (response.statusCode == 200) {
         return StationFullData.fromJson(response.data);
       } else {

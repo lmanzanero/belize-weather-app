@@ -14,20 +14,19 @@ class RegisterPage extends ConsumerStatefulWidget {
 class _RegisterPageState extends ConsumerState<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+  final _otpController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
+    _otpController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
+    final l10n = AppLocalizations.of(context);
     
     ref.listen(authProvider, (previous, next) {
       if (next.error != null) {
@@ -39,95 +38,98 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
     return Scaffold(
       body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).createAccount,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    const SizedBox(height: 32),
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).email,
-                        prefixIcon: Icon(Icons.email_outlined),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+              child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.person_add_outlined, size: 64, color: Colors.orange),
+                      const SizedBox(height: 24),
+                      Text(
+                        authState.otpSent ? 'Verify Email' : 'Create Account',
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context).pleaseEnterEmail;
-                        }
-                        if (!value.contains('@')) {
-                          return AppLocalizations.of(context).pleaseEnterValidEmail;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).password,
-                        prefixIcon: Icon(Icons.lock_outline),
+                      const SizedBox(height: 8),
+                      Text(
+                        authState.otpSent 
+                          ? 'Enter the code sent to ${authState.email}'
+                          : 'Enter your email to get started with Belize Weather.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context).pleaseEnterPassword;
-                        }
-                        if (value.length < 6) {
-                          return AppLocalizations.of(context).passwordMustBe6Chars;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _confirmPasswordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).confirmPassword,
-                        prefixIcon: Icon(Icons.lock_outline),
+                      const SizedBox(height: 32),
+                      if (!authState.otpSent)
+                        TextFormField(
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: l10n.email,
+                            prefixIcon: const Icon(Icons.email_outlined),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) return 'Please enter your email';
+                            if (!value.contains('@')) return 'Please enter a valid email';
+                            return null;
+                          },
+                        )
+                      else
+                        TextFormField(
+                          controller: _otpController,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 24, letterSpacing: 8, fontWeight: FontWeight.bold),
+                          decoration: InputDecoration(
+                            labelText: 'One-Time Password',
+                            hintText: '000000',
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) return 'Please enter the OTP';
+                            if (value.length < 4) return 'OTP is too short';
+                            return null;
+                          },
+                        ),
+                      const SizedBox(height: 32),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          onPressed: authState.isLoading ? null : _handleSubmit,
+                          style: FilledButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          ),
+                          child: authState.isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                                )
+                              : Text(authState.otpSent ? 'Verify & Create' : 'Send Code'),
+                        ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context).pleaseConfirmPassword;
-                        }
-                        if (value != _passwordController.text) {
-                          return AppLocalizations.of(context).passwordsDoNotMatch;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 32),
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: authState.isLoading ? null : _onRegister,
-                        child: authState.isLoading
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
-                              )
-                            : Text(AppLocalizations.of(context).createAccount),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () {
+                          if (authState.otpSent) {
+                            ref.read(authProvider.notifier).resetFlow();
+                          } else {
+                            context.go('/login');
+                          }
+                        },
+                        child: Text(authState.otpSent ? 'Use a different email' : l10n.alreadyHaveAccount),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextButton(
-                      onPressed: () => context.go('/login'),
-                      child: Text(AppLocalizations.of(context).alreadyHaveAccount),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -137,12 +139,13 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     );
   }
 
-  void _onRegister() {
+  void _handleSubmit() {
     if (_formKey.currentState!.validate()) {
-      ref.read(authProvider.notifier).register(
-        _emailController.text,
-        _passwordController.text,
-      );
+      if (ref.read(authProvider).otpSent) {
+        ref.read(authProvider.notifier).verifyOtp(_otpController.text);
+      } else {
+        ref.read(authProvider.notifier).sendOtp(_emailController.text);
+      }
     }
   }
 }

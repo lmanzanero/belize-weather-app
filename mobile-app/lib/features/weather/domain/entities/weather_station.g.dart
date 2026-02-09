@@ -6,8 +6,8 @@ part of 'weather_station.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WeatherStationImpl _$$WeatherStationImplFromJson(Map<String, dynamic> json) =>
-    _$WeatherStationImpl(
+_WeatherStation _$WeatherStationFromJson(Map<String, dynamic> json) =>
+    _WeatherStation(
       id: (json['id'] as num).toInt(),
       city: json['name'] as String? ?? 'Unknown Station',
       region: json['region'] as String? ?? 'Unknown Region',
@@ -20,17 +20,16 @@ _$WeatherStationImpl _$$WeatherStationImplFromJson(Map<String, dynamic> json) =>
       isActive: json['is_active'] as bool?,
     );
 
-Map<String, dynamic> _$$WeatherStationImplToJson(
-  _$WeatherStationImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'name': instance.city,
-  'region': instance.region,
-  'temperature_c': instance.temperatureC,
-  'temperature_f': instance.temperatureF,
-  'condition': instance.condition,
-  'icon': instance.icon,
-  'longitude': instance.longitude,
-  'latitude': instance.latitude,
-  'is_active': instance.isActive,
-};
+Map<String, dynamic> _$WeatherStationToJson(_WeatherStation instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.city,
+      'region': instance.region,
+      'temperature_c': instance.temperatureC,
+      'temperature_f': instance.temperatureF,
+      'condition': instance.condition,
+      'icon': instance.icon,
+      'longitude': instance.longitude,
+      'latitude': instance.latitude,
+      'is_active': instance.isActive,
+    };

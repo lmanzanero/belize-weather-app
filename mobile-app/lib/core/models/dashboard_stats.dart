@@ -4,7 +4,7 @@ part 'dashboard_stats.freezed.dart';
 part 'dashboard_stats.g.dart';
 
 @freezed
-class DashboardStats with _$DashboardStats {
+abstract class DashboardStats with _$DashboardStats {
   const factory DashboardStats({
     required int totalUsers,
     required int activeUsers,
@@ -20,7 +20,7 @@ class DashboardStats with _$DashboardStats {
 }
 
 @freezed
-class ChartData with _$ChartData {
+abstract class ChartData with _$ChartData {
   const factory ChartData({
     required String label,
     required double value,
@@ -32,7 +32,7 @@ class ChartData with _$ChartData {
 }
 
 @freezed
-class ActivityItem with _$ActivityItem {
+abstract class ActivityItem with _$ActivityItem {
   const factory ActivityItem({
     required String id,
     required String description,

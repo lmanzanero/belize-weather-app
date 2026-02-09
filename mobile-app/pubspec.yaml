@@ -15,6 +15,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   
+  # Auth
+  flutter_better_auth: ^0.1.3
+  
   # Map
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
@@ -40,7 +43,7 @@ dependencies:
   
   # Storage
   shared_preferences: ^2.3.0
-  flutter_secure_storage: ^9.2.0
+  flutter_secure_storage: ^9.2.4
   
   # Networking
   dio: ^5.5.0
@@ -49,7 +52,7 @@ dependencies:
   equatable: ^2.0.5
   json_annotation: ^4.9.0
   flutter_dotenv: ^5.1.0
-  freezed_annotation: ^2.4.0
+  freezed_annotation: ^3.0.0
   intl: ^0.20.2
 
 dev_dependencies:
@@ -57,7 +60,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
   build_runner: ^2.4.11
-  freezed: ^2.5.0
+  freezed: ^3.0.0
   json_serializable: ^6.8.0
   riverpod_generator: ^2.5.1
 

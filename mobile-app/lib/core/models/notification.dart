@@ -6,7 +6,7 @@ part 'notification.g.dart';
 enum NotificationType { info, warning, error, success }
 
 @freezed
-class AppNotification with _$AppNotification {
+abstract class AppNotification with _$AppNotification {
   const factory AppNotification({
     required String id,
     required String title,

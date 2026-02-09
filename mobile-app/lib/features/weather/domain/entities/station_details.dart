@@ -4,7 +4,7 @@ part 'station_details.freezed.dart';
 part 'station_details.g.dart';
 
 @freezed
-class StationDetails with _$StationDetails {
+abstract class StationDetails with _$StationDetails {
   const factory StationDetails({
     required int id,
     @Default('Unknown') String name,
@@ -22,7 +22,7 @@ class StationDetails with _$StationDetails {
 }
 
 @freezed
-class WeatherVariable with _$WeatherVariable {
+abstract class WeatherVariable with _$WeatherVariable {
   const factory WeatherVariable({
     @Default('Unknown') String name,
     @Default('') String symbol,
@@ -35,7 +35,7 @@ class WeatherVariable with _$WeatherVariable {
 }
 
 @freezed
-class WeatherValue with _$WeatherValue {
+abstract class WeatherValue with _$WeatherValue {
   const factory WeatherValue({
     @Default('--') dynamic value,
     required WeatherVariable variable,
@@ -46,7 +46,7 @@ class WeatherValue with _$WeatherValue {
 }
 
 @freezed
-class StationFullData with _$StationFullData {
+abstract class StationFullData with _$StationFullData {
   const factory StationFullData({
     required StationDetails station,
     @Default('Unknown Station') @JsonKey(name: 'station_name') String stationName,
