@@ -21,7 +21,7 @@ const limiter = rateLimit({
   max: 100,
 });
 
-app.use(express.json());
+ 
 app.use(limiter);
 app.set("trust proxy", 1);
 
@@ -39,5 +39,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/v1", router);
 app.use("/api/v1/auth", authRoutes);
+
+app.use(express.json());
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
