@@ -4,7 +4,7 @@ import { auth } from "../lib/auth.js";
 const router = express.Router();
 
 // 1. Request OTP (Sign-in or Verification)
-router.post("/send-otp", async (req, res, next) => {
+router.post("/email-otp/send-verification-otp", async (req, res, next) => {
     console.log(req.body);
     try {
         console.log("Better-Auth initialized successfully");
@@ -27,11 +27,13 @@ router.post("/check-otp", async (req, res, next) => {
 });
 
 // 3. Complete Sign In with OTP
-router.post("/signin-otp", async (req, res, next) => {
+router.post("/sign-in/email-otp", async (req, res, next) => {
+    console.log("api called")
     try {
         const result = await auth.api.signInEmailOTP({
             body: req.body, // Expects { email, otp }
         });
+        console.log("Sign in message: ", result)
         res.json(result);
     } catch (e) { next(e); }
 });
