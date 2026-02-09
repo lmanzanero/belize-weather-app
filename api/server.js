@@ -36,10 +36,12 @@ app.use(errorHandler);
 app.get("/", (req, res) => {
   return res.json({message: 'Belize Weather API /api/v1'})
 })
+
+app.use(express.json());
 // Routes
 app.use("/api/v1", router);
 app.use("/api/v1/auth", authRoutes);
 
-app.use(express.json());
+
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -12,7 +12,7 @@ router.get("/health-check", async (req, res, next) => {
 });
 // 1. Request OTP (Sign-in or Verification)
 router.post("/email-otp/send-verification-otp", async (req, res, next) => {
-    console.log(req.body);
+    console.log("Data: ", req?.body);
     try {
         console.log("Better-Auth initialized successfully");
         const result = await auth.api.sendVerificationOTP({
