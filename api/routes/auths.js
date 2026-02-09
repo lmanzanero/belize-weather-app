@@ -3,6 +3,13 @@ import { auth } from "../lib/auth.js";
 
 const router = express.Router();
 
+router.get("/health-check", async (req, res, next) => {
+  try {
+    res.status(200).json({ "auth-heath-check": "Ok" });
+  } catch (error) {
+    next(error);
+  }
+});
 // 1. Request OTP (Sign-in or Verification)
 router.post("/email-otp/send-verification-otp", async (req, res, next) => {
     console.log(req.body);
