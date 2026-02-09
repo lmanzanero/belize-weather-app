@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/send-otp", async (req, res, next) => {
     console.log(req.body);
     try {
+        console.log("Better-Auth initialized successfully");
         const result = await auth.api.sendVerificationOTP({
             body: req.body, // Expects { email, type }
         });
