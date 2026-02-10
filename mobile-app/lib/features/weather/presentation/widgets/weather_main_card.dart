@@ -13,7 +13,7 @@ class WeatherMainCard extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     return Container(
-      height: 450,
+      height: 400,
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -61,7 +61,7 @@ class WeatherMainCard extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
               ),
             ),
-            const Spacer(),
+            const SizedBox(height: 16),
             Text(
               '11:17 PM',
               style: GoogleFonts.inter(

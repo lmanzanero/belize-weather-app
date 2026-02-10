@@ -13,6 +13,9 @@ void main() async {
   // Initialize global error handling
   GlobalErrorHandler.initialize();
   
+  // Initialize SharedPreferences
+  final prefs = await SharedPreferences.getInstance();
+  
   // Initialize Better Auth
   await FlutterBetterAuth.initialize(
     url: 'http://10.0.2.2:3000/api/v1/auth',
@@ -20,9 +23,6 @@ void main() async {
   
   // Remove the hash from URLs on web
   usePathUrlStrategy();
-  
-  // Initialize SharedPreferences
-  final prefs = await SharedPreferences.getInstance();
   
   runApp(
     ProviderScope(

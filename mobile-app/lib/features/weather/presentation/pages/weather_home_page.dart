@@ -6,6 +6,9 @@ import '../widgets/weather_main_card.dart';
 import '../widgets/forecast_list.dart';
 import '../widgets/community_weather_card.dart';
 import '../widgets/marine_report_card.dart';
+import '../widgets/daily_briefing_card.dart';
+import '../widgets/regional_temperatures_card.dart';
+import '../widgets/weekly_forecast_list.dart';
 
 class WeatherHomePage extends ConsumerWidget {
   const WeatherHomePage({super.key});
@@ -33,6 +36,12 @@ class WeatherHomePage extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const WeeklyForecastList(),
+                      const SizedBox(height: 32),
+                      const DailyBriefingCard(),
+                      const SizedBox(height: 24),
+                      const RegionalTemperaturesCard(),
+                      const SizedBox(height: 32),
                       Text(
                         'Municipality Forecast',
                         style: GoogleFonts.inter(

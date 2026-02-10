@@ -48,7 +48,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   ref.watch(_onboardingInitProvider);
   
   return GoRouter(
-    initialLocation: onboardingCompleted ? '/weather' : '/onboarding',
+    initialLocation: onboardingCompleted ? (authState.isAuthenticated ? '/weather' : '/login') : '/onboarding',
     redirect: (context, state) {
       final isAuthenticated = authState.isAuthenticated;
       final isAuthRoute = state.matchedLocation == '/login' || 
@@ -63,6 +63,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       // Redirect authenticated users away from auth pages
       if (isAuthenticated && isAuthRoute) {
         return '/weather';
+      }
+
+      // Force login if not authenticated and not on an auth route
+      if (!isAuthenticated && !isAuthRoute && !isOnboardingRoute) {
+        return '/login';
       }
       
       return null;
