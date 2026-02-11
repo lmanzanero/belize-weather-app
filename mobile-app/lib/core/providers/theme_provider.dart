@@ -19,7 +19,7 @@ class ThemeNotifier extends StateNotifier<ThemeState> {
   ThemeNotifier(this.prefs, this.ref)
       : super(
           ThemeState(
-            themeMode: ThemeMode.values[prefs.getInt(_themeModeKey) ?? 1], // Default to light mode
+            themeMode: ThemeMode.values[prefs.getInt(_themeModeKey) ?? 1], 
             colorSeed: ColorSeed.values[prefs.getInt(_colorSeedKey) ?? 0],
           ),
         );
@@ -30,7 +30,6 @@ class ThemeNotifier extends StateNotifier<ThemeState> {
   static const _colorSeedKey = 'color_seed';
 
   Future<void> setThemeMode(ThemeMode mode) async {
-    // Only save to preferences if user is authenticated
     final authState = ref.read(authProvider);
     if (authState.isAuthenticated) {
       await prefs.setInt(_themeModeKey, mode.index);
@@ -39,7 +38,6 @@ class ThemeNotifier extends StateNotifier<ThemeState> {
   }
 
   Future<void> setColorSeed(ColorSeed seed) async {
-    // Only save to preferences if user is authenticated
     final authState = ref.read(authProvider);
     if (authState.isAuthenticated) {
       await prefs.setInt(_colorSeedKey, seed.index);

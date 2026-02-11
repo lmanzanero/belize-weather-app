@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../domain/entities/forecast.dart';
 
 class RegionalTemperaturesCard extends StatelessWidget {
-  const RegionalTemperaturesCard({super.key});
+  final GeneralForecast generalForecast;
+
+  const RegionalTemperaturesCard({super.key, required this.generalForecast});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,23 @@ class RegionalTemperaturesCard extends StatelessWidget {
         const SizedBox(height: 16),
         Row(
           children: [
-            Expanded(child: _buildTempItem(context, 'COAST', '81°F / 70°F')),
+            Expanded(child: _buildTempItem(
+              context, 
+              'COAST', 
+              '${generalForecast.coastHighF} / ${generalForecast.coastLowF}'.replaceAll('&deg;', ''),
+            )),
             const SizedBox(width: 12),
-            Expanded(child: _buildTempItem(context, 'INLAND', '85°F / 63°F')),
+            Expanded(child: _buildTempItem(
+              context, 
+              'INLAND', 
+              '${generalForecast.inlandHighF} / ${generalForecast.inlandLowF}'.replaceAll('&deg;', ''),
+            )),
             const SizedBox(width: 12),
-            Expanded(child: _buildTempItem(context, 'HILLS', '72°F / 54°F')),
+            Expanded(child: _buildTempItem(
+              context, 
+              'HILLS', 
+              '${generalForecast.hillsHighF} / ${generalForecast.hillsLowF}'.replaceAll('&deg;', ''),
+            )),
           ],
         ),
       ],

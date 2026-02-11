@@ -7,7 +7,7 @@ part 'weather_station.g.dart';
 abstract class WeatherStation with _$WeatherStation {
   const factory WeatherStation({
     required int id,
-    @Default('Unknown Station') @JsonKey(name: 'name') String city,
+    @Default('Unknown Station') @JsonKey(name: 'name') String name,
     @Default('Unknown Region') @JsonKey(name: 'region') String region,
     @Default(24.0) @JsonKey(name: 'temperature_c') double temperatureC,
     @Default(75.0) @JsonKey(name: 'temperature_f') double temperatureF,

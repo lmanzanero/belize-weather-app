@@ -213,8 +213,8 @@ return $default(_that.id,_that.name,_that.avatarUrl,_that.photoCount,_that.lastA
 /// @nodoc
 @JsonSerializable()
 
-class _CommunitySpotter implements CommunitySpotter {
-  const _CommunitySpotter({required this.id, required this.name, required this.avatarUrl, required this.photoCount, required this.lastActive, final  List<SkyPhoto> sharedPhotos = const []}): _sharedPhotos = sharedPhotos;
+class _CommunitySpotter extends CommunitySpotter {
+  const _CommunitySpotter({required this.id, required this.name, required this.avatarUrl, required this.photoCount, required this.lastActive, final  List<SkyPhoto> sharedPhotos = const []}): _sharedPhotos = sharedPhotos,super._();
   factory _CommunitySpotter.fromJson(Map<String, dynamic> json) => _$CommunitySpotterFromJson(json);
 
 @override final  String id;
@@ -299,7 +299,8 @@ as List<SkyPhoto>,
 /// @nodoc
 mixin _$SkyPhoto {
 
- String get id; String get imageUrl; String get caption; DateTime get timestamp; String get location;
+ String get id; String get imageUrl; String get caption; DateTime get timestamp; String get location; double? get latitude; double? get longitude; int get likes; int get comments; String get category;// sky, cloud, rainbow, sunset, storm
+ String? get userName; String? get userAvatar;
 /// Create a copy of SkyPhoto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -312,16 +313,16 @@ $SkyPhotoCopyWith<SkyPhoto> get copyWith => _$SkyPhotoCopyWithImpl<SkyPhoto>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SkyPhoto&&(identical(other.id, id) || other.id == id)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.caption, caption) || other.caption == caption)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.location, location) || other.location == location));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SkyPhoto&&(identical(other.id, id) || other.id == id)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.caption, caption) || other.caption == caption)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.location, location) || other.location == location)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.likes, likes) || other.likes == likes)&&(identical(other.comments, comments) || other.comments == comments)&&(identical(other.category, category) || other.category == category)&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.userAvatar, userAvatar) || other.userAvatar == userAvatar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,imageUrl,caption,timestamp,location);
+int get hashCode => Object.hash(runtimeType,id,imageUrl,caption,timestamp,location,latitude,longitude,likes,comments,category,userName,userAvatar);
 
 @override
 String toString() {
-  return 'SkyPhoto(id: $id, imageUrl: $imageUrl, caption: $caption, timestamp: $timestamp, location: $location)';
+  return 'SkyPhoto(id: $id, imageUrl: $imageUrl, caption: $caption, timestamp: $timestamp, location: $location, latitude: $latitude, longitude: $longitude, likes: $likes, comments: $comments, category: $category, userName: $userName, userAvatar: $userAvatar)';
 }
 
 
@@ -332,7 +333,7 @@ abstract mixin class $SkyPhotoCopyWith<$Res>  {
   factory $SkyPhotoCopyWith(SkyPhoto value, $Res Function(SkyPhoto) _then) = _$SkyPhotoCopyWithImpl;
 @useResult
 $Res call({
- String id, String imageUrl, String caption, DateTime timestamp, String location
+ String id, String imageUrl, String caption, DateTime timestamp, String location, double? latitude, double? longitude, int likes, int comments, String category, String? userName, String? userAvatar
 });
 
 
@@ -349,14 +350,21 @@ class _$SkyPhotoCopyWithImpl<$Res>
 
 /// Create a copy of SkyPhoto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? imageUrl = null,Object? caption = null,Object? timestamp = null,Object? location = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? imageUrl = null,Object? caption = null,Object? timestamp = null,Object? location = null,Object? latitude = freezed,Object? longitude = freezed,Object? likes = null,Object? comments = null,Object? category = null,Object? userName = freezed,Object? userAvatar = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,caption: null == caption ? _self.caption : caption // ignore: cast_nullable_to_non_nullable
 as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,location: null == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
-as String,
+as String,latitude: freezed == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double?,longitude: freezed == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double?,likes: null == likes ? _self.likes : likes // ignore: cast_nullable_to_non_nullable
+as int,comments: null == comments ? _self.comments : comments // ignore: cast_nullable_to_non_nullable
+as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String,userName: freezed == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String?,userAvatar: freezed == userAvatar ? _self.userAvatar : userAvatar // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -441,10 +449,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String imageUrl,  String caption,  DateTime timestamp,  String location)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String imageUrl,  String caption,  DateTime timestamp,  String location,  double? latitude,  double? longitude,  int likes,  int comments,  String category,  String? userName,  String? userAvatar)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SkyPhoto() when $default != null:
-return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.location);case _:
+return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.location,_that.latitude,_that.longitude,_that.likes,_that.comments,_that.category,_that.userName,_that.userAvatar);case _:
   return orElse();
 
 }
@@ -462,10 +470,10 @@ return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.loca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String imageUrl,  String caption,  DateTime timestamp,  String location)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String imageUrl,  String caption,  DateTime timestamp,  String location,  double? latitude,  double? longitude,  int likes,  int comments,  String category,  String? userName,  String? userAvatar)  $default,) {final _that = this;
 switch (_that) {
 case _SkyPhoto():
-return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.location);case _:
+return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.location,_that.latitude,_that.longitude,_that.likes,_that.comments,_that.category,_that.userName,_that.userAvatar);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -482,10 +490,10 @@ return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.loca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String imageUrl,  String caption,  DateTime timestamp,  String location)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String imageUrl,  String caption,  DateTime timestamp,  String location,  double? latitude,  double? longitude,  int likes,  int comments,  String category,  String? userName,  String? userAvatar)?  $default,) {final _that = this;
 switch (_that) {
 case _SkyPhoto() when $default != null:
-return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.location);case _:
+return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.location,_that.latitude,_that.longitude,_that.likes,_that.comments,_that.category,_that.userName,_that.userAvatar);case _:
   return null;
 
 }
@@ -496,8 +504,8 @@ return $default(_that.id,_that.imageUrl,_that.caption,_that.timestamp,_that.loca
 /// @nodoc
 @JsonSerializable()
 
-class _SkyPhoto implements SkyPhoto {
-  const _SkyPhoto({required this.id, required this.imageUrl, required this.caption, required this.timestamp, required this.location});
+class _SkyPhoto extends SkyPhoto {
+  const _SkyPhoto({required this.id, required this.imageUrl, required this.caption, required this.timestamp, required this.location, this.latitude, this.longitude, this.likes = 0, this.comments = 0, this.category = 'sky', this.userName, this.userAvatar}): super._();
   factory _SkyPhoto.fromJson(Map<String, dynamic> json) => _$SkyPhotoFromJson(json);
 
 @override final  String id;
@@ -505,6 +513,14 @@ class _SkyPhoto implements SkyPhoto {
 @override final  String caption;
 @override final  DateTime timestamp;
 @override final  String location;
+@override final  double? latitude;
+@override final  double? longitude;
+@override@JsonKey() final  int likes;
+@override@JsonKey() final  int comments;
+@override@JsonKey() final  String category;
+// sky, cloud, rainbow, sunset, storm
+@override final  String? userName;
+@override final  String? userAvatar;
 
 /// Create a copy of SkyPhoto
 /// with the given fields replaced by the non-null parameter values.
@@ -519,16 +535,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SkyPhoto&&(identical(other.id, id) || other.id == id)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.caption, caption) || other.caption == caption)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.location, location) || other.location == location));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SkyPhoto&&(identical(other.id, id) || other.id == id)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.caption, caption) || other.caption == caption)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.location, location) || other.location == location)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.likes, likes) || other.likes == likes)&&(identical(other.comments, comments) || other.comments == comments)&&(identical(other.category, category) || other.category == category)&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.userAvatar, userAvatar) || other.userAvatar == userAvatar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,imageUrl,caption,timestamp,location);
+int get hashCode => Object.hash(runtimeType,id,imageUrl,caption,timestamp,location,latitude,longitude,likes,comments,category,userName,userAvatar);
 
 @override
 String toString() {
-  return 'SkyPhoto(id: $id, imageUrl: $imageUrl, caption: $caption, timestamp: $timestamp, location: $location)';
+  return 'SkyPhoto(id: $id, imageUrl: $imageUrl, caption: $caption, timestamp: $timestamp, location: $location, latitude: $latitude, longitude: $longitude, likes: $likes, comments: $comments, category: $category, userName: $userName, userAvatar: $userAvatar)';
 }
 
 
@@ -539,7 +555,7 @@ abstract mixin class _$SkyPhotoCopyWith<$Res> implements $SkyPhotoCopyWith<$Res>
   factory _$SkyPhotoCopyWith(_SkyPhoto value, $Res Function(_SkyPhoto) _then) = __$SkyPhotoCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String imageUrl, String caption, DateTime timestamp, String location
+ String id, String imageUrl, String caption, DateTime timestamp, String location, double? latitude, double? longitude, int likes, int comments, String category, String? userName, String? userAvatar
 });
 
 
@@ -556,14 +572,21 @@ class __$SkyPhotoCopyWithImpl<$Res>
 
 /// Create a copy of SkyPhoto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? imageUrl = null,Object? caption = null,Object? timestamp = null,Object? location = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? imageUrl = null,Object? caption = null,Object? timestamp = null,Object? location = null,Object? latitude = freezed,Object? longitude = freezed,Object? likes = null,Object? comments = null,Object? category = null,Object? userName = freezed,Object? userAvatar = freezed,}) {
   return _then(_SkyPhoto(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,caption: null == caption ? _self.caption : caption // ignore: cast_nullable_to_non_nullable
 as String,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,location: null == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
-as String,
+as String,latitude: freezed == latitude ? _self.latitude : latitude // ignore: cast_nullable_to_non_nullable
+as double?,longitude: freezed == longitude ? _self.longitude : longitude // ignore: cast_nullable_to_non_nullable
+as double?,likes: null == likes ? _self.likes : likes // ignore: cast_nullable_to_non_nullable
+as int,comments: null == comments ? _self.comments : comments // ignore: cast_nullable_to_non_nullable
+as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String,userName: freezed == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String?,userAvatar: freezed == userAvatar ? _self.userAvatar : userAvatar // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

@@ -16,6 +16,10 @@ class WeatherHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final weatherState = ref.watch(weatherStationsProvider);
+    final forecastState = ref.watch(forecastProvider);
+    final mainStation = ref.watch(selectedMainStationProvider);
+    final liveDataState = ref.watch(mainStationDetailsProvider);
+    
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
@@ -23,12 +27,18 @@ class WeatherHomePage extends ConsumerWidget {
       backgroundColor: isDark ? const Color(0xFF0F172A) : Colors.white,
       body: weatherState.when(
         data: (stations) {
-          final mainStation = stations.firstWhere((s) => s.city == 'Belize City', orElse: () => stations.first);
+          if (mainStation == null) return const Center(child: CircularProgressIndicator());
           
           return CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: WeatherMainCard(station: mainStation),
+                child: WeatherMainCard(
+                  station: mainStation,
+                  generalForecast: forecastState.value?.general.data.firstOrNull,
+                  liveData: liveDataState.value,
+                  // Pass the first item from daily forecast data
+                  dailyForecast: forecastState.value?.daily.data.firstOrNull,
+                ),
               ),
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
@@ -36,11 +46,19 @@ class WeatherHomePage extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const WeeklyForecastList(),
-                      const SizedBox(height: 32),
-                      const DailyBriefingCard(),
-                      const SizedBox(height: 24),
-                      const RegionalTemperaturesCard(),
+                      forecastState.when(
+                        data: (forecast) => Column(
+                          children: [
+                            WeeklyForecastList(dailyForecasts: forecast.daily.data),
+                            const SizedBox(height: 32),
+                            DailyBriefingCard(generalForecast: forecast.general.data.first),
+                            const SizedBox(height: 24),
+                            RegionalTemperaturesCard(generalForecast: forecast.general.data.first),
+                          ],
+                        ),
+                        loading: () => const SizedBox(height: 100, child: Center(child: CircularProgressIndicator())),
+                        error: (err, _) => Text('Forecast Error: $err'),
+                      ),
                       const SizedBox(height: 32),
                       Text(
                         'Municipality Forecast',
@@ -56,7 +74,7 @@ class WeatherHomePage extends ConsumerWidget {
                       const CommunityWeatherCard(),
                       const SizedBox(height: 32),
                       const MarineReportCard(),
-                      const SizedBox(height: 100), // Bottom spacing
+                      const SizedBox(height: 100),
                     ],
                   ),
                 ),
@@ -65,16 +83,7 @@ class WeatherHomePage extends ConsumerWidget {
           );
         },
         loading: () => Center(child: CircularProgressIndicator(color: theme.colorScheme.primary)),
-        error: (err, stack) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Text(
-              'Error: $err', 
-              style: TextStyle(color: isDark ? Colors.white70 : Colors.black54),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
+        error: (err, stack) => Center(child: Text('Error: $err')),
       ),
     );
   }

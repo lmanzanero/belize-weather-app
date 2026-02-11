@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'weather_audio_player.dart';
+import '../../domain/entities/forecast.dart';
 
 class DailyBriefingCard extends StatelessWidget {
-  const DailyBriefingCard({super.key});
+  final GeneralForecast generalForecast;
+
+  const DailyBriefingCard({super.key, required this.generalForecast});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class DailyBriefingCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'MOSTLY SUNNY TODAY, THEN CLEAR TO PARTLY CLOUDY TONIGHT. ONLY ISOLATED SHOWERS, IF ANY.',
+            generalForecast.briefing.toUpperCase(),
             style: GoogleFonts.inter(
               color: isDark ? Colors.white.withOpacity(0.9) : Colors.black87,
               fontSize: 15,
@@ -41,8 +44,17 @@ class DailyBriefingCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const WeatherAudioPlayer(
-            url: 'https://wimp.nms.gov.bz/forecast/general/audio/2026-02-10_0600_AM_NMS_BZ.mp3',
+          const SizedBox(height: 16),
+          Text(
+            'Situation: ${generalForecast.situation}',
+            style: GoogleFonts.inter(
+              color: isDark ? Colors.white60 : Colors.black54,
+              fontSize: 13,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          WeatherAudioPlayer(
+            url: generalForecast.audio,
           ),
         ],
       ),

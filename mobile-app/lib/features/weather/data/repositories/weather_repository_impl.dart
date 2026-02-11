@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 import '../../domain/entities/weather_station.dart';
 import '../../domain/entities/station_details.dart';
+import '../../domain/entities/forecast.dart';
 import '../../domain/repositories/weather_repository.dart';
 
 class WeatherRepositoryImpl implements WeatherRepository {
   final Dio _dio;
 
   // Use 10.0.2.2 to access your computer's localhost from an Android Emulator.
-  // Use localhost if testing on an iOS Simulator.
-  // Use your Vercel URL for production: https://belize-weather-app.vercel.app
   static const String _baseUrl = 'http://10.0.2.2:3000';
 
   WeatherRepositoryImpl(this._dio);
@@ -39,6 +38,20 @@ class WeatherRepositoryImpl implements WeatherRepository {
       }
     } catch (e) {
       throw Exception('Error fetching station details: $e');
+    }
+  }
+
+  @override
+  Future<ForecastResponse> getForecast() async {
+    try {
+      final response = await _dio.get('$_baseUrl/api/v1/forecast');
+      if (response.statusCode == 200) {
+        return ForecastResponse.fromJson(response.data);
+      } else {
+        throw Exception('Failed to load forecast data');
+      }
+    } catch (e) {
+      throw Exception('Error fetching forecast data: $e');
     }
   }
 }

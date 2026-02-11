@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WeatherStation {
 
- int get id;@JsonKey(name: 'name') String get city;@JsonKey(name: 'region') String get region;@JsonKey(name: 'temperature_c') double get temperatureC;@JsonKey(name: 'temperature_f') double get temperatureF; String get condition; String? get icon; double? get longitude; double? get latitude;@JsonKey(name: 'is_active') bool? get isActive;
+ int get id;@JsonKey(name: 'name') String get name;@JsonKey(name: 'region') String get region;@JsonKey(name: 'temperature_c') double get temperatureC;@JsonKey(name: 'temperature_f') double get temperatureF; String get condition; String? get icon; double? get longitude; double? get latitude;@JsonKey(name: 'is_active') bool? get isActive;
 /// Create a copy of WeatherStation
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $WeatherStationCopyWith<WeatherStation> get copyWith => _$WeatherStationCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherStation&&(identical(other.id, id) || other.id == id)&&(identical(other.city, city) || other.city == city)&&(identical(other.region, region) || other.region == region)&&(identical(other.temperatureC, temperatureC) || other.temperatureC == temperatureC)&&(identical(other.temperatureF, temperatureF) || other.temperatureF == temperatureF)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.isActive, isActive) || other.isActive == isActive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WeatherStation&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.region, region) || other.region == region)&&(identical(other.temperatureC, temperatureC) || other.temperatureC == temperatureC)&&(identical(other.temperatureF, temperatureF) || other.temperatureF == temperatureF)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.isActive, isActive) || other.isActive == isActive));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,city,region,temperatureC,temperatureF,condition,icon,longitude,latitude,isActive);
+int get hashCode => Object.hash(runtimeType,id,name,region,temperatureC,temperatureF,condition,icon,longitude,latitude,isActive);
 
 @override
 String toString() {
-  return 'WeatherStation(id: $id, city: $city, region: $region, temperatureC: $temperatureC, temperatureF: $temperatureF, condition: $condition, icon: $icon, longitude: $longitude, latitude: $latitude, isActive: $isActive)';
+  return 'WeatherStation(id: $id, name: $name, region: $region, temperatureC: $temperatureC, temperatureF: $temperatureF, condition: $condition, icon: $icon, longitude: $longitude, latitude: $latitude, isActive: $isActive)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $WeatherStationCopyWith<$Res>  {
   factory $WeatherStationCopyWith(WeatherStation value, $Res Function(WeatherStation) _then) = _$WeatherStationCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'name') String city,@JsonKey(name: 'region') String region,@JsonKey(name: 'temperature_c') double temperatureC,@JsonKey(name: 'temperature_f') double temperatureF, String condition, String? icon, double? longitude, double? latitude,@JsonKey(name: 'is_active') bool? isActive
+ int id,@JsonKey(name: 'name') String name,@JsonKey(name: 'region') String region,@JsonKey(name: 'temperature_c') double temperatureC,@JsonKey(name: 'temperature_f') double temperatureF, String condition, String? icon, double? longitude, double? latitude,@JsonKey(name: 'is_active') bool? isActive
 });
 
 
@@ -65,10 +65,10 @@ class _$WeatherStationCopyWithImpl<$Res>
 
 /// Create a copy of WeatherStation
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? city = null,Object? region = null,Object? temperatureC = null,Object? temperatureF = null,Object? condition = null,Object? icon = freezed,Object? longitude = freezed,Object? latitude = freezed,Object? isActive = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? region = null,Object? temperatureC = null,Object? temperatureF = null,Object? condition = null,Object? icon = freezed,Object? longitude = freezed,Object? latitude = freezed,Object? isActive = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,region: null == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
 as String,temperatureC: null == temperatureC ? _self.temperatureC : temperatureC // ignore: cast_nullable_to_non_nullable
 as double,temperatureF: null == temperatureF ? _self.temperatureF : temperatureF // ignore: cast_nullable_to_non_nullable
@@ -162,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'name')  String city, @JsonKey(name: 'region')  String region, @JsonKey(name: 'temperature_c')  double temperatureC, @JsonKey(name: 'temperature_f')  double temperatureF,  String condition,  String? icon,  double? longitude,  double? latitude, @JsonKey(name: 'is_active')  bool? isActive)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'name')  String name, @JsonKey(name: 'region')  String region, @JsonKey(name: 'temperature_c')  double temperatureC, @JsonKey(name: 'temperature_f')  double temperatureF,  String condition,  String? icon,  double? longitude,  double? latitude, @JsonKey(name: 'is_active')  bool? isActive)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _WeatherStation() when $default != null:
-return $default(_that.id,_that.city,_that.region,_that.temperatureC,_that.temperatureF,_that.condition,_that.icon,_that.longitude,_that.latitude,_that.isActive);case _:
+return $default(_that.id,_that.name,_that.region,_that.temperatureC,_that.temperatureF,_that.condition,_that.icon,_that.longitude,_that.latitude,_that.isActive);case _:
   return orElse();
 
 }
@@ -183,10 +183,10 @@ return $default(_that.id,_that.city,_that.region,_that.temperatureC,_that.temper
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'name')  String city, @JsonKey(name: 'region')  String region, @JsonKey(name: 'temperature_c')  double temperatureC, @JsonKey(name: 'temperature_f')  double temperatureF,  String condition,  String? icon,  double? longitude,  double? latitude, @JsonKey(name: 'is_active')  bool? isActive)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'name')  String name, @JsonKey(name: 'region')  String region, @JsonKey(name: 'temperature_c')  double temperatureC, @JsonKey(name: 'temperature_f')  double temperatureF,  String condition,  String? icon,  double? longitude,  double? latitude, @JsonKey(name: 'is_active')  bool? isActive)  $default,) {final _that = this;
 switch (_that) {
 case _WeatherStation():
-return $default(_that.id,_that.city,_that.region,_that.temperatureC,_that.temperatureF,_that.condition,_that.icon,_that.longitude,_that.latitude,_that.isActive);case _:
+return $default(_that.id,_that.name,_that.region,_that.temperatureC,_that.temperatureF,_that.condition,_that.icon,_that.longitude,_that.latitude,_that.isActive);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +203,10 @@ return $default(_that.id,_that.city,_that.region,_that.temperatureC,_that.temper
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'name')  String city, @JsonKey(name: 'region')  String region, @JsonKey(name: 'temperature_c')  double temperatureC, @JsonKey(name: 'temperature_f')  double temperatureF,  String condition,  String? icon,  double? longitude,  double? latitude, @JsonKey(name: 'is_active')  bool? isActive)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'name')  String name, @JsonKey(name: 'region')  String region, @JsonKey(name: 'temperature_c')  double temperatureC, @JsonKey(name: 'temperature_f')  double temperatureF,  String condition,  String? icon,  double? longitude,  double? latitude, @JsonKey(name: 'is_active')  bool? isActive)?  $default,) {final _that = this;
 switch (_that) {
 case _WeatherStation() when $default != null:
-return $default(_that.id,_that.city,_that.region,_that.temperatureC,_that.temperatureF,_that.condition,_that.icon,_that.longitude,_that.latitude,_that.isActive);case _:
+return $default(_that.id,_that.name,_that.region,_that.temperatureC,_that.temperatureF,_that.condition,_that.icon,_that.longitude,_that.latitude,_that.isActive);case _:
   return null;
 
 }
@@ -218,11 +218,11 @@ return $default(_that.id,_that.city,_that.region,_that.temperatureC,_that.temper
 @JsonSerializable()
 
 class _WeatherStation implements WeatherStation {
-  const _WeatherStation({required this.id, @JsonKey(name: 'name') this.city = 'Unknown Station', @JsonKey(name: 'region') this.region = 'Unknown Region', @JsonKey(name: 'temperature_c') this.temperatureC = 24.0, @JsonKey(name: 'temperature_f') this.temperatureF = 75.0, this.condition = 'Sunny', this.icon, this.longitude, this.latitude, @JsonKey(name: 'is_active') this.isActive});
+  const _WeatherStation({required this.id, @JsonKey(name: 'name') this.name = 'Unknown Station', @JsonKey(name: 'region') this.region = 'Unknown Region', @JsonKey(name: 'temperature_c') this.temperatureC = 24.0, @JsonKey(name: 'temperature_f') this.temperatureF = 75.0, this.condition = 'Sunny', this.icon, this.longitude, this.latitude, @JsonKey(name: 'is_active') this.isActive});
   factory _WeatherStation.fromJson(Map<String, dynamic> json) => _$WeatherStationFromJson(json);
 
 @override final  int id;
-@override@JsonKey(name: 'name') final  String city;
+@override@JsonKey(name: 'name') final  String name;
 @override@JsonKey(name: 'region') final  String region;
 @override@JsonKey(name: 'temperature_c') final  double temperatureC;
 @override@JsonKey(name: 'temperature_f') final  double temperatureF;
@@ -245,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WeatherStation&&(identical(other.id, id) || other.id == id)&&(identical(other.city, city) || other.city == city)&&(identical(other.region, region) || other.region == region)&&(identical(other.temperatureC, temperatureC) || other.temperatureC == temperatureC)&&(identical(other.temperatureF, temperatureF) || other.temperatureF == temperatureF)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.isActive, isActive) || other.isActive == isActive));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WeatherStation&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.region, region) || other.region == region)&&(identical(other.temperatureC, temperatureC) || other.temperatureC == temperatureC)&&(identical(other.temperatureF, temperatureF) || other.temperatureF == temperatureF)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.isActive, isActive) || other.isActive == isActive));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,city,region,temperatureC,temperatureF,condition,icon,longitude,latitude,isActive);
+int get hashCode => Object.hash(runtimeType,id,name,region,temperatureC,temperatureF,condition,icon,longitude,latitude,isActive);
 
 @override
 String toString() {
-  return 'WeatherStation(id: $id, city: $city, region: $region, temperatureC: $temperatureC, temperatureF: $temperatureF, condition: $condition, icon: $icon, longitude: $longitude, latitude: $latitude, isActive: $isActive)';
+  return 'WeatherStation(id: $id, name: $name, region: $region, temperatureC: $temperatureC, temperatureF: $temperatureF, condition: $condition, icon: $icon, longitude: $longitude, latitude: $latitude, isActive: $isActive)';
 }
 
 
@@ -265,7 +265,7 @@ abstract mixin class _$WeatherStationCopyWith<$Res> implements $WeatherStationCo
   factory _$WeatherStationCopyWith(_WeatherStation value, $Res Function(_WeatherStation) _then) = __$WeatherStationCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'name') String city,@JsonKey(name: 'region') String region,@JsonKey(name: 'temperature_c') double temperatureC,@JsonKey(name: 'temperature_f') double temperatureF, String condition, String? icon, double? longitude, double? latitude,@JsonKey(name: 'is_active') bool? isActive
+ int id,@JsonKey(name: 'name') String name,@JsonKey(name: 'region') String region,@JsonKey(name: 'temperature_c') double temperatureC,@JsonKey(name: 'temperature_f') double temperatureF, String condition, String? icon, double? longitude, double? latitude,@JsonKey(name: 'is_active') bool? isActive
 });
 
 
@@ -282,10 +282,10 @@ class __$WeatherStationCopyWithImpl<$Res>
 
 /// Create a copy of WeatherStation
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? city = null,Object? region = null,Object? temperatureC = null,Object? temperatureF = null,Object? condition = null,Object? icon = freezed,Object? longitude = freezed,Object? latitude = freezed,Object? isActive = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? region = null,Object? temperatureC = null,Object? temperatureF = null,Object? condition = null,Object? icon = freezed,Object? longitude = freezed,Object? latitude = freezed,Object? isActive = freezed,}) {
   return _then(_WeatherStation(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,region: null == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
 as String,temperatureC: null == temperatureC ? _self.temperatureC : temperatureC // ignore: cast_nullable_to_non_nullable
 as double,temperatureF: null == temperatureF ? _self.temperatureF : temperatureF // ignore: cast_nullable_to_non_nullable

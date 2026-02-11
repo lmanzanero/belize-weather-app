@@ -16,3 +16,12 @@ final spotterDetailsProvider = FutureProvider.family<CommunitySpotter, String>((
   final repository = ref.watch(communityRepositoryProvider);
   return repository.getSpotterDetails(id);
 });
+
+// Map Filter state
+final mapCategoryFilterProvider = StateProvider<String>((ref) => 'stations');
+
+// Discovery photos based on category
+final discoveryPhotosProvider = FutureProvider.family<List<SkyPhoto>, String>((ref, category) async {
+  final repository = ref.watch(communityRepositoryProvider);
+  return repository.getDiscoveryPhotos(category: category);
+});

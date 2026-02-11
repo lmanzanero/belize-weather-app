@@ -1,32 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+import '../../domain/entities/forecast.dart';
 
 class WeeklyForecastList extends StatelessWidget {
-  const WeeklyForecastList({super.key});
+  final List<DailyForecast> dailyForecasts;
+
+  const WeeklyForecastList({super.key, required this.dailyForecasts});
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
-    // Mock data for 7 days
-    final now = DateTime.now();
-    final mockForecast = List.generate(7, (index) {
-      final date = now.add(Duration(days: index));
-      return {
-        'day': index == 0 ? 'TODAY' : DateFormat('EEEE').format(date).toUpperCase(),
-        'date': DateFormat('MMM d').format(date),
-        'high': 82 + index % 3,
-        'low': 70 + index % 2,
-        'condition': index % 2 == 0 ? 'Showers' : 'Partly Cloudy',
-      };
-    });
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'WEEKLY FORECAST',
+          'GENERAL 4 DAY FORECAST',
           style: GoogleFonts.inter(
             color: isDark ? Colors.white70 : Colors.black54,
             fontSize: 14,
@@ -39,11 +28,10 @@ class WeeklyForecastList extends StatelessWidget {
           height: 140,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: mockForecast.length,
+            itemCount: dailyForecasts.length,
             clipBehavior: Clip.none,
             itemBuilder: (context, index) {
-              final forecast = mockForecast[index];
-              // Calculate width to show roughly 2.2 items on most screens
+              final forecast = dailyForecasts[index];
               final itemWidth = MediaQuery.of(context).size.width * 0.42;
               
               return Container(
@@ -56,12 +44,12 @@ class WeeklyForecastList extends StatelessWidget {
                   border: Border.all(
                     color: isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05),
                   ),
-                  gradient: index == 0 && isDark ? LinearGradient(
+                  gradient: index == 0 && isDark ? const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      const Color(0xFF334155),
-                      const Color(0xFF1E293B),
+                      Color(0xFF334155),
+                      Color(0xFF1E293B),
                     ],
                   ) : null,
                 ),
@@ -69,7 +57,7 @@ class WeeklyForecastList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      forecast['day'] as String,
+                      forecast.day.toUpperCase(),
                       style: GoogleFonts.inter(
                         color: isDark ? Colors.white : Colors.black87,
                         fontSize: 13,
@@ -77,7 +65,7 @@ class WeeklyForecastList extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      forecast['date'] as String,
+                      forecast.date,
                       style: GoogleFonts.inter(
                         color: isDark ? Colors.white60 : Colors.black54,
                         fontSize: 11,
@@ -88,8 +76,9 @@ class WeeklyForecastList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        // Dynamic condition icon
                         Icon(
-                          index % 2 == 0 ? Icons.cloudy_snowing : Icons.wb_cloudy_outlined,
+                          _getIconForCondition(forecast.image),
                           color: isDark ? Colors.lightBlueAccent : Colors.blue.shade400,
                           size: 32,
                         ),
@@ -97,7 +86,7 @@ class WeeklyForecastList extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              '${forecast['high']}°F',
+                              forecast.coastHigh.replaceAll('&deg;', ''),
                               style: GoogleFonts.inter(
                                 color: isDark ? Colors.white : Colors.black87,
                                 fontSize: 16,
@@ -105,7 +94,7 @@ class WeeklyForecastList extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${forecast['low']}°F',
+                              forecast.coastLow.replaceAll('&deg;', ''),
                               style: GoogleFonts.inter(
                                 color: isDark ? Colors.white60 : Colors.black54,
                                 fontSize: 13,
@@ -123,5 +112,12 @@ class WeeklyForecastList extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  IconData _getIconForCondition(String imageName) {
+    if (imageName.contains('shower')) return Icons.cloudy_snowing;
+    if (imageName.contains('cloudy')) return Icons.wb_cloudy_outlined;
+    if (imageName.contains('sunny')) return Icons.wb_sunny_outlined;
+    return Icons.wb_cloudy;
   }
 }

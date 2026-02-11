@@ -12,8 +12,10 @@ class StationDetailsModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final detailsAsync = ref.watch(stationDetailsProvider(stationId));
+    final defaultId = ref.watch(defaultStationIdProvider);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final isDefault = defaultId == stationId;
 
     return Container(
       constraints: BoxConstraints(
@@ -27,7 +29,7 @@ class StationDetailsModal extends ConsumerWidget {
       child: SafeArea(
         top: false,
         child: detailsAsync.when(
-          data: (data) => _buildContent(context, data),
+          data: (data) => _buildContent(context, data, isDefault, ref),
           loading: () => const SizedBox(
             height: 300,
             child: Center(child: CircularProgressIndicator(color: Colors.orange)),
@@ -47,7 +49,7 @@ class StationDetailsModal extends ConsumerWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context, StationFullData data) {
+  Widget _buildContent(BuildContext context, StationFullData data, bool isDefault, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SingleChildScrollView(
@@ -99,6 +101,52 @@ class StationDetailsModal extends ConsumerWidget {
               ),
             ],
           ),
+          const SizedBox(height: 24),
+          
+          // Make Default Button
+          if (!isDefault)
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  ref.read(defaultStationIdProvider.notifier).state = stationId;
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('${data.stationName} is now your default station.'),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.star_border),
+                label: const Text('Make default station'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+              ),
+            )
+          else
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.green.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.green.withOpacity(0.3)),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.star, color: Colors.green, size: 18),
+                  SizedBox(width: 8),
+                  Text('Current Default Station', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+
           const SizedBox(height: 24),
           Text(
             'Latest Readings',

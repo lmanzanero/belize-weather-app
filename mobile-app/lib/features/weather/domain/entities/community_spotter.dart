@@ -14,6 +14,8 @@ abstract class CommunitySpotter with _$CommunitySpotter {
     @Default([]) List<SkyPhoto> sharedPhotos,
   }) = _CommunitySpotter;
 
+  const CommunitySpotter._();
+
   factory CommunitySpotter.fromJson(Map<String, dynamic> json) =>
       _$CommunitySpotterFromJson(json);
 }
@@ -26,7 +28,16 @@ abstract class SkyPhoto with _$SkyPhoto {
     required String caption,
     required DateTime timestamp,
     required String location,
+    double? latitude,
+    double? longitude,
+    @Default(0) int likes,
+    @Default(0) int comments,
+    @Default('sky') String category, // sky, cloud, rainbow, sunset, storm
+    String? userName,
+    String? userAvatar,
   }) = _SkyPhoto;
+
+  const SkyPhoto._();
 
   factory SkyPhoto.fromJson(Map<String, dynamic> json) =>
       _$SkyPhotoFromJson(json);

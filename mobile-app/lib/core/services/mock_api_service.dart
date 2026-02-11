@@ -33,16 +33,60 @@ class MockApiService {
       ));
     }
     
-    // Generate mock notifications
-    for (int i = 1; i <= 20; i++) {
+    // Generate mock weather alerts
+    final weatherAlerts = [
+      {
+        'title': 'Severe Thunderstorm Warning',
+        'message': 'A severe thunderstorm is moving through Belize City. Seek shelter immediately.',
+        'type': NotificationType.error,
+      },
+      {
+        'title': 'Flood Watch: Cayo District',
+        'message': 'Increased water levels in the Mopan river. Flash flooding possible in low-lying areas.',
+        'type': NotificationType.warning,
+      },
+      {
+        'title': 'Marine Small Craft Advisory',
+        'message': 'Winds 15-25 knots. High seas expected offshore. Exercise caution.',
+        'type': NotificationType.warning,
+      },
+      {
+        'title': 'High UV Index Alert',
+        'message': 'UV Index is currently Extreme (11+). Wear sun protection and limit exposure.',
+        'type': NotificationType.info,
+      },
+      {
+        'title': 'Daily Briefing Ready',
+        'message': 'Your morning weather audio briefing for February 10th is now available.',
+        'type': NotificationType.success,
+      },
+      {
+        'title': 'New Sky Post Near You',
+        'message': 'DiverSteve just shared a new sky photo in Belmopan. Check it out!',
+        'type': NotificationType.info,
+      },
+      {
+        'title': 'Tropical Depression Warning',
+        'message': 'A tropical depression has been detected in the Western Caribbean. Monitor updates.',
+        'type': NotificationType.error,
+      },
+      {
+        'title': 'Temperature Record: Orange Walk',
+        'message': 'Today reached a record high of 98°F in Orange Walk District.',
+        'type': NotificationType.info,
+      },
+    ];
+
+    for (int i = 0; i < 15; i++) {
+      final alert = weatherAlerts[i % weatherAlerts.length];
       _notifications.add(AppNotification(
         id: 'notif_$i',
-        title: _getRandomNotificationTitle(),
-        message: _getRandomNotificationMessage(),
-        type: NotificationType.values[_random.nextInt(NotificationType.values.length)],
+        title: alert['title'] as String,
+        message: alert['message'] as String,
+        type: alert['type'] as NotificationType,
         createdAt: DateTime.now().subtract(Duration(hours: _random.nextInt(168))),
         isRead: _random.nextBool(),
-        actionUrl: _random.nextBool() ? '/users/user_${_random.nextInt(50) + 1}' : null,
+        actionUrl: _random.nextBool() ? '/weather' : null,
       ));
     }
   }
@@ -199,34 +243,6 @@ class MockApiService {
     final departments = ['Engineering', 'Sales', 'Marketing', 'HR', 
                         'Finance', 'Operations', 'Support', 'Product'];
     return departments[_random.nextInt(departments.length)];
-  }
-  
-  String _getRandomNotificationTitle() {
-    final titles = [
-      'New user registered',
-      'System update completed',
-      'Monthly report available',
-      'Security alert',
-      'Payment received',
-      'Task completed',
-      'Meeting reminder',
-      'New message',
-    ];
-    return titles[_random.nextInt(titles.length)];
-  }
-  
-  String _getRandomNotificationMessage() {
-    final messages = [
-      'A new user has joined your organization.',
-      'System has been successfully updated to the latest version.',
-      'Your monthly analytics report is ready for review.',
-      'Unusual login activity detected from a new location.',
-      'Payment of \$1,250 has been processed successfully.',
-      'Your assigned task has been marked as complete.',
-      'You have a meeting scheduled in 30 minutes.',
-      'You have received a new message in your inbox.',
-    ];
-    return messages[_random.nextInt(messages.length)];
   }
   
   String _getRandomActivity() {

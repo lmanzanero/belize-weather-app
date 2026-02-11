@@ -9,7 +9,7 @@ part of 'weather_station.dart';
 _WeatherStation _$WeatherStationFromJson(Map<String, dynamic> json) =>
     _WeatherStation(
       id: (json['id'] as num).toInt(),
-      city: json['name'] as String? ?? 'Unknown Station',
+      name: json['name'] as String? ?? 'Unknown Station',
       region: json['region'] as String? ?? 'Unknown Region',
       temperatureC: (json['temperature_c'] as num?)?.toDouble() ?? 24.0,
       temperatureF: (json['temperature_f'] as num?)?.toDouble() ?? 75.0,
@@ -23,7 +23,7 @@ _WeatherStation _$WeatherStationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$WeatherStationToJson(_WeatherStation instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.city,
+      'name': instance.name,
       'region': instance.region,
       'temperature_c': instance.temperatureC,
       'temperature_f': instance.temperatureF,

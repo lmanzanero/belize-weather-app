@@ -6,7 +6,7 @@ import '../../domain/repositories/auth_repository.dart';
 part 'auth_provider.freezed.dart';
 
 @freezed
-class AuthState with _$AuthState {
+abstract class AuthState with _$AuthState {
   const factory AuthState({
     @Default(false) bool isAuthenticated,
     @Default(false) bool isLoading,
@@ -14,22 +14,16 @@ class AuthState with _$AuthState {
     String? email,
     String? error,
   }) = _AuthState;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier(this._repository) : super(const AuthState()) {
-    // Check initial auth state on app start
     checkAuth();
   }
 
   final AuthRepository _repository;
 
   Future<void> checkAuth() async {
-    // If we're already loading or authenticated, we can avoid double checks
-    // but usually, a silent check on startup is preferred.
     try {
       final hasValidSession = await _repository.checkAuth();
       if (mounted) {
@@ -76,8 +70,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     
     try {
       final success = await _repository.verifyOtp(state.email!, otp);
-      
-      // After verification, we verify the session again to be 100% sure
       final hasSession = await _repository.checkAuth();
       
       if (mounted) {
