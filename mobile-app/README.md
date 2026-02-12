@@ -1,4 +1,4 @@
-# Flutter Starter App
+# Belize Skies
 
 A modern, production-ready Flutter starter template with best practices, clean architecture, and essential features pre-configured. Perfect for quickly bootstrapping new Flutter projects with a solid foundation.
 
