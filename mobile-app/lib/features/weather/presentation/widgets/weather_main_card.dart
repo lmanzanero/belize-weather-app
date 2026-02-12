@@ -124,7 +124,7 @@ class WeatherMainCard extends StatelessWidget {
                   '$tempF / $tempC',
                   style: GoogleFonts.inter(
                     color: !isDark ? const Color(0xFF0F172A) : Colors.white,
-                    fontSize: 30,
+                    fontSize: 20,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -135,7 +135,7 @@ class WeatherMainCard extends StatelessWidget {
                   height: 100,
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) => 
-                    const Icon(Icons.wb_cloudy, color: Colors.white, size: 90),
+                    const Icon(Icons.wb_cloudy, color: Colors.white, size: 20),
                 ),
               ],
             ),

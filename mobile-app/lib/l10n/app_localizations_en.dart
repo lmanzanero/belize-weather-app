@@ -480,7 +480,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get about => 'About';
 
   @override
-  String get flutterStarterApp => 'Flutter Starter App';
+  String get flutterStarterApp => 'Belize Skies';
 
   @override
   String get version => 'Version 1.0.0';
