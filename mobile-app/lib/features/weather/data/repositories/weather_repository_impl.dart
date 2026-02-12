@@ -1,21 +1,21 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_starter/core/config/env_config.dart';
 import '../../domain/entities/weather_station.dart';
 import '../../domain/entities/station_details.dart';
 import '../../domain/entities/forecast.dart';
 import '../../domain/repositories/weather_repository.dart';
-
 class WeatherRepositoryImpl implements WeatherRepository {
   final Dio _dio;
 
   // Use 10.0.2.2 to access your computer's localhost from an Android Emulator.
-  static const String _baseUrl = 'http://10.0.2.2:3000';
+  static final String _baseUrl = EnvConfig.apiBaseUrl;
 
   WeatherRepositoryImpl(this._dio);
 
   @override
   Future<List<WeatherStation>> getWeatherStations() async {
     try {
-      final response = await _dio.get('$_baseUrl/api/v1/weather-stations');
+      final response = await _dio.get('$_baseUrl/weather-stations');
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         return data.map((json) => WeatherStation.fromJson(json)).toList();
@@ -30,7 +30,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<StationFullData> getStationDetails(int id) async {
     try {
-      final response = await _dio.get('$_baseUrl/api/v1/weather-stations/$id');
+      final response = await _dio.get('$_baseUrl/weather-stations/$id');
       if (response.statusCode == 200) {
         return StationFullData.fromJson(response.data);
       } else {
@@ -44,7 +44,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<ForecastResponse> getForecast() async {
     try {
-      final response = await _dio.get('$_baseUrl/api/v1/forecast');
+      final response = await _dio.get('$_baseUrl/forecast');
       if (response.statusCode == 200) {
         return ForecastResponse.fromJson(response.data);
       } else {

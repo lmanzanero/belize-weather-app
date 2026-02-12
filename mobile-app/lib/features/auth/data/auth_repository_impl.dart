@@ -4,15 +4,23 @@ import 'package:flutter_better_auth/flutter_better_auth.dart';
 import 'package:flutter_better_auth/core/api/better_auth_client.dart';
 import 'package:flutter_better_auth/plugins/email_otp/email_otp_extension.dart';
 import '../domain/repositories/auth_repository.dart';
+import '../../../core/config/env_config.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final BetterAuthClient _client;
   final SharedPreferences _prefs;
-  
-  // Persistence Key
+  final Dio _dio;
+
   static const String _sessionExistsKey = 'auth_session_active';
 
-  AuthRepositoryImpl(this._client, this._prefs);
+  AuthRepositoryImpl(this._client, this._prefs) : _dio = Dio(BaseOptions(
+    // Use the central config instead of hardcoded 10.0.2.2
+    baseUrl: EnvConfig.authBaseUrl,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  ));
 
   @override
   Future<void> sendOtp(String email) async {
@@ -38,12 +46,8 @@ class AuthRepositoryImpl implements AuthRepository {
         otp: otp
       );
 
-      // result.data contains the { token, user } object you mentioned
       if (result.data != null) {
-        // 1. Manually persist the login state in SharedPreferences
-        // This acts as our 'source of truth' if the client fails to restore on reload
         await _prefs.setBool(_sessionExistsKey, true);
-        
         return true;
       }
       
@@ -61,7 +65,6 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> logout() async {
     try {
       await _client.signOut();
-      // Clear our fallback flag
       await _prefs.remove(_sessionExistsKey);
     } catch (_) {}
   }
@@ -69,15 +72,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<bool> checkAuth() async {
     try {
-      // 1. Check the library's built-in session check
       final session = await _client.getSession();
       if (session != null) {
         await _prefs.setBool(_sessionExistsKey, true);
         return true;
       }
-
-      // 2. Fallback: If getSession() is null (common after restart with custom APIs),
-      // check if we manually saved a 'session active' flag.
       return _prefs.getBool(_sessionExistsKey) ?? false;
     } catch (_) {
       return _prefs.getBool(_sessionExistsKey) ?? false;
